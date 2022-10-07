@@ -1,5 +1,5 @@
 <template>
-  <div class="flex p-4 px-10 justify-between bg-white">
+  <div class="flex py-4 px-20 justify-between bg-white">
     <div>
       <img class="my-auto" src="/logo.svg" alt="" />
     </div>
@@ -9,7 +9,6 @@
           Sign In Here
         </button>
       </NuxtLink>
-
       <NuxtLink to="/signup" v-else>
         <button class="p-3 bg-blue-600 rounded-md text-white w-52">
           Create an Account
