@@ -1,5 +1,5 @@
 <template>
-  <div class="flex py-4 px-20  bg-white">
+  <div class="flex py-4 px-20 justify-between bg-white">
     <div>
       <img class="my-auto" src="/logo.svg" alt="" />
     </div>

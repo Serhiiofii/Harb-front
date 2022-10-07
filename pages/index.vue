@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-50">
-    <HeaderNav />
+    <MainNav />
     <div class="mx-20">
       <div class="flex">
         <div class="w-80 bg-white rounded-lg p-3 m-4">
