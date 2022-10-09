@@ -1,5 +1,5 @@
 <template>
-    <div class="m-2">
+    <div class="compcard">
         <img src="/cardimg.png" alt="">
         <div class="text-xl font-bold my-1" >
             Tatooth Long Yatch

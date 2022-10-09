@@ -1,14 +1,15 @@
 <template>
   <div class="flex py-4 px-20 justify-between bg-white">
-    <div>
-      <img class="my-auto" src="/logo.svg" alt="" />
+    <div class="my-auto">
+      <img class=" w-40" src="/logo.svg" alt="" />
     </div>
-    <div class="flex">
+    <div class="flex my-auto">
       <b-dropdown aria-role="list" class="z-10 -mr-1">
         <template #trigger="{ active }">
           <b-button
             label="All Categories"
             type="is-info"
+            class="h-12"
             :icon-right="active ? 'menu-up' : 'menu-down'"
           />
         </template>
@@ -57,19 +58,29 @@
           >
         </div>
       </b-dropdown>
-      <b-field>
-        <b-autocomplete
-          v-model="name"
-          :keep-first="keepFirst"
-          :open-on-focus="openOnFocus"
-          :data="filteredDataObj"
-          icon="magnify"
-          field="user.first_name"
-          @select="(option) => (selected = option)"
-          :clearable="clearable"
-        >
-        </b-autocomplete>
-      </b-field>
+      <input type="text" class="p-3 border border-gray-100 w-96 h-12" placeholder="Search items on harbour hub" />
+    </div>
+    <div class="flex my-auto">
+      <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
+      Cart
+    </div>
+    <div class="my-auto">Become a seller</div>
+    <img src="/icons/bell.png" class="h-4 w-4 my-auto" alt="" />
+    <div class="flex my-auto">
+      <img src="/user.png" class="w-8 my-auto h-8" alt="" />
+      <b-dropdown aria-role="list">
+        <template #trigger="{ active }">
+          <b-button
+            class="border-none"
+            label="Hi Louis"
+            :icon-right="active ? 'menu-up' : 'menu-down'"
+          />
+        </template>
+
+        <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+      </b-dropdown>
     </div>
   </div>
 </template>
@@ -95,3 +106,5 @@ export default {
   },
 };
 </script>
+<style scoped>
+</style>
