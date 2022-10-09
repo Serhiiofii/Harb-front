@@ -12,7 +12,7 @@
         <button class="p-3 border border-yellow-500 w-32 rounded-sm">Follow</button>
       </div>
     </div>
-    <div>
+    <div class="my-3 text-sm">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor venenatis nisl magnis gravida gravida. Sed nibh in mattis et eget. Iaculis in aliquet pretium, lectus varius mus. Posuere.
     </div>
   </div>

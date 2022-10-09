@@ -1,7 +1,7 @@
 <template>
   <div class="flex py-4 px-20 justify-between bg-white">
     <div class="my-auto">
-      <img class=" w-40" src="/logo.svg" alt="" />
+      <img class="w-40" src="/logo.svg" alt="" />
     </div>
     <div class="flex my-auto">
       <b-dropdown aria-role="list" class="z-10 -mr-1">
@@ -58,14 +58,41 @@
           >
         </div>
       </b-dropdown>
-      <input type="text" class="p-3 border border-gray-100 w-96 h-12" placeholder="Search items on harbour hub" />
+      <input
+        type="text"
+        class="p-3 border border-gray-100 w-96 h-12"
+        placeholder="Search items on harbour hub"
+      />
     </div>
     <div class="flex my-auto">
       <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
       Cart
     </div>
     <div class="my-auto">Become a seller</div>
-    <img src="/icons/bell.png" class="h-4 w-4 my-auto" alt="" />
+    <div class="my-auto">
+      <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
+        <template #trigger="{}">
+          <img src="/icons/bell.png" class="h-4 w-4 cursor-pointer" alt="" />
+        </template>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex justify-between w-80">
+            <div class="uppercase text-gray-300">Notifications</div>
+            <div class="text-xs text-green-400 w-12">See all</div>
+          </div>
+        </b-dropdown-item>
+        <div class="h-1 bg-gray-100 w-full"></div>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex justify-between w-80 my-2">
+            <div class="">
+              <div>Bid for tathoth Hose - N300,000</div>
+              <div class="text-xs text-gray-200">6 - Sep - 2022, 13:02</div>
+            </div>
+            <div class="text-xs text-green-800 text-center bg-green-100 rounded-sm p-1 my-auto w-12">View</div>
+          </div>
+        </b-dropdown-item>
+        <div class="h-1 bg-gray-100 w-full"></div>
+      </b-dropdown>
+    </div>
     <div class="flex my-auto">
       <img src="/user.png" class="w-8 my-auto h-8" alt="" />
       <b-dropdown aria-role="list">
@@ -77,9 +104,51 @@
           />
         </template>
 
-        <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
-        <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
-        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Hi Louis</b-dropdown-item>
+        <div class="h-1 bg-gray-100 w-full"></div>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/user.svg" alt="" />
+            <div class="ml-3">Account</div>
+          </div>
+        </b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/saved.svg" alt="" />
+            <div class="ml-3">Saved Items</div>
+          </div>
+        </b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/orders.svg" alt="" />
+            <div class="ml-3">My Orders</div>
+          </div>
+        </b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/msg.svg" alt="" />
+            <div class="ml-3">Messages</div>
+          </div>
+        </b-dropdown-item>
+        <div class="h-1 bg-gray-100 w-full"></div>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/pass.svg" alt="" />
+            <div class="ml-3">Change Password</div>
+          </div>
+        </b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/help.svg" alt="" />
+            <div class="ml-3">Help / Support</div>
+          </div>
+        </b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">
+          <div class="flex">
+            <img src="/icons/logout.svg" alt="" />
+            <div class="ml-3">Logout</div>
+          </div>
+        </b-dropdown-item>
       </b-dropdown>
     </div>
   </div>
@@ -92,19 +161,11 @@ export default {
       name: "",
     };
   },
-  computed: {
-    filteredDataObj() {
-      return this.data.filter((option) => {
-        return (
-          option.user.first_name
-            .toString()
-            .toLowerCase()
-            .indexOf(this.name.toLowerCase()) >= 0
-        );
-      });
-    },
-  },
+  computed: {},
 };
 </script>
 <style scoped>
+.h-1 {
+  height: 1px;
+}
 </style>
