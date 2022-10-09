@@ -22,8 +22,12 @@
             <div>Lagos, Nigeria</div>
           </div>
           <div class="flex text-white w-52 justify-between">
-            <button class="bg-blue-800 p-3 w-24 h-12 my-auto rounded-sm">Contact</button>
-            <button class="bg-yellow-300 p-3  w-24 h-12 my-auto rounded-sm">Chat</button>
+            <button class="bg-blue-800 p-3 w-24 h-12 my-auto rounded-sm">
+              Contact
+            </button>
+            <button class="bg-yellow-300 p-3 w-24 h-12 my-auto rounded-sm">
+              Chat
+            </button>
           </div>
         </div>
       </div>
@@ -43,8 +47,15 @@
           <ServiceCard />
         </div>
       </div>
+      <FooterNav />
     </div>
-
-    <FooterNav />
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+    };
+  },
+};
+</script>

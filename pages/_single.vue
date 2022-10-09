@@ -13,7 +13,7 @@
         <div class="w-2/5 px-8">
           <div class="text-3xl font-bold">Tatooth Long Yatch</div>
           <div class="flex justify-between my-3">
-            <button class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm">
+            <button @click="isCardModalActive = !isCardModalActive" class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm">
               Make a Bid
             </button>
             <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
@@ -67,6 +67,7 @@
           <ProductCard />
         </div>
       </div>
+      <BidModal :isCardModalActive="isCardModalActive" />
       <FooterNav />
     </div>
   </div>
@@ -75,7 +76,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      isCardModalActive: false,
+    };
   },
 };
 </script>
