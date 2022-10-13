@@ -64,10 +64,12 @@
         placeholder="Search items on harbour hub"
       />
     </div>
-    <div class="flex my-auto">
-      <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
-      Cart
-    </div>
+    <NuxtLink to="my-orders" class="my-auto">
+      <div class="flex my-auto">
+        <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
+        Cart
+      </div>
+    </NuxtLink>
     <div class="my-auto">Become a seller</div>
     <div class="my-auto">
       <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
@@ -87,7 +89,18 @@
               <div>Bid for tathoth Hose - N300,000</div>
               <div class="text-xs text-gray-200">6 - Sep - 2022, 13:02</div>
             </div>
-            <div class="text-xs text-green-800 text-center bg-green-100 rounded-sm p-1 my-auto w-12">View</div>
+            <div
+              class="
+                text-xs text-green-800 text-center
+                bg-green-100
+                rounded-sm
+                p-1
+                my-auto
+                w-12
+              "
+            >
+              View
+            </div>
           </div>
         </b-dropdown-item>
         <div class="h-1 bg-gray-100 w-full"></div>
