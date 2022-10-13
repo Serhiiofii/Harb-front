@@ -120,41 +120,53 @@
         <b-dropdown-item aria-role="listitem">Hi Louis</b-dropdown-item>
         <div class="h-1 bg-gray-100 w-full"></div>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/user.svg" alt="" />
-            <div class="ml-3">Account</div>
-          </div>
+          <NuxtLink to="/account"
+            ><div class="flex">
+              <img src="/icons/user.svg" alt="" />
+              <div class="ml-3">Account</div>
+            </div></NuxtLink
+          >
         </b-dropdown-item>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/saved.svg" alt="" />
-            <div class="ml-3">Saved Items</div>
-          </div>
+          <NuxtLink to="/saved">
+            <div class="flex">
+              <img src="/icons/saved.svg" alt="" />
+              <div class="ml-3">Saved Items</div>
+            </div>
+          </NuxtLink>
         </b-dropdown-item>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/orders.svg" alt="" />
-            <div class="ml-3">My Orders</div>
-          </div>
+          <NuxtLink to="/my-orders">
+            <div class="flex">
+              <img src="/icons/orders.svg" alt="" />
+              <div class="ml-3">My Orders</div>
+            </div>
+          </NuxtLink>
         </b-dropdown-item>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/msg.svg" alt="" />
-            <div class="ml-3">Messages</div>
-          </div>
+          <NuxtLink to="">
+            <div class="flex">
+              <img src="/icons/msg.svg" alt="" />
+              <div class="ml-3">Messages</div>
+            </div>
+          </NuxtLink>
         </b-dropdown-item>
         <div class="h-1 bg-gray-100 w-full"></div>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/pass.svg" alt="" />
-            <div class="ml-3">Change Password</div>
-          </div>
+          <NuxtLink to="/change-password">
+            <div class="flex">
+              <img src="/icons/pass.svg" alt="" />
+              <div class="ml-3">Change Password</div>
+            </div>
+          </NuxtLink>
         </b-dropdown-item>
         <b-dropdown-item aria-role="listitem">
-          <div class="flex">
-            <img src="/icons/help.svg" alt="" />
-            <div class="ml-3">Help / Support</div>
-          </div>
+          <NuxtLink to=""
+            ><div class="flex">
+              <img src="/icons/help.svg" alt="" />
+              <div class="ml-3">Help / Support</div>
+            </div></NuxtLink
+          >
         </b-dropdown-item>
         <b-dropdown-item aria-role="listitem">
           <div class="flex">
