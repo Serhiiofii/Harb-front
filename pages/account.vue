@@ -79,8 +79,20 @@
           </div>
         </div>
         <div class="bg-white mt-4 p-2">
-          <Product />
-          <Product />
+          <b-tabs type="is-toggle">
+            <b-tab-item label="Products">
+              <div>
+                <Product />
+                <Product />
+              </div>
+            </b-tab-item>
+            <b-tab-item label="Services">
+              <div class="flex justify-between">
+                <div class="mr-2"><ServiceCard /></div>
+                <div class="ml-2"><ServiceCard /></div>
+              </div>
+            </b-tab-item>
+          </b-tabs>
         </div>
       </div>
     </div>
