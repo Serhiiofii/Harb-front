@@ -111,14 +111,24 @@
         </div>
       </div>
       <div class="mt-6">
-        <button class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
+        <button @click="isComponentModalActive = !isComponentModalActive" class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
           Proceed
         </button>
       </div>
     </div>
-    <SuccessModal />
+    <SuccessModal :isComponentModalActive="isComponentModalActive" />
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isComponentModalActive: false,
+    };
+  },
+};
+</script>
+
 <style >
 textarea:focus {
   outline: none;
