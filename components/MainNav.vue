@@ -71,7 +71,9 @@
           Cart
         </div>
       </NuxtLink>
-      <div class="my-auto">Become a seller</div>
+      <NuxtLink to="/becomeaseller" class="my-auto">
+        <div class="my-auto">Become a seller</div>
+      </NuxtLink>
       <div class="my-auto">
         <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
           <template #trigger="{}">
