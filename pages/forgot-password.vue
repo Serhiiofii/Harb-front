@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 h-screen">
     <HeaderNav />
-    <div class="w-96 bg-white mx-auto p-6 my-20 shadow-md rounded-sm">
+    <div class="lg:w-96 bg-white mx-auto p-6 my-20 shadow-md rounded-sm">
       <div class="text-center">
         <div class="font-bold text-2xl">Forgotten Password</div>
         <div class="text-sm">An OTP will be sent to the email entered</div>

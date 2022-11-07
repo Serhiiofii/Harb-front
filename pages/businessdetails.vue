@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
-    <HeaderNav />
-    <div class="w-2/5 bg-white mx-auto p-6 mt-8 shadow-md rounded-sm">
+    <RegularNav />
+    <div class="lg:w-2/5 bg-white mx-auto p-6 mt-8 shadow-md rounded-sm">
       <div class="text-center">
         <div class="font-bold text-2xl">Business Account Details</div>
         <div class="text-xs">

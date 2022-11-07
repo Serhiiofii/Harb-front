@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 ">
     <HeaderNav />
-    <div class="w-96 bg-white mx-auto p-6 mt-20 shadow-md rounded-sm">
+    <div class="lg:w-96 bg-white mx-auto p-6 mt-20 shadow-md rounded-sm">
       <div class="text-center">
         <div class="font-bold text-2xl">Create an account</div>
         <div class="text-sm">Create an account with socials</div>

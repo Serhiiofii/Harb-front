@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Company Name</div>
+        <div class="text-sm my-1">Equipment Name</div>
         <input
           type="text"
           class="
@@ -25,42 +25,7 @@
         />
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Company Email Address</div>
-        <div class="flex">
-          <input
-            type="text"
-            class="
-              p-3
-              rounded-sm
-              border border-gray-200
-              w-full
-              rounded-sm
-              text-sm
-            "
-            placeholder="Enter Company Email"
-          />
-          <div class="w-40 text-center my-auto font-bold text-yellow-600">
-            Send OTP
-          </div>
-        </div>
-      </div>
-      <div class="my-3">
-        <div class="text-sm my-1">Enter OTP From Email</div>
-        <input
-          type="number"
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-          placeholder="6 Digit OTP"
-        />
-      </div>
-      <div class="my-3">
-        <div class="text-sm my-1">Type of Business Entity</div>
+        <div class="text-sm my-1">Category</div>
         <select
           name=""
           id=""
@@ -73,12 +38,12 @@
             text-sm
           "
         >
-          <option value="hello word">hello world</option>
+          <option value="hello word">Select a Category</option>
           <option value="hello word">hello world</option>
         </select>
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Postion in the Company</div>
+        <div class="text-sm my-1">Equipment Manufacturer</div>
         <input
           type="text"
           class="
@@ -89,13 +54,60 @@
             rounded-sm
             text-sm
           "
-          placeholder="Enter Designation"
+          placeholder="Manufacturer"
         />
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">
-          Enter Business Legal Documents: CAC, Other documents...
-        </div>
+        <div class="text-sm my-1">Equipment Specification</div>
+        <input
+          type="text"
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+          "
+          placeholder="Specification"
+        />
+      </div>
+      <div class="my-3">
+        <div class="text-sm my-1">Equipment Year of Build</div>
+        <select
+          name=""
+          id=""
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+          "
+        >
+          <option value="hello word">Select Year</option>
+          <option value="hello word">hello world</option>
+        </select>
+      </div>
+      <div class="my-3">
+        <div class="text-sm my-1">Equipment Description</div>
+        <textarea
+          name=""
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+            h-32
+          "
+          placeholder="Description......"
+        ></textarea>
+      </div>
+      <div class="my-3">
+        <div class="text-sm my-1">Add Image:</div>
         <div class="flex justify-between">
           <div>
             <img src="/upload.png" alt="" />
@@ -109,7 +121,7 @@
         </div>
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Location</div>
+        <div class="text-sm my-1">Add a Custom Specification:</div>
         <input
           type="text"
           class="
@@ -120,13 +132,10 @@
             rounded-sm
             text-sm
           "
-          placeholder="Enter Business Address"
+          placeholder="Specification Title:"
         />
-      </div>
-      <div class="my-3">
-        <div class="text-sm my-1">Business Descrition</div>
-        <textarea
-          name=""
+        <input
+          type="text"
           class="
             p-3
             rounded-sm
@@ -134,11 +143,12 @@
             w-full
             rounded-sm
             text-sm
-            h-32
+            mt-1
           "
-          placeholder="About Business"
-        ></textarea>
+          placeholder="Specification Details"
+        />
       </div>
+
       <div class="mt-6">
         <NuxtLink to="/businessdetails">
           <button
