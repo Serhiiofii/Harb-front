@@ -18,11 +18,5 @@ export default {
   name: "HeaderNav",
 };
 </script>
-<style >
-@media (max-width: 600px) {
-  .nav {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
+<style>
 </style>

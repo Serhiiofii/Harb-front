@@ -1,9 +1,9 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="mx-20">
-      <div class="flex">
-        <div class="w-80 bg-white rounded-lg p-3 m-4">
+    <div class="lg:mx-20 container">
+      <div class="lg:flex">
+        <div :class="sidebar === true ? 'show' : 'hide'">
           <div>Categories</div>
           <div
             v-for="(single, index) in categories"
@@ -17,11 +17,15 @@
             </div>
           </div>
         </div>
-        <div class="m-2">
-          <div class="w-full m-2 rounded-md relative">
-            <img src="/hero.png" class="rounded-md" alt="" />
-            <div class="absolute top-4 left-20 w-1/2">
-              <div class="text-4xl font-bold text-white">
+        <div class="lg:m-2">
+          <div class="w-full lg:m-2 rounded-md relative">
+            <img
+              src="/hero.png"
+              class="rounded-md w-full lg:h-auto h-60"
+              alt=""
+            />
+            <div class="absolute top-4 lg:left-20 left-4 lg:w-1/2">
+              <div class="lg:text-4xl text-xl font-bold text-white">
                 Get offshore <br />
                 equipments on demand
               </div>
@@ -30,23 +34,25 @@
                 nec at velit hendrerit fames. Hendrerit mauris, adipiscing
                 fringilla morbi. Ornare pretium non
               </div>
-              <button
-                class="
-                  bg-transparent
-                  border border-white
-                  w-44
-                  rounded-md
-                  text-white
-                  p-3
-                "
-              >
-                Become a Seller
-              </button>
+              <NuxtLink to="/becomeaseller">
+                <button
+                  class="
+                    bg-transparent
+                    border border-white
+                    w-44
+                    rounded-md
+                    text-white
+                    p-3
+                  "
+                >
+                  Become a Seller
+                </button>
+              </NuxtLink>
             </div>
           </div>
           <div>
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
-            <div class="flex">
+            <div class="lg:flex">
               <ProductCard />
               <ProductCard />
             </div>
@@ -54,9 +60,9 @@
         </div>
       </div>
 
-      <div class="flex">
-        <div class="p-20 blue rounded-xl w-1/2 text-white">
-          <div class="w-80 my-auto">
+      <div class="lg:flex">
+        <div class="lg:p-20 p-8 blue rounded-xl lg:w-1/2 text-white">
+          <div class="lg:w-80 my-auto">
             <div class="text-4xl font-bold">Get the best Harbour Deals</div>
             <div class="my-3 text-sm">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper
@@ -64,23 +70,31 @@
               fringilla morbi. Ornare pretium non
             </div>
             <button
-              class="p-2 w-80 rounded-full border-2 border-white bg-transparent"
+              class="
+                p-2
+                lg:w-80
+                w-full
+                rounded-full
+                border-2 border-white
+                bg-transparent
+              "
             >
               Become a Food Vendor
             </button>
           </div>
         </div>
-        <div class="w-1/2 ml-4">
+        <div class="lg:w-1/2 lg:ml-4 top">
           <div>
             <div class="p-8 brown rounded-xl w-full text-white">
-              <div class="w-80">
+              <div class="lg:w-80">
                 <div class="text-3xl font-bold">
                   Become a Vendor on Harbour Hub
                 </div>
                 <button
                   class="
                     p-2
-                    w-80
+                    lg:w-80
+                    w-full
                     rounded-full
                     border-2 border-white
                     bg-transparent
@@ -94,14 +108,15 @@
           </div>
           <div class="mt-4">
             <div class="p-8 weird rounded-xl w-full text-white">
-              <div class="w-80">
+              <div class="lg:w-80">
                 <div class="text-3xl font-bold">
                   Subscribe to our newsletter
                 </div>
                 <button
                   class="
                     p-2
-                    w-80
+                    lg:w-80
+                    w-full
                     rounded-full
                     border-2 border-white
                     bg-transparent
@@ -121,7 +136,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+
 export default {
+  computed: mapState(["sidebar"]),
+
   data() {
     return {
       categories: [
@@ -160,12 +180,17 @@ export default {
       ],
     };
   },
+  methods: {
+    ...mapMutations(["toggleSidenav"]),
+  },
+  mounted() {
+    if (screen.width <= 600) {
+      this.toggleSidenav();
+    }
+  },
 };
 </script>
-<style>
-body {
-  background-color: #f8f6f3 !important;
-}
+<style scoped>
 .blue {
   background-color: #2b7edf;
 }
@@ -175,4 +200,8 @@ body {
 .weird {
   background-color: #60bcd9;
 }
+.show {
+  width: 30% !important;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-20 border-t border-black">
-    <div class="flex p-4 justify-between">
+    <div class="lg:flex p-4 justify-between">
       <div class="w-72">
         <img src="/logo.svg" alt="" />
         <div>

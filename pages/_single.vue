@@ -1,19 +1,22 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="mx-20 my-8">
-      <div class="flex">
-        <div class="w-3/5">
-          <img src="/cardimg.png" class="w-full h-80" alt="" />
+    <div class="lg:mx-20 my-8 container">
+      <div class="lg:flex">
+        <div class="lg:w-3/5">
+          <img src="/cardimg.png" class="w-full lg:h-80" alt="" />
           <div class="flex my-4 justify-between">
             <img src="/cardimg.png" class="img mr-2" alt="" />
-            <img src="/cardimg.png" class="img ml-2 h-52" alt="" />
+            <img src="/cardimg.png" class="img ml-2 lg:h-52" alt="" />
           </div>
         </div>
-        <div class="w-2/5 px-8">
+        <div class="lg:w-2/5 lg:px-8">
           <div class="text-3xl font-bold">Tatooth Long Yatch</div>
           <div class="flex justify-between my-3">
-            <button @click="isCardModalActive = !isCardModalActive" class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm">
+            <button
+              @click="isCardModalActive = !isCardModalActive"
+              class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm"
+            >
               Make a Bid
             </button>
             <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
@@ -59,9 +62,9 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="my-3">
         <div class="text-2xl font-bold">Recent Sales</div>
-        <div class="flex">
+        <div class="lg:flex">
           <ProductCard />
           <ProductCard />
           <ProductCard />

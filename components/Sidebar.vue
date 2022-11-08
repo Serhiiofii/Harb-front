@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-md py-4 px-10 w-80">
+  <div :class="sidebar ? 'show' : 'hide'">
     <div class="my-4 text-gray-400 uppercase">Hi Louis,</div>
     <NuxtLink to="/account">
       <div class="flex my-5">
@@ -69,8 +69,50 @@
     </div>
   </div>
 </template>
+<script>
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+
+export default {
+  computed: mapState(["sidebar"]),
+  data() {
+    return {};
+  },
+  methods: {
+    ...mapMutations(["toggleSidenav"]),
+  },
+  mounted() {
+    if (screen.width <= 600) {
+      this.toggleSidenav();
+    }
+  },
+};
+</script>
 <style>
 .h-1 {
   height: 1px;
+}
+
+.show,
+.hide {
+  display: block;
+  width: 25%;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .show {
+    display: block;
+    position: fixed;
+    z-index: 10;
+    top: 980px;
+    height: 100vh;
+    left: 0px;
+    padding: 20px;
+    background-color: white;
+    width: 100%;
+  }
 }
 </style>

@@ -1,25 +1,37 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="mx-20 flex mt-4">
+    <div class="lg:mx-20 flex mt-4 container">
       <Sidebar />
-      <div class="ml-4 w-full">
+      <div class="lg:ml-4 w-full">
         <div class="bg-white">
-          <div class="flex">
+          <div class="lg:flex">
             <div class="m-2 border border-gray-200 rounded-md">
-              <div class="flex">
+              <div class="lg:flex">
                 <div class="p-2">
                   <span class="text-sm">First Name</span> <br />
                   <input
                     type="text"
-                    class="p-2 border border-gray-200 rounded-sm"
+                    class="
+                      p-2
+                      border border-gray-200
+                      rounded-sm
+                      lg:w-auto
+                      w-full
+                    "
                   />
                 </div>
                 <div class="p-2">
                   <span class="text-sm">Last Name</span> <br />
                   <input
                     type="text"
-                    class="p-2 border border-gray-200 rounded-sm"
+                    class="
+                      p-2
+                      border border-gray-200
+                      rounded-sm
+                      lg:w-auto
+                      w-full
+                    "
                   />
                 </div>
               </div>
@@ -38,16 +50,16 @@
                 />
               </div>
             </div>
-            <div class="m-2 w-full">
-              <div class="flex">
+            <div class="m-2 lg:w-full">
+              <div class="lg:flex">
                 <div
                   class="
                     border-gray-200 border
-                    mr-1
+                    lg:mr-1
                     justify-evenly
                     p-3
                     flex
-                    w-1/2
+                    lg:w-1/2
                   "
                 >
                   <div class="font-bold text-base my-auto">Avatar</div>
@@ -55,7 +67,16 @@
                     <img src="/icons/user.svg" class="mx-auto my-8" alt="" />
                   </div>
                 </div>
-                <div class="w-1/2 border border-gray-200 p-2 rounded-md ml-1">
+                <div
+                  class="
+                    lg:w-1/2
+                    top
+                    border border-gray-200
+                    p-2
+                    rounded-md
+                    lg:ml-1
+                  "
+                >
                   <textarea
                     class="w-full bg-gray-200 h-full rounded-md"
                     name=""
@@ -78,7 +99,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-white mt-4 p-2">
+        <!-- <div class="bg-white mt-4 p-2">
           <b-tabs type="is-toggle">
             <b-tab-item label="Products">
               <div>
@@ -93,13 +114,18 @@
               </div>
             </b-tab-item>
           </b-tabs>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 textarea:focus {
   outline: none;
+}
+@media (max-width: 600px) {
+  .top {
+    margin-top: 10px;
+  }
 }
 </style>
