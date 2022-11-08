@@ -1,12 +1,12 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="mx-20 my-8">
+    <div class="lg:mx-20 my-8 container">
       <div class="relative">
-        <img src="/cover.png" alt="" />
-        <img src="/user.png" class="absolute top-28 w-24 left-12" alt="" />
-        <div class="flex justify-evenly ml-20 p-4">
-          <div class="w-1/2">
+        <img src="/cover.png" class="lg:h-auto h-40" alt="" />
+        <img src="/user.png" class="absolute top-28 w-24 lg:left-12 left-6" alt="" />
+        <div class="lg:flex justify-evenly lg:ml-20 p-4 lg:mt-0 mt-10">
+          <div class="lg:w-1/2">
             <div class="font-bold">Yahama Services</div>
             <div>
               <div class="text-xs text-blue-600">About:</div>
@@ -21,7 +21,7 @@
             <div class="text-xs text-blue-600">Location:</div>
             <div>Lagos, Nigeria</div>
           </div>
-          <div class="flex text-white w-52 justify-between">
+          <div class="flex text-white lg:w-52 lg:mt-0 mt-3 justify-between">
             <button class="bg-blue-800 p-3 w-24 h-12 my-auto rounded-sm">
               Contact
             </button>
@@ -33,7 +33,7 @@
       </div>
       <div>
         <div class="text-2xl my-3 font-bold">Equipments for sale/rent</div>
-        <div class="flex justify-between">
+        <div class="lg:flex justify-between">
           <ProductCard />
           <ProductCard />
           <ProductCard />
@@ -41,7 +41,7 @@
       </div>
       <div class="mt-4">
         <div class="text-2xl my-3 font-bold">Services</div>
-        <div class="flex justify-between">
+        <div class="lg:flex justify-between">
           <ServiceCard />
           <ServiceCard />
           <ServiceCard />

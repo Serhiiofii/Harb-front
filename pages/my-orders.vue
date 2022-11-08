@@ -7,10 +7,20 @@
         <Product />
       </div>
       <div
-        :class="
-          sidebar
-            ? 'show'
-            : 'hide'
+        v-show="sidebar"
+        class="
+          lg:w-1/2
+          w-full
+          bg-white
+          lg:p-4 lg:ml-4
+          rounded-md
+          lg:relative
+          fixed
+          z-10
+          lg:top-0
+          top-12
+          h-full
+          left-0
         "
       >
         <div class="bg-white lg:p-2">

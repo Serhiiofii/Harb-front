@@ -3,8 +3,21 @@
     <MainNav />
     <div class="lg:mx-20 lg:flex mt-4 container">
       <div
-        :class="
-          sidebar ? 'show' : 'hide'
+        v-show="sidebar"
+        class="
+          lg:w-1/2
+          w-full
+          bg-white
+          p-4
+          my-4
+          rounded-md
+          lg:relative
+          fixed
+          z-10
+          lg:top-0
+          top-12
+          left-0
+          h-full
         "
       >
         <input

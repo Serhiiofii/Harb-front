@@ -1,5 +1,21 @@
 <template>
-  <div :class="sidebar ? 'show' : 'hide'">
+  <div
+    v-show="sidebar"
+    class="
+      lg:w-96
+      w-full
+      bg-white
+      p-4
+      my-4
+      rounded-md
+      lg:relative
+      fixed
+      z-10
+      lg:top-0
+      top-12
+      left-0
+    "
+  >
     <div class="my-4 text-gray-400 uppercase">Hi Louis,</div>
     <NuxtLink to="/account">
       <div class="flex my-5">

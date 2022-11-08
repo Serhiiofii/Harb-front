@@ -1,7 +1,7 @@
 <template>
   <div class="lg:flex lg:p-3 my-2 border border-gray-100">
-    <div class="lg:w-80">
-      <img class="lg:h-full h-40 w-full" src="/product.png" alt="" />
+    <div class="lg:w-96">
+      <img class="lg:h-full lg:w-auto w-full" src="/product.png" alt="" />
     </div>
     <div class="lg:ml-5 w-full lg:mt-0 mt-2 lg:p-0 p-2">
       <div class="flex">

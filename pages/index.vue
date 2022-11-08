@@ -3,7 +3,23 @@
     <MainNav />
     <div class="lg:mx-20 container">
       <div class="lg:flex">
-        <div :class="sidebar === true ? 'show' : 'hide'">
+        <div
+          v-show="sidebar"
+          class="
+            lg:w-96
+            w-full
+            bg-white
+            p-4
+            my-4
+            rounded-md
+            lg:relative
+            fixed
+            z-10
+            lg:top-0
+            top-12
+            left-0
+          "
+        >
           <div>Categories</div>
           <div
             v-for="(single, index) in categories"
@@ -190,6 +206,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .blue {
   background-color: #2b7edf;
@@ -200,8 +217,7 @@ export default {
 .weird {
   background-color: #60bcd9;
 }
-.show {
-  width: 30% !important;
-}
-
+/* .show {
+  width: 25% !important;
+} */
 </style>

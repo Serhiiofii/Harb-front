@@ -1,19 +1,24 @@
 <template>
-  <div class="flex py-4 px-20 justify-between bg-white nav">
-    <div class="my-auto w-full flex justify-between">
-      <div class="bar w-10">
-        <img @click="toggleSidenav()" src="/hamburger-menu.svg" alt="" />
+  <b-navbar class="lg:px-20 py-4 nav">
+    <!-- <div class="flex py-4 px-20 justify-between bg-white nav"> -->
+    <template #brand>
+      <div class="my-auto w-full flex justify-between lg:px-0 px-4">
+        <div class="bar w-10">
+          <img @click="toggleSidenav()" src="/hamburger-menu.svg" class="w-6" alt="" />
+        </div>
+        <NuxtLink to="/" class="my-auto">
+          <img class="w-40 my-auto" src="/logo.svg" alt="" />
+        </NuxtLink>
+        <!-- <div class="bar w-10">
+          <img src="/hamburger-menu.svg" alt="" />
+        </div> -->
       </div>
-      <NuxtLink to="/" class="my-auto">
-        <img class="w-40 my-auto" src="/logo.svg" alt="" />
-      </NuxtLink>
-      <div class="bar w-10">
-        <img src="/hamburger-menu.svg" alt="" />
-      </div>
-    </div>
-    <div class="flex hidden">
-      <div class="flex my-auto">
-        <b-dropdown aria-role="list" class="z-10 -mr-1">
+    </template>
+
+    <!-- <div class="lg:flex hidden"> -->
+    <template #end>
+      <div class="lg:flex my-auto lg:p-0 p-2">
+        <b-dropdown aria-role="list" class="z-10 lg:-mr-1">
           <template #trigger="{ active }">
             <b-button
               label="All Categories"
@@ -69,11 +74,11 @@
         </b-dropdown>
         <input
           type="text"
-          class="p-3 border border-gray-100 w-96 h-12"
+          class="p-3 border border-gray-100 lg:w-96 w-full h-12"
           placeholder="Search items on harbour hub"
         />
       </div>
-      <div class="flex w-96 justify-between">
+      <div class="lg:flex lg:w-96 justify-between lg:p-0 p-3">
         <NuxtLink to="my-orders" class="my-auto">
           <div class="flex my-auto">
             <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
@@ -193,8 +198,10 @@
           </b-dropdown>
         </div>
       </div>
-    </div>
-  </div>
+    </template>
+    <!-- </div> -->
+    <!-- </div> -->
+  </b-navbar>
 </template>
 <script>
 import { mapMutations } from "vuex";
