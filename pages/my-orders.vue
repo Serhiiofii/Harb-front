@@ -12,13 +12,13 @@
           lg:w-1/2
           w-full
           bg-white
-          lg:p-4 lg:ml-4
+          p-4 lg:ml-4
           rounded-md
           lg:relative
           fixed
           z-10
           lg:top-0
-          top-12
+          top-16
           h-full
           left-0
         "

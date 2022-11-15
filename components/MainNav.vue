@@ -18,7 +18,7 @@
     <!-- <div class="lg:flex hidden"> -->
     <template #end>
       <div class="lg:flex my-auto lg:p-0 p-2">
-        <b-dropdown aria-role="list" class="z-10 lg:-mr-1">
+        <b-dropdown aria-role="list" class="z-10 lg:-mr-1 nav-item">
           <template #trigger="{ active }">
             <b-button
               label="All Categories"
@@ -74,21 +74,21 @@
         </b-dropdown>
         <input
           type="text"
-          class="p-3 border border-gray-100 lg:w-96 w-full h-12"
+          class="p-3 border border-gray-100 lg:w-96 w-full h-12 nav-item"
           placeholder="Search items on harbour hub"
         />
       </div>
       <div class="lg:flex lg:w-96 justify-between lg:p-0 p-3">
         <NuxtLink to="my-orders" class="my-auto">
-          <div class="flex my-auto">
+          <div class="flex my-auto nav-item">
             <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
             Cart
           </div>
         </NuxtLink>
         <NuxtLink to="/becomeaseller" class="my-auto">
-          <div class="my-auto">Become a seller</div>
+          <div class="my-auto nav-item">Become a seller</div>
         </NuxtLink>
-        <div class="my-auto">
+        <div class="my-auto nav-item">
           <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
             <template #trigger="{}">
               <img
@@ -127,7 +127,7 @@
             <div class="h-1 bg-gray-100 w-full"></div>
           </b-dropdown>
         </div>
-        <div class="flex my-auto">
+        <div class="flex my-auto nav-item">
           <img src="/user.png" class="w-8 my-auto h-8" alt="" />
           <b-dropdown aria-role="list">
             <template #trigger="{ active }">
@@ -230,6 +230,9 @@ export default {
 @media (max-width: 600px) {
   .bar {
     display: block;
+  }
+  .nav-item{
+    margin-top: 8px!important;
   }
 }
 </style>

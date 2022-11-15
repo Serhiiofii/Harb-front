@@ -3,8 +3,8 @@
     <MainNav />
     <div class="lg:mx-20 flex mt-4">
       <Sidebar />
-      <div class="w-full bg-white ml-4">
-        <div class="w-96 mx-auto p-3 shadow-md mt-8">
+      <div class="w-full container bg-white lg:ml-4">
+        <div class="lg:w-96 mx-auto p-3 shadow-md mt-8">
           <div class="my-3">
             <div class="text-sm my-1">Enter Current Password</div>
             <input
