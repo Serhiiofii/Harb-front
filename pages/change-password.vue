@@ -9,6 +9,7 @@
             <div class="text-sm my-1">Enter Current Password</div>
             <input
               type="password"
+              v-model="password"
               class="
                 p-3
                 rounded-sm
@@ -24,6 +25,7 @@
             <div class="text-sm my-1">Enter NEW Password</div>
             <input
               type="password"
+              v-model="new_password"
               class="
                 p-3
                 rounded-sm
@@ -39,6 +41,7 @@
             <div class="text-sm my-1">Re-Enter NEW Password</div>
             <input
               type="password"
+              v-model="password_confirmation"
               class="
                 p-3
                 rounded-sm
@@ -52,9 +55,10 @@
           </div>
           <div class="mt-6">
             <button
+              @click="signupUser"
               class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
             >
-             Proceed
+              {{ loading ? "Loading..." : "Proceed" }}
             </button>
           </div>
         </div>
@@ -62,3 +66,51 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  middleware: "authenticated",
+  data() {
+    return {
+      password: "",
+      password_confirmation: "",
+      new_password: "",
+      loading: false,
+    };
+  },
+  computed: mapState(["token"]),
+
+  methods: {
+    async signupUser() {
+      try {
+        this.loading = true;
+        let local = JSON.parse(window.localStorage.getItem("data"));
+        const data = await this.$axios.$put(
+          "account/password",
+          {
+            old_password: this.password,
+            password: this.new_password,
+            password_confirmation: this.password_confirmation,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + local.data.token,
+            },
+          }
+        );
+        console.log(data);
+        this.loading = false;
+        this.$toast.success("Successfully authenticated");
+        // this.$router.push("/");
+      } catch {
+        console.log("error");
+        this.loading = false;
+        this.$toast.error("Oops! Something happened");
+      }
+    },
+  },
+};
+</script>

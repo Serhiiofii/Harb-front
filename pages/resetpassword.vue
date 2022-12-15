@@ -3,21 +3,13 @@
     <HeaderNav />
     <div class="lg:w-96 bg-white mx-auto p-6 my-20 shadow-md rounded-sm">
       <div class="text-center">
-        <div class="font-bold text-2xl">Sign in</div>
-        <div class="text-sm">Sign in with socials</div>
-      </div>
-      <div class="flex justify-between w-24 my-5 mx-auto">
-        <div>
-          <img class="w-10 h-10" src="/icons/google.svg" alt="" />
-        </div>
-        <div>
-          <img class="w-10 h-10" src="/icons/facebook.svg" alt="" />
-        </div>
+        <div class="font-bold text-2xl">Reset Password</div>
+        <div class="text-sm">Enter the OTP that was sent to your email</div>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Enter your email</div>
         <input
-          type="text"
+          type="password"
           v-model="email"
           class="
             p-3
@@ -27,11 +19,27 @@
             rounded-sm
             text-sm
           "
-          placeholder="e,g johndoe@gmail.com"
+          placeholder="Enter your new password"
         />
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Password</div>
+        <div class="text-sm my-1">Enter your the OTP code</div>
+        <input
+          v-model="reset_code"
+          type="number"
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+          "
+          placeholder="Enter your new password"
+        />
+      </div>
+      <div class="my-3">
+        <div class="text-sm my-1">Enter your new password</div>
         <input
           type="password"
           v-model="password"
@@ -43,46 +51,42 @@
             rounded-sm
             text-sm
           "
-          placeholder="****************"
+          placeholder="Enter your new password"
         />
       </div>
-      <NuxtLink to="/forgot-password">
-        <div class="text-right text-sm">Forgot Password?</div>
-      </NuxtLink>
+
       <div class="my-6">
         <button
           @click="signupUser"
           class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
         >
-          {{ loading ? "Loading..." : "Sign in" }}
+          {{ loading ? "Loading..." : "Sign In" }}
         </button>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
-import { mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
-      email: "",
       password: "",
+      email: "",
+      reset_code: "",
       loading: false,
     };
   },
   methods: {
-    ...mapMutations(["userLoggedIn"]),
-
     async signupUser() {
       try {
         this.loading = true;
         const data = await this.$axios.$post(
-          "auth/login",
+          "auth/reset-password",
           {
             email: this.email,
             password: this.password,
+            reset_code: this.reset_code,
           },
           {
             headers: {
@@ -91,14 +95,11 @@ export default {
           }
         );
         console.log(data);
-        this.userLoggedIn();
         this.$toast.success("Successfully authenticated");
+        this.$router.push("/resetpassword");
         this.loading = false;
-        window.localStorage.setItem("data", JSON.stringify(data));
-        this.loading = false;
-        this.$router.push("/");
-      } catch (error) {
-        console.log(error);
+      } catch {
+        console.log("error");
         this.loading = false;
         this.$toast.error("Oops! Something");
       }

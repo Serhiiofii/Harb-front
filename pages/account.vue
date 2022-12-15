@@ -12,6 +12,7 @@
                   <span class="text-sm">First Name</span> <br />
                   <input
                     type="text"
+                    v-model="data.first_name"
                     class="
                       p-2
                       border border-gray-200
@@ -25,6 +26,7 @@
                   <span class="text-sm">Last Name</span> <br />
                   <input
                     type="text"
+                    v-model="data.last_name"
                     class="
                       p-2
                       border border-gray-200
@@ -39,6 +41,7 @@
                 <span class="text-sm">Enter your email</span> <br />
                 <input
                   type="text"
+                  v-model="data.email"
                   class="p-2 border border-gray-200 rounded-sm w-full"
                 />
               </div>
@@ -46,6 +49,7 @@
                 <span class="text-sm">Enter your Phone Number</span> <br />
                 <input
                   type="number"
+                  v-model="data.phone"
                   class="p-2 border border-gray-200 rounded-sm w-full"
                 />
               </div>
@@ -80,6 +84,7 @@
                   <textarea
                     class="w-full bg-gray-200 h-full rounded-md"
                     name=""
+                    v-model="data.bio"
                   ></textarea>
                 </div>
               </div>
@@ -87,6 +92,7 @@
                 <textarea
                   class="w-full border border-gray-200 h-20 rounded-md"
                   name=""
+                  v-model="data.delivery_address"
                 ></textarea>
               </div>
               <div>
@@ -94,6 +100,7 @@
                   type="text"
                   class="p-2 border border-gray-200 w-full"
                   value="Location:"
+                  v-model="data.location"
                 />
               </div>
             </div>
@@ -119,6 +126,55 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  middleware: "authenticated",
+  data() {
+    return {
+      data: [],
+      loading: false,
+    };
+  },
+  computed: mapState(["token"]),
+  mounted() {
+    let local = JSON.parse(window.localStorage.getItem("data"));
+    this.data = local.data.user;
+  },
+  // methods: {
+  //   async signupUser() {
+  //     try {
+  //       this.loading = true;
+  //       let local = JSON.parse(window.localStorage.getItem("data"));
+  //       const data = await this.$axios.$put(
+  //         "account/password",
+  //         {
+  //           old_password: this.password,
+  //           password: this.new_password,
+  //           password_confirmation: this.password_confirmation,
+  //         },
+  //         {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Accept: "application/json",
+  //             Authorization: "Bearer " + local.data.token,
+  //           },
+  //         }
+  //       );
+  //       console.log(data);
+  //       this.loading = false;
+  //       this.$toast.success("Successfully authenticated");
+  //       // this.$router.push("/");
+  //     } catch {
+  //       console.log("error");
+  //       this.loading = false;
+  //       this.$toast.error("Oops! Something happened");
+  //     }
+  //   },
+  // },
+};
+</script>
 <style scoped>
 textarea:focus {
   outline: none;
