@@ -13,6 +13,7 @@
         <div class="text-sm my-1">Bank Account Name</div>
         <input
           type="text"
+          v-model="account_name"
           class="
             p-3
             rounded-sm
@@ -28,6 +29,7 @@
         <div class="text-sm my-1">Bank Account Number</div>
         <input
           type="number"
+          v-model="account_number"
           class="
             p-3
             rounded-sm
@@ -42,6 +44,7 @@
       <div class="my-3">
         <div class="text-sm my-1">Select Bank</div>
         <select
+          v-model="bank_name"
           name=""
           id=""
           class="
@@ -61,6 +64,7 @@
         <div class="text-sm my-1">Postion in the Company</div>
         <input
           type="text"
+          v-model="company_position"
           class="
             p-3
             rounded-sm
@@ -76,6 +80,7 @@
         <div class="text-sm my-1">Account Officer Name</div>
         <input
           type="text"
+          v-model="account_officer_name"
           class="
             p-3
             rounded-sm
@@ -91,6 +96,7 @@
         <div class="text-sm my-1">Account Officer Phone Number</div>
         <input
           type="text"
+          v-model="account_officer_phone"
           class="
             p-3
             rounded-sm
@@ -111,8 +117,11 @@
         </div>
       </div>
       <div class="mt-6">
-        <button @click="isComponentModalActive = !isComponentModalActive" class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
-          Proceed
+        <button
+          @click="accountDetails"
+          class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
+        >
+          {{ loading ? "Loading..." : "Proceed" }}
         </button>
       </div>
     </div>
@@ -124,7 +133,50 @@ export default {
   data() {
     return {
       isComponentModalActive: false,
+      loading: false,
+      account_name: "",
+      account_number: "",
+      bank_name: "",
+      company_position: "",
+      account_officer_name: "",
+      account_officer_phone: "",
+      seller_id: "",
     };
+  },
+  methods: {
+    async accountDetails() {
+      try {
+        this.loading = true;
+        let local = JSON.parse(window.localStorage.getItem("data"));
+        const data = await this.$axios.$post(
+          "seller/account-details",
+          {
+            account_name: this.account_name,
+            account_number: this.account_number,
+            bank_name: this.bank_name,
+            company_position: this.company_position,
+            account_officer: this.account_officer_name,
+            account_officer_phone: this.account_officer_phone,
+            seller_id: this.seller_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + local.data.token,
+            },
+          }
+        );
+        console.log(data);
+        this.loading = false;
+        this.$toast.success("Bank Details added Successfully");
+        this.isComponentModalActive = true;
+      } catch {
+        console.log("error");
+        this.loading = false;
+        this.$toast.error("Oops! Something happened");
+      }
+    },
   },
 };
 </script>

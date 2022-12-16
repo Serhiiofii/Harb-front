@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="w-96 mx-auto">
-      <NuxtLink to="/">
+      <NuxtLink to="/account">
         <button
           class="bg-blue-600 w-full p-3 mx-auto text-white font-bold rounded-sm"
         >
