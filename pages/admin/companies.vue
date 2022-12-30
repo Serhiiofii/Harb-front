@@ -105,7 +105,18 @@
                 <div class="w-52 text-sm my-auto text-gray-400">
                   Atiku Abubakar
                 </div>
-                <div class="w-20"></div>
+                <div class="w-20">
+                  <b-field>
+                    <b-switch
+                      type="is-info"
+                      v-model="isSwitchedCustom"
+                      true-value="Yes"
+                      false-value="No"
+                    >
+                      {{ isSwitchedCustom }}
+                    </b-switch>
+                  </b-field>
+                </div>
                 <div class="w-40">
                   <button
                     class="bg-green-200 text-sm p-2 rounded-sm text-green-800"
@@ -122,3 +133,12 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isSwitchedCustom: "Yes",
+    };
+  },
+};
+</script>

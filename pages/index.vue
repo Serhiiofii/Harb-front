@@ -40,7 +40,7 @@
               class="rounded-md w-full lg:h-auto h-60"
               alt=""
             />
-            <div class="absolute top-4 lg:left-20 left-4 lg:w-1/2">
+            <div class="absolute top-8 lg:left-20 left-4 lg:w-1/2">
               <div class="lg:text-4xl text-xl font-bold text-white">
                 Get offshore <br />
                 equipments on demand

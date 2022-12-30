@@ -61,7 +61,7 @@
       </div>
     </NuxtLink>
     <div class="bg-gray-300 h-1 w-full"></div>
-    <NuxtLink to="/">
+    <NuxtLink to="/admin/roles">
       <div class="flex my-5">
         <img src="/icons/user.svg" alt="" />
         <div class="ml-4">Roles</div>
