@@ -1,7 +1,7 @@
 <template>
-  <div class="lg:flex lg:p-3 my-2 border border-gray-100">
+  <div class="lg:flex lg:p-3 my-2 border border-gray-100 relative">
     <div class="lg:w-96">
-      <img class="lg:h-full lg:w-auto w-full" src="/product.png" alt="" />
+      <img class="lg:h-52 lg:w-80 w-full" src="/product.png" alt="" />
     </div>
     <div class="lg:ml-5 w-full lg:mt-0 mt-2 lg:p-0 p-2">
       <div class="flex">
@@ -11,7 +11,7 @@
           <div>Off Shore service</div>
         </div>
       </div>
-      <div class="lg:text-base text-xs my-2">
+      <div class="lg:text-sm text-xs my-2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id ridiculus
         purus tempus faucibus non pretium. Aenean at laoreet sodales tellus
         orci. In proin pretium purus, fermentum arcu, curabitur. Porta feugiat
@@ -19,10 +19,10 @@
         consectetur feugiat purus.
       </div>
       <div class="flex">
-        <div class="mr-6 lg:text-base text-xs">Date Uploaded:</div>
-        <div class="lg:text-base text-xs">25/02/2022</div>
+        <div class="mr-6 lg:text-sm text-xs">Date Uploaded:</div>
+        <div class="lg:text-sm text-xs">25/02/2022</div>
       </div>
-      <div class="lg:mt-0 mt-2">
+      <div class="lg:mt-0 absolute right-6 bottom-6 mt-2">
         <button
           class="
             flex
