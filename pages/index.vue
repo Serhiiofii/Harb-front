@@ -46,9 +46,9 @@
                 equipments on demand
               </div>
               <div class="my-3 text-white text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper
-                nec at velit hendrerit fames. Hendrerit mauris, adipiscing
-                fringilla morbi. Ornare pretium non
+                Find marine equipment, equipment for industrial use, and
+                industrial spare parts. Whether you're looking to buy or sell
+                you'll find the best deals here
               </div>
               <NuxtLink to="/becomeaseller">
                 <button
@@ -78,12 +78,12 @@
 
       <div class="lg:flex">
         <div class="lg:p-20 p-8 blue rounded-xl lg:w-1/2 text-white">
-          <div class="lg:w-80 my-auto">
-            <div class="text-4xl font-bold">Get the best Harbour Deals</div>
+          <div class="lg:w-96 my-auto">
+            <div class="text-4xl font-bold">Become a Vendor on Harbour Hub</div>
             <div class="my-3 text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper
-              nec at velit hendrerit fames. Hendrerit mauris, adipiscing
-              fringilla morbi. Ornare pretium non
+              Sell your equipment at the best price. Experience the ease of
+              listing and selling your equipment in the hub with secured payment
+              methods and have your equipment sold to the best-fit buyer.
             </div>
             <button
               class="
@@ -95,7 +95,7 @@
                 bg-transparent
               "
             >
-              Become a Food Vendor
+              Become a Vendor
             </button>
           </div>
         </div>
@@ -103,9 +103,7 @@
           <div>
             <div class="p-8 brown rounded-xl w-full text-white">
               <div class="lg:w-80">
-                <div class="text-3xl font-bold">
-                  Become a Vendor on Harbour Hub
-                </div>
+                <div class="text-3xl font-bold">Get the best Harbour Deals</div>
                 <button
                   class="
                     p-2
@@ -117,7 +115,7 @@
                     mt-3
                   "
                 >
-                  Become a Vendor
+                  Explore Top Deals
                 </button>
               </div>
             </div>
@@ -128,6 +126,10 @@
                 <div class="text-3xl font-bold">
                   Subscribe to our newsletter
                 </div>
+                <!-- <div class="my-3 text-sm">
+                  Be the first to know about the update of new equipment and
+                  exclusive management and maintenance tips
+                </div> -->
                 <button
                   class="
                     p-2
@@ -164,27 +166,7 @@ export default {
     return {
       categories: [
         {
-          title: "Services",
-          items: "200 goods",
-        },
-        {
-          title: "Trucks",
-          items: "200 goods",
-        },
-        {
-          title: "Lifebuoy",
-          items: "200 goods",
-        },
-        {
-          title: "Drillling Machines",
-          items: "200 goods",
-        },
-        {
-          title: "Heavy Duty Machine",
-          items: "200 goods",
-        },
-        {
-          title: "pumps and Hoses",
+          title: "Hauling Equipment",
           items: "200 goods",
         },
         {
@@ -192,7 +174,27 @@ export default {
           items: "200 goods",
         },
         {
-          title: "Users",
+          title: "Subsea Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Cranes",
+          items: "200 goods",
+        },
+        {
+          title: "Pumps and Hoses",
+          items: "200 goods",
+        },
+        {
+          title: "OCTG Pipes",
+          items: "200 goods",
+        },
+        {
+          title: "Safety Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Power",
           items: "200 goods",
         },
       ],
