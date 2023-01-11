@@ -98,21 +98,25 @@
             <div class="text-green-800 text-sm">See all</div>
           </div>
           <div class="bg-gray-300 h-1 w-full my-3"></div>
-          <div>
+          <div v-for="(account, index) in accounts" :key="index">
             <div class="flex justify-between">
               <div>
-                <div class="text-sm">Peter Obi</div>
+                <div class="text-sm capitalize">
+                  {{ account.first_name }} {{ account.last_name }}
+                </div>
                 <div class="text-xs text-gray-300">
-                  Date Created 9 - Sep - 2022, 13:02
+                  Date Created {{ account.created_at.substring(0, 10) }}
                 </div>
               </div>
               <div class="flex justify-between w-96">
                 <div>
-                  <button
-                    class="bg-blue-200 p-2 rounded-md text-sm text-blue-800"
-                  >
-                    View Account
-                  </button>
+                  <NuxtLink :to="'/admin/' + account.id">
+                    <button
+                      class="bg-blue-200 p-2 rounded-md text-sm text-blue-800"
+                    >
+                      View Account
+                    </button>
+                  </NuxtLink>
                 </div>
                 <div>
                   <button
@@ -137,3 +141,55 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      accounts: [],
+    };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get("admin/users", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          // console.log(response.data);
+          this.accounts = response.data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {
+    deleteAccount(id) {
+      try {
+        this.$axios
+          .$delete(`admin/users/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.message);
+            this.$toast.success(response.message);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
+</script>

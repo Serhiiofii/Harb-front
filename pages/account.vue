@@ -197,8 +197,6 @@ export default {
           this.bio = response.data.bio;
         });
       this.first_name = data.first_name;
-
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

@@ -35,3 +35,26 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    let local = JSON.parse(window.localStorage.getItem("data"));
+    try {
+      this.$axios
+        .$get("account/notifications", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + local.data.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

@@ -24,7 +24,7 @@
                 p-2
               "
             >
-              50,758
+              {{ total }}
             </div>
           </div>
 
@@ -40,7 +40,7 @@
                 mx-auto
               "
             >
-              50,758
+              {{ booked }}
             </div>
           </div>
           <div class="border bg-white rounded-md p-4 w-1/2 text-center">
@@ -56,7 +56,7 @@
                 p-2
               "
             >
-              409
+              {{ unbooked }}
             </div>
           </div>
         </div>
@@ -81,3 +81,42 @@
     </div>
   </div>
 </template>
+
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      services: [],
+      booked: 0,
+      unbooked: 0,
+      total: 0,
+    };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get(`admin/services`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.products = response.data.services;
+          this.booked = response.data.booked_services;
+          this.unbooked = response.data.unbooked_services;
+          this.total = response.data.total_services;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

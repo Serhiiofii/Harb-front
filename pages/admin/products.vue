@@ -24,7 +24,7 @@
                 p-2
               "
             >
-              50,758
+              {{ total }}
             </div>
           </div>
 
@@ -40,7 +40,7 @@
                 mx-auto
               "
             >
-              50,758
+              {{ sold }}
             </div>
           </div>
           <div class="border bg-white rounded-md p-4 w-1/2 text-center">
@@ -56,7 +56,7 @@
                 p-2
               "
             >
-              409
+              {{ rented }}
             </div>
           </div>
         </div>
@@ -80,3 +80,41 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      products: [],
+      sold: 0,
+      rented: 0,
+      total: 0,
+    };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get(`admin/equipments`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.products = response.data.equipments;
+          this.sold = response.data.sold_equipments;
+          this.rented = response.data.rented_equipments;
+          this.total = response.data.total_equipments;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

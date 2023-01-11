@@ -163,3 +163,41 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      orders: [],
+      ongoing: 0,
+      declined: 0,
+      total: 0,
+    };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get(`admin/orders`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.orders = response.data.orders;
+          this.ongoing = response.data.ongoing;
+          this.declined = response.data.declined;
+          this.total = response.data.total;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

@@ -24,10 +24,12 @@ export default {
   data() {
     return {
       path: null,
+
     };
   },
   mounted() {
     this.path = this.$router.history.current.path;
+
   },
 };
 </script>

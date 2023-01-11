@@ -1,7 +1,7 @@
 export const state = () => ({
     sidebar: true,
     authenticated: false,
-    token: null,
+    token: "",
     user: []
 })
 
@@ -15,26 +15,10 @@ export const mutations = {
     userLoggedOut(state) {
         state.authenticated = false
     },
-    mutateToken: function (state, payload) {
-        state.token = payload
+    mutateToken: function (state) {
+        state.token = JSON.parse(window.localStorage.getItem("data")).data.token;
     },
-    mutateUser: function (state, payload) {
-        state.user = payload
+    mutateUser: function (state) {
+        state.user = JSON.parse(window.localStorage.getItem("data")).data.user
     },
-}
-
-export const actions = {
-    // updateToken({ commit, state }, payload) {
-    //     let data = JSON.parse(window.localStorage.getItem("data"));
-    //     let token = data.token;
-    //     state.token = token
-    //     commit('mutateToken', payload)
-    // },
-    // updateUser({ commit, state }, payload) {
-    //     let data = JSON.parse(window.localStorage.getItem("data"));
-    //     let user = data.user;
-    //     state.user = user
-    //     commit('mutateUser', payload)
-    //     console.log(state.user)
-    // },
 }

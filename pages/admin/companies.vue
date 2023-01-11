@@ -29,7 +29,7 @@
                   p-2
                 "
               >
-                4000 33
+               {{total}}
               </div>
             </div>
 
@@ -47,7 +47,7 @@
                   mx-auto
                 "
               >
-                309384
+                {{verified}}
               </div>
             </div>
             <div class="border bg-white rounded-md p-4 w-1/2 text-center">
@@ -63,7 +63,7 @@
                   p-2
                 "
               >
-                4000
+                {{suspended}}
               </div>
             </div>
           </div>
@@ -133,12 +133,43 @@
     </div>
   </div>
 </template>
+
+
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: mapState(["token"]),
+
   data() {
     return {
+      companies: [],
+      suspended: 0,
+      verified: 0,
+      total: 0,
       isSwitchedCustom: "Yes",
     };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get(`admin/companies`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.companies = response.data.companies;
+          this.suspended = response.data.suspended_companies;
+          this.verified = response.data.verified_companies;
+          this.total = response.data.total_companies;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

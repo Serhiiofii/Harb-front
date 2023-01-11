@@ -4,7 +4,12 @@
     <template #brand>
       <div class="my-auto w-full flex justify-between lg:px-0 px-4">
         <div class="bar w-10">
-          <img @click="toggleSidenav()" src="/hamburger-menu.svg" class="w-6" alt="" />
+          <img
+            @click="toggleSidenav()"
+            src="/hamburger-menu.svg"
+            class="w-6"
+            alt=""
+          />
         </div>
         <NuxtLink to="/" class="my-auto">
           <img class="w-40 my-auto" src="/logo.svg" alt="" />
@@ -85,7 +90,8 @@
             Cart
           </div>
         </NuxtLink>
-        <NuxtLink to="/becomeaseller" class="my-auto">
+
+        <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
           <div class="my-auto nav-item">Become a seller</div>
         </NuxtLink>
         <div class="my-auto nav-item">
@@ -133,12 +139,14 @@
             <template #trigger="{ active }">
               <b-button
                 class="border-none"
-                label="Hi Louis"
+                :label="'Hi ' + name"
                 :icon-right="active ? 'menu-up' : 'menu-down'"
               />
             </template>
 
-            <b-dropdown-item aria-role="listitem">Hi Louis</b-dropdown-item>
+            <b-dropdown-item aria-role="listitem"
+              >Hi {{ name }}</b-dropdown-item
+            >
             <div class="h-1 bg-gray-100 w-full"></div>
             <b-dropdown-item aria-role="listitem">
               <NuxtLink to="/account"
@@ -205,16 +213,23 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
+  computed: mapState(["user"]),
   data() {
     return {
       data: [],
       name: "",
       sidebar: false,
+      role: "",
+      name: "",
     };
   },
-  computed: {},
+  mounted() {
+    this.name = this.user.first_name;
+    this.role = this.user.user_role;
+  },
   methods: {
     ...mapMutations(["toggleSidenav"]),
   },
@@ -231,8 +246,8 @@ export default {
   .bar {
     display: block;
   }
-  .nav-item{
-    margin-top: 8px!important;
+  .nav-item {
+    margin-top: 8px !important;
   }
 }
 </style>

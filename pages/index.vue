@@ -159,8 +159,7 @@ import { mapMutations } from "vuex";
 
 export default {
   middleware: "authenticated",
-
-  computed: mapState(["sidebar"]),
+  computed: mapState(["sidebar", "token"]),
 
   data() {
     return {
@@ -201,11 +200,28 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["toggleSidenav"]),
+    ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
   },
   mounted() {
+    this.mutateToken();
+    this.mutateUser();
     if (screen.width <= 600) {
       this.toggleSidenav();
+    }
+    try {
+      this.$axios
+        .$get("products/get-products", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

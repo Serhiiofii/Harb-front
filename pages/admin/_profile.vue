@@ -42,13 +42,17 @@
             <div class="text-gray-500 my-3">TRANSACTIONS</div>
             <div class="flex justify-between">
               <div>
-                <button class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3">
-                  Sold Transactions: 200
+                <button
+                  class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3"
+                >
+                  Sold Transactions: {{ sold }}
                 </button>
               </div>
               <div>
-                <button class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3">
-                  Rented Transactions: 10
+                <button
+                  class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3"
+                >
+                  Rented Transactions: {{ rented }}
                 </button>
               </div>
             </div>
@@ -62,7 +66,7 @@
                   <span class="text-sm">First Name</span> <br />
                   <input
                     type="text"
-                    v-model="first_name"
+                    v-model="account.first_name"
                     class="
                       p-2
                       border border-gray-200
@@ -76,7 +80,7 @@
                   <span class="text-sm">Last Name</span> <br />
                   <input
                     type="text"
-                    v-model="last_name"
+                    v-model="account.last_name"
                     class="
                       p-2
                       border border-gray-200
@@ -91,7 +95,7 @@
                 <span class="text-sm">Enter your email</span> <br />
                 <input
                   type="text"
-                  v-model="email"
+                  v-model="account.email"
                   class="p-2 border border-gray-200 rounded-sm w-full"
                 />
               </div>
@@ -99,7 +103,7 @@
                 <span class="text-sm">Enter your Phone Number</span> <br />
                 <input
                   type="number"
-                  v-model="phone"
+                  v-model="account.phone"
                   class="p-2 border border-gray-200 rounded-sm w-full"
                 />
               </div>
@@ -149,7 +153,7 @@
                   <textarea
                     class="w-full p-1 bg-gray-200 h-full rounded-md"
                     name=""
-                    v-model="delivery_address"
+                    v-model="account.delivery_address"
                   ></textarea>
                 </div>
               </div>
@@ -164,7 +168,7 @@
                 <textarea
                   class="w-full border-none h-20 rounded-md"
                   name=""
-                  v-model="bio"
+                  v-model="account.bio"
                 ></textarea>
               </div>
               <div class="relative">
@@ -180,13 +184,16 @@
                 <input
                   type="text"
                   class="py-2 border border-gray-200 pl-20 w-full"
-                  v-model="location"
+                  v-model="account.location"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div class="bg-white mt-4 p-2">
+        <div
+          v-if="equipment.length && services.length >= 1"
+          class="bg-white mt-4 p-2"
+        >
           <b-tabs type="is-toggle">
             <b-tab-item label="Products">
               <div>
@@ -206,3 +213,47 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      account: [],
+      user: "",
+      sold: 0,
+      rented: 0,
+      equipment: [],
+      services: [],
+      documents: [],
+    };
+  },
+  mounted() {
+    this.user = this.$router.history.current.params.profile;
+    try {
+      this.$axios
+        .$get(`admin/users/${this.user}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.account = response.data.user;
+          this.sold = response.data.sold_transactions;
+          this.rented = response.data.rented_transactions;
+          this.equipment = response.data.equipments;
+          this.documents = response.data.documents;
+          this.services = response.data.services;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>
