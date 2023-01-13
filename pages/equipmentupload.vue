@@ -13,6 +13,7 @@
         <div class="text-sm my-1">Equipment Name</div>
         <input
           type="text"
+          v-model="name"
           class="
             p-3
             rounded-sm
@@ -28,6 +29,7 @@
         <div class="text-sm my-1">Category</div>
         <select
           name=""
+          v-model="category"
           id=""
           class="
             p-3
@@ -45,6 +47,7 @@
       <div class="my-3">
         <div class="text-sm my-1">Equipment Manufacturer</div>
         <input
+          v-model="manufacturer"
           type="text"
           class="
             p-3
@@ -61,6 +64,7 @@
         <div class="text-sm my-1">Equipment Specification</div>
         <input
           type="text"
+          v-model="specification"
           class="
             p-3
             rounded-sm
@@ -76,6 +80,7 @@
         <div class="text-sm my-1">Equipment Year of Build</div>
         <select
           name=""
+          v-model="year_of_build"
           id=""
           class="
             p-3
@@ -91,8 +96,28 @@
         </select>
       </div>
       <div class="my-3">
+        <div class="text-sm my-1">Sale Type</div>
+        <select
+          name=""
+          v-model="type"
+          id=""
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+          "
+        >
+          <option value="sale">Sale</option>
+          <option value="rent">Rent</option>
+        </select>
+      </div>
+      <div class="my-3">
         <div class="text-sm my-1">Equipment Description</div>
         <textarea
+          v-model="description"
           name=""
           class="
             p-3
@@ -110,20 +135,62 @@
         <div class="text-sm my-1">Add Image:</div>
         <div class="flex justify-between">
           <div>
-            <img src="/upload.png" alt="" />
+            <label for="fileInput" v-if="image1URL">
+              <img
+                :src="image1URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
+            </label>
+
+            <label for="fileInput" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
+          </div>
+
+          <div>
+            <label for="fileInput1" v-if="image2URL">
+              <img :src="image2URL" class="cursor-pointer w-40 h-40 rounded-md" alt="" />
+            </label>
+
+            <label for="fileInput1" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
           </div>
           <div>
-            <img src="/upload.png" alt="" />
+            <label for="fileInput2" v-if="image3URL">
+              <img :src="image3URL" class="cursor-pointer w-40 h-40 rounded-md" alt="" />
+            </label>
+
+            <label for="fileInput2" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
           </div>
-          <div>
-            <img src="/upload.png" alt="" />
-          </div>
+          <input
+            type="file"
+            id="fileInput"
+            @change="uploadFile(1)"
+            class="hidden"
+          />
+          <input
+            type="file"
+            id="fileInput1"
+            @change="uploadFile(2)"
+            class="hidden"
+          />
+          <input
+            type="file"
+            id="fileInput2"
+            @change="uploadFile(3)"
+            class="hidden"
+          />
         </div>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Add a Custom Specification:</div>
         <input
           type="text"
+          v-model="custom_title"
           class="
             p-3
             rounded-sm
@@ -136,6 +203,7 @@
         />
         <input
           type="text"
+          v-model="custom_details"
           class="
             p-3
             rounded-sm
@@ -150,13 +218,12 @@
       </div>
 
       <div class="mt-6">
-        <NuxtLink to="/businessdetails">
-          <button
-            class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
-          >
-            Proceed
-          </button>
-        </NuxtLink>
+        <button
+          @click="upload"
+          class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
+        >
+          {{ loading ? "Loading..." : "Proceed" }}
+        </button>
       </div>
     </div>
   </div>
@@ -166,3 +233,85 @@ textarea:focus {
   outline: none;
 }
 </style>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+  data() {
+    return {
+      name: "",
+      category: "",
+      manufacturer: "",
+      specification: "",
+      year_of_build: "",
+      description: "",
+      type: "sale",
+      custom_title: "",
+      custom_details: "",
+      loading: false,
+
+      image1: "",
+      image2: "",
+      image3: "",
+
+      image1URL: "",
+      image2URL: "",
+      image3URL: "",
+    };
+  },
+  methods: {
+    async uploadFile(id) {
+      const files = event.target.files;
+      const formData = new FormData();
+      formData.append("myFile", files[0]);
+      this[`image${id}`] = formData;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = async (e) => {
+        this[`image${id}URL`] = await e.target.result;
+      };
+    },
+    async upload() {
+      try {
+        this.loading = true;
+        const data = await this.$axios.$post(
+          "seller/equipments/add",
+          {
+            name: this.name,
+            category: this.category,
+            manufacturer: this.manufacturer,
+            equipment_specification: this.specification,
+            build_year: this.year_of_build,
+            description: this.description,
+            image: [this.image1, this.image2, this.image3],
+            sale_type: this.type,
+            custom_specifications: [
+              {
+                title: this.custom_title,
+                details: this.custom_details,
+              },
+            ],
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          }
+        );
+        console.log(data);
+        this.loading = false;
+        this.$toast.success("Equipment uploaded successfully!");
+        // this.$router.push("/products");
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+        this.$toast.error("Oops! Something");
+      }
+    },
+  },
+};
+</script>

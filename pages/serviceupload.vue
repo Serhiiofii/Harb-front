@@ -13,6 +13,7 @@
         <div class="text-sm my-1">Services Name</div>
         <input
           type="text"
+          v-model="name"
           class="
             p-3
             rounded-sm
@@ -28,6 +29,7 @@
         <div class="text-sm my-1">Category</div>
         <select
           name=""
+          v-model="category"
           id=""
           class="
             p-3
@@ -46,6 +48,7 @@
         <div class="text-sm my-1">Service Description</div>
         <textarea
           name=""
+          v-model="description"
           class="
             p-3
             rounded-sm
@@ -59,13 +62,9 @@
         ></textarea>
       </div>
       <div class="mt-6">
-        <NuxtLink to="/businessdetails">
-          <button
-            class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
-          >
-            Proceed
-          </button>
-        </NuxtLink>
+        <button @click="upload" class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
+          {{ loading ? "Loading..." : "Proceed" }}
+        </button>
       </div>
     </div>
   </div>
@@ -75,3 +74,50 @@ textarea:focus {
   outline: none;
 }
 </style>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  setup() {
+    return {
+      name: "",
+      category: "",
+      description: "",
+      loading: false
+    };
+  },
+  methods: {
+    async upload() {
+      try {
+        this.loading = true;
+        const data = await this.$axios.$post(
+          "seller/services/add",
+          {
+            name: this.name,
+            category: this.category,
+            description: this.description,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          }
+        );
+        console.log(data);
+        this.loading = false;
+        this.$toast.success("Services uploaded successfully!");
+        // this.$router.push("/products");
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+        this.$toast.error("Oops! Something");
+      }
+    },
+  },
+};
+</script>
