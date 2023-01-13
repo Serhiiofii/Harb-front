@@ -73,9 +73,9 @@
           </div>
         </div>
         <div class="bg-white border p-2 flex justify-between flex-wrap">
-          <div class="p-2 w-1/2"><ServiceCard /></div>
-          <div class="p-2 w-1/2"><ServiceCard /></div>
-          <div class="p-2 w-1/2"><ServiceCard /></div>
+          <div class="p-2 w-1/2"><AdminServiceCard /></div>
+          <div class="p-2 w-1/2"><AdminServiceCard /></div>
+          <div class="p-2 w-1/2"><AdminServiceCard /></div>
         </div>
       </div>
     </div>

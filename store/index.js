@@ -2,7 +2,7 @@ export const state = () => ({
     sidebar: true,
     authenticated: false,
     token: "",
-    user: []
+    user: null
 })
 
 export const mutations = {

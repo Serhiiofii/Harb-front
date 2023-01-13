@@ -94,6 +94,26 @@
         <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
           <div class="my-auto nav-item">Become a seller</div>
         </NuxtLink>
+        <b-dropdown v-else aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+              label="Sell an Item"
+              class="border-none"
+              :icon-right="active ? 'menu-up' : 'menu-down'"
+            />
+          </template>
+          <NuxtLink class="my-auto" to="/equipmentupload">
+            <b-dropdown-item aria-role="listitem"
+              >Equipment Upload</b-dropdown-item
+            >
+          </NuxtLink>
+          <NuxtLink class="my-auto" to="/serviceupload">
+            <b-dropdown-item aria-role="listitem"
+              >Service Upload</b-dropdown-item
+            >
+          </NuxtLink>
+        </b-dropdown>
+
         <div class="my-auto nav-item">
           <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
             <template #trigger="{}">
@@ -198,7 +218,7 @@
               >
             </b-dropdown-item>
             <b-dropdown-item aria-role="listitem">
-              <div class="flex">
+              <div class="flex" @click="logout">
                 <img src="/icons/logout.svg" alt="" />
                 <div class="ml-3">Logout</div>
               </div>
@@ -232,6 +252,10 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
+    },
   },
 };
 </script>

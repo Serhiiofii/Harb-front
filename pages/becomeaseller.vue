@@ -217,7 +217,11 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: mapState(["token"]),
+
   data() {
     return {
       loading: false,
@@ -253,7 +257,6 @@ export default {
     async registerSeller() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$post(
           "seller/register",
           {
@@ -270,7 +273,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -290,7 +293,6 @@ export default {
           this.$toast.error("Please enter company email");
           return;
         }
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$post(
           "seller/request-otp",
           {
@@ -300,7 +302,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );

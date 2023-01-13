@@ -73,8 +73,8 @@
           </div>
         </div>
         <div>
-          <Product />
-          <Product />
+          <AdminProductCard />
+          <AdminProductCard />
         </div>
       </div>
     </div>

@@ -111,7 +111,7 @@ export default {
         console.log(data);
         this.loading = false;
         this.$toast.success("Services uploaded successfully!");
-        // this.$router.push("/products");
+        this.$router.push("/products");
       } catch (error) {
         console.log(error);
         this.loading = false;

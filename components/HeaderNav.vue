@@ -4,7 +4,7 @@
       <img class="my-auto" src="/logo.svg" alt="" />
     </div>
     <div>
-      <NuxtLink to="/login" v-if="path === '/signup'">
+      <NuxtLink to="/login" v-if="path === '/signup' || path === '/'">
         <button class="p-3 bg-blue-600 rounded-md text-white lg:w-52">
           Sign In Here
         </button>
@@ -24,12 +24,10 @@ export default {
   data() {
     return {
       path: null,
-
     };
   },
   mounted() {
     this.path = this.$router.history.current.path;
-
   },
 };
 </script>

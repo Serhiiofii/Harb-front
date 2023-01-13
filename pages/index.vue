@@ -1,6 +1,11 @@
 <template>
   <div class="bg-gray-50">
-    <MainNav />
+    <div v-if="user === null">
+      <HeaderNav />
+    </div>
+    <div v-else>
+      <MainNav />
+    </div>
     <div class="lg:mx-20 container">
       <div class="lg:flex">
         <div
@@ -158,8 +163,8 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  middleware: "authenticated",
-  computed: mapState(["sidebar", "token"]),
+  // middleware: "authenticated",
+  computed: mapState(["sidebar", "token", "user"]),
 
   data() {
     return {
@@ -203,25 +208,29 @@ export default {
     ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
   },
   mounted() {
-    this.mutateToken();
-    this.mutateUser();
+    const token = JSON.parse(window.localStorage.getItem("data"));
+
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
-    try {
-      this.$axios
-        .$get("products/get-products", {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-        });
-    } catch (error) {
-      console.log(error);
+    if (token) {
+      this.mutateToken();
+      this.mutateUser();
+      try {
+        this.$axios
+          .$get("products/get-products", {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
 };
