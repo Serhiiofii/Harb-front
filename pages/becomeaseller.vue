@@ -113,14 +113,63 @@
         </div>
         <div class="flex justify-between">
           <div>
-            <img src="/upload.png" alt="" />
+            <label for="fileInput" v-if="image1URL">
+              <img
+                :src="image1URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
+            </label>
+
+            <label for="fileInput" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
+          </div>
+
+          <div>
+            <label for="fileInput1" v-if="image2URL">
+              <img
+                :src="image2URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
+            </label>
+
+            <label for="fileInput1" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
           </div>
           <div>
-            <img src="/upload.png" alt="" />
+            <label for="fileInput2" v-if="image3URL">
+              <img
+                :src="image3URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
+            </label>
+
+            <label for="fileInput2" v-else>
+              <img src="/upload.png" class="cursor-pointer" alt="" />
+            </label>
           </div>
-          <div>
-            <img src="/upload.png" alt="" />
-          </div>
+          <input
+            type="file"
+            id="fileInput"
+            @change="uploadFile(1)"
+            class="hidden"
+          />
+          <input
+            type="file"
+            id="fileInput1"
+            @change="uploadFile(2)"
+            class="hidden"
+          />
+          <input
+            type="file"
+            id="fileInput2"
+            @change="uploadFile(3)"
+            class="hidden"
+          />
         </div>
       </div>
       <div class="my-3">
@@ -179,10 +228,28 @@ export default {
       company_role: "",
       business_location: "",
       business_description: "",
-      business_documents: [],
+
+      image1: "",
+      image2: "",
+      image3: "",
+
+      image1URL: "",
+      image2URL: "",
+      image3URL: "",
     };
   },
   methods: {
+    async uploadFile(id) {
+      const files = event.target.files;
+      const formData = new FormData();
+      formData.append("myFile", files[0]);
+      this[`image${id}`] = formData;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = async (e) => {
+        this[`image${id}URL`] = await e.target.result;
+      };
+    },
     async registerSeller() {
       try {
         this.loading = true;
@@ -197,7 +264,7 @@ export default {
             company_role: this.company_role,
             business_location: this.business_location,
             business_description: this.business_description,
-            business_documents: this.business_documents,
+            business_documents: [this.image1, this.image2, this.image3],
           },
           {
             headers: {

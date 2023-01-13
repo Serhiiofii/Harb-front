@@ -47,25 +47,27 @@
         <div class="ml-4">Notification</div>
       </div>
     </NuxtLink>
-    <div class="bg-gray-300 h-1 w-full"></div>
-    <NuxtLink to="/seller">
-      <div class="flex my-5">
-        <img src="/icons/company.svg" alt="" />
-        <div class="ml-4">Company Profile</div>
-      </div>
-    </NuxtLink>
-    <NuxtLink to="/seller/products">
-      <div class="flex my-5">
-        <img src="/icons/products.svg" alt="" />
-        <div class="ml-4">Products</div>
-      </div>
-    </NuxtLink>
-    <NuxtLink to="/seller/services">
-      <div class="flex my-5">
-        <img src="/icons/services.svg" alt="" />
-        <div class="ml-4">Services</div>
-      </div>
-    </NuxtLink>
+    <div v-if="user.user_role !== 'user'">
+      <div class="bg-gray-300 h-1 w-full"></div>
+      <NuxtLink to="/seller">
+        <div class="flex my-5">
+          <img src="/icons/company.svg" alt="" />
+          <div class="ml-4">Company Profile</div>
+        </div>
+      </NuxtLink>
+      <NuxtLink to="/seller/products">
+        <div class="flex my-5">
+          <img src="/icons/products.svg" alt="" />
+          <div class="ml-4">Products</div>
+        </div>
+      </NuxtLink>
+      <NuxtLink to="/seller/services">
+        <div class="flex my-5">
+          <img src="/icons/services.svg" alt="" />
+          <div class="ml-4">Services</div>
+        </div>
+      </NuxtLink>
+    </div>
 
     <div class="bg-gray-300 h-1 w-full"></div>
     <NuxtLink to="/change-password">
@@ -91,7 +93,7 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  computed: mapState(["sidebar"]),
+  computed: mapState(["sidebar", "user"]),
   data() {
     return {};
   },
