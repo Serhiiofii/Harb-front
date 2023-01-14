@@ -111,7 +111,7 @@
       <div class="my-6">
         <button
           class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
-          @click="signupUser"
+          @click="createAdmin"
         >
           {{ loading ? "Loading..." : "Sign in" }}
         </button>
@@ -119,3 +119,64 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      password: "",
+      password_confirmation: "",
+      loading: false,
+    };
+  },
+
+  methods: {
+    createAdmin() {
+      this.loading = true;
+      if (this.password !== this.password_confirmation) {
+        this.$toast.error("Password does not match");
+        this.loading = false;
+        return;
+      }
+      try {
+        this.$axios
+          .$post(
+            `admin/create-admin`,
+            {
+              first_name: this.first_name,
+              last_name: this.last_name,
+              email: this.email,
+              password: this.password,
+              phone: this.phone_number,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.$toast.success("Admin created successfully");
+            this.$router.push("/admin/roles");
+            this.loading = false;
+          });
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+        this.$toast.error("Oops something went wrong");
+      }
+    },
+  },
+};
+</script>

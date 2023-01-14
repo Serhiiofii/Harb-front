@@ -29,7 +29,7 @@
                   p-2
                 "
               >
-               {{total}}
+                {{ total }}
               </div>
             </div>
 
@@ -47,7 +47,7 @@
                   mx-auto
                 "
               >
-                {{verified}}
+                {{ verified }}
               </div>
             </div>
             <div class="border bg-white rounded-md p-4 w-1/2 text-center">
@@ -63,7 +63,7 @@
                   p-2
                 "
               >
-                {{suspended}}
+                {{ suspended }}
               </div>
             </div>
           </div>
@@ -96,24 +96,25 @@
               <div class="w-40 text-sm text-gray-400 uppercase">vIEW dOCS.</div>
             </div>
             <div class="bg-gray-300 h-1 w-full my-3"></div>
-            <div>
+            <div v-for="(company, index) in companies" :key="index">
               <div class="flex justify-between my-3">
-                <div class="w-52 text-sm my-auto font-bold">Herkshire Mate</div>
                 <div class="w-52 text-sm my-auto font-bold">
-                  9 Sep - 2022 , 13:02
+                  {{ company.company_name }}
+                </div>
+                <div class="w-52 text-sm my-auto font-bold">
+                  {{ company.created_at.substring(0, 10) }}
                 </div>
                 <div class="w-52 text-sm my-auto text-gray-400">
-                  Atiku Abubakar
+                  {{ company.user.first_name }} {{ company.user.last_name }}
                 </div>
-                <div class="w-20">
+                <div class="w-20" @click="verifyCompany(company.id)">
                   <b-field>
                     <b-switch
                       type="is-info"
-                      v-model="isSwitchedCustom"
+                      v-model="company.is_verified"
                       true-value="Yes"
                       false-value="No"
                     >
-                      {{ isSwitchedCustom }}
                     </b-switch>
                   </b-field>
                 </div>
@@ -147,7 +148,6 @@ export default {
       suspended: 0,
       verified: 0,
       total: 0,
-      isSwitchedCustom: "Yes",
     };
   },
   mounted() {
@@ -170,6 +170,25 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    verifyCompany(id) {
+      try {
+        this.$axios
+          .$put(`admin/companies/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

@@ -127,6 +127,7 @@
                 </div>
                 <div>
                   <button
+                  @click="deleteAccount(account.id)"
                     class="bg-red-200 p-2 rounded-md text-sm text-red-800"
                   >
                     Delete Account

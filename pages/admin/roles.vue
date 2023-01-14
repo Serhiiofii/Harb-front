@@ -56,9 +56,11 @@
             <div class="w-40 text-sm text-gray-400 uppercase">services</div>
           </div>
           <div class="bg-gray-300 h-1 w-full my-3"></div>
-          <div>
+          <div v-for="(admin, index) in admins" :key="index">
             <div class="flex justify-between my-3">
-              <div class="w-52 text-sm my-auto font-bold">Herkshire Mate</div>
+              <div class="w-52 text-sm my-auto font-bold">
+                {{ admin.first_name }} {{ admin.last_name }}
+              </div>
               <div class="w-40">
                 <b-field>
                   <b-switch
@@ -115,12 +117,37 @@
     </div>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: mapState(["token"]),
+
   data() {
     return {
-      isSwitchedCustom: "Yes",
+      admins: [],
+      isSwitchedCustom: "yes",
     };
   },
+  mounted() {
+    try {
+      this.$axios
+        .$get(`admin/get-admins`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.admins = response.data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {},
 };
 </script>

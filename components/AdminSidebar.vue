@@ -29,7 +29,7 @@
         <div class="ml-4">Payments</div>
       </div>
     </NuxtLink>
-    <NuxtLink to="/">
+    <NuxtLink to="/notifications">
       <div class="flex my-5">
         <img src="/icons/bell.svg" alt="" />
         <div class="ml-4">Notification</div>

@@ -73,9 +73,9 @@
           </div>
         </div>
         <div class="bg-white border p-2 flex justify-between flex-wrap">
-          <div class="p-2 w-1/2"><AdminServiceCard /></div>
-          <div class="p-2 w-1/2"><AdminServiceCard /></div>
-          <div class="p-2 w-1/2"><AdminServiceCard /></div>
+          <div v-for="(service, index) in services" :key="index" class="p-2 w-1/2"><AdminServiceCard :service="service" /></div>
+          <!-- <div class="p-2 w-1/2"><AdminServiceCard /></div>
+          <div class="p-2 w-1/2"><AdminServiceCard /></div> -->
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.products = response.data.services;
+          this.services = response.data.services;
           this.booked = response.data.booked_services;
           this.unbooked = response.data.unbooked_services;
           this.total = response.data.total_services;

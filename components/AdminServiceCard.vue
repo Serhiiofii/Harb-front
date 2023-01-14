@@ -4,12 +4,13 @@
       <div class="flex w-80">
         <img src="/user.png" alt="" />
         <div class="ml-4">
-          <div class="text-base font-bold">Yamaha Services</div>
-          <div class="text-sm">Sea Equipments</div>
+          <div class="text-base font-bold">{{service.seller.company_name}}</div>
+          <div class="text-sm">{{service.category}}</div>
         </div>
       </div>
       <div>
         <button
+          @click="deleteService(service.id)"
           class="
             p-3
             border border-yellow-500
@@ -25,9 +26,7 @@
       </div>
     </div>
     <div class="my-3 text-sm">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor
-      venenatis nisl magnis gravida gravida. Sed nibh in mattis et eget. Iaculis
-      in aliquet pretium, lectus varius mus. Posuere.
+      {{service.description}}
     </div>
   </div>
 </template>
@@ -37,7 +36,14 @@
 }
 </style>
 <script>
+import { mapState } from "vuex";
+
 export default {
+  props: {
+    service: Object,
+  },
+  computed: mapState(["token"]),
+
   data() {
     return {
       path: null,
@@ -45,6 +51,26 @@ export default {
   },
   mounted() {
     this.path = this.$router.history.current.path;
+  },
+  methods: {
+    deleteService(id) {
+      try {
+        this.$axios
+          .$delete(`admin/services/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.message);
+            this.$toast.success(response.message);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
