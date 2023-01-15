@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="lg:w-2/5 lg:px-8">
-          <div class="text-3xl font-bold">Tatooth Long Yatch</div>
+          <div class="text-3xl font-bold">{{ product.name }}</div>
           <div class="flex justify-between my-3">
             <button
               @click="isCardModalActive = !isCardModalActive"
@@ -27,8 +27,16 @@
             </button>
           </div>
           <div class="text-xs my-2">Type of Product:</div>
-          <button class="p-3 bg-red-100 w-24 font-bold rounded-md">Rent</button>
-          <div class="my-4">
+          <button
+            v-if="product.sale_type === 'rent'"
+            class="p-3 bg-red-100 capitalize w-20 rounded-md"
+          >
+            {{ product.sale_type }}
+          </button>
+          <button v-else class="p-3 bg-green-100 capitalize w-20 rounded-md">
+            {{ product.sale_type }}
+          </button>
+          <!-- <div class="my-4">
             <div class="text-xs">Length:</div>
             <div class="font-bold text-lg">62.3m (204.4ft)</div>
           </div>
@@ -48,26 +56,20 @@
             <div class="my-1 flex justify-between">
               Company: <span class="text-blue-600 w-20">Long Tee Mack</span>
             </div>
-          </div>
-          <div class="text-xs my-3">Full Specificiation:</div>
+          </div> -->
+          <div class="font-bold my-3">Full Specificiation:</div>
           <div class="text-xs">
-            <div class="font-bold mb-3">About:</div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet odio
-            risus velit tellus ullamcorper. Vestibulum odio commodo ultrices
-            pellentesque ipsum ac. Massa pellentesque quis duis nullam. Non
-            vulputate fringilla non, pulvinar. Interdum eros, in molestie amet,
-            lacus tempor congue. Eleifend nunc aliquam nunc odio. Luctus enim
-            egestas cum volutpat velit amet suspendisse. Iaculis vitae amet
-            lobortis amet sodales. Adipiscing congue libero ut bibendum odio
+            <!-- <div class="font-bold mb-3">About:</div> -->
+            {{ product.equipment_specification }}
           </div>
         </div>
       </div>
       <div class="my-3">
-        <div class="text-2xl font-bold">Recent Sales</div>
+        <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
         <div class="lg:flex">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          <div v-for="(category, index) in data.recent_sales" :key="index">
+            <ProductCard :data="category" />
+          </div>
         </div>
       </div>
       <BidModal :isCardModalActive="isCardModalActive" />
@@ -86,11 +88,12 @@ export default {
     return {
       isCardModalActive: false,
       single: "",
+      data: [],
+      product: []
     };
   },
   mounted() {
     this.single = this.$router.history.current.params.single;
-
     try {
       this.$axios
         .$get(`products/${this.single}`, {
@@ -101,7 +104,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log();
+          this.product = response.data.product
+          this.data = response.data;
         });
     } catch (error) {
       console.log(error);
