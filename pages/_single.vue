@@ -77,11 +77,35 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+  computed: mapState(["token"]),
+
   data() {
     return {
       isCardModalActive: false,
+      single: "",
     };
+  },
+  mounted() {
+    this.single = this.$router.history.current.params.single;
+
+    try {
+      this.$axios
+        .$get(`products/${this.single}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

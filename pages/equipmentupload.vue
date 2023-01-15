@@ -150,7 +150,11 @@
 
           <div>
             <label for="fileInput1" v-if="image2URL">
-              <img :src="image2URL" class="cursor-pointer w-40 h-40 rounded-md" alt="" />
+              <img
+                :src="image2URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
             </label>
 
             <label for="fileInput1" v-else>
@@ -159,7 +163,11 @@
           </div>
           <div>
             <label for="fileInput2" v-if="image3URL">
-              <img :src="image3URL" class="cursor-pointer w-40 h-40 rounded-md" alt="" />
+              <img
+                :src="image3URL"
+                class="cursor-pointer w-40 h-40 rounded-md"
+                alt=""
+              />
             </label>
 
             <label for="fileInput2" v-else>
@@ -264,9 +272,8 @@ export default {
   methods: {
     async uploadFile(id) {
       const files = event.target.files;
-      const formData = new FormData();
-      formData.append("myFile", files[0]);
-      this[`image${id}`] = formData;
+      this[`image${id}`] = files[0];
+
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = async (e) => {
@@ -276,6 +283,15 @@ export default {
     async upload() {
       try {
         this.loading = true;
+        const formData1 = new FormData();
+        formData1.append("myFile1", this.image1);
+
+        const formData2 = new FormData();
+        formData2.append("myFile2", this.image2);
+
+        const formData3 = new FormData();
+        formData3.append("myFile3", this.image3);
+
         const data = await this.$axios.$post(
           "seller/equipments/add",
           {
@@ -285,7 +301,7 @@ export default {
             equipment_specification: this.specification,
             build_year: this.year_of_build,
             description: this.description,
-            image: [this.image1, this.image2, this.image3],
+            images: [formData1, formData2, formData3],
             sale_type: this.type,
             custom_specifications: [
               {

@@ -6,7 +6,7 @@
     <div v-else>
       <MainNav />
     </div>
-    <div class="lg:mx-20 container">
+    <div class="lg:mx-20">
       <div class="lg:flex">
         <div
           v-show="sidebar"
@@ -74,13 +74,44 @@
           <div>
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="lg:flex">
-              <ProductCard />
-              <ProductCard />
+              <div v-for="(top, index) in data.top_deals" :key="index">
+                <ProductCard :data="top" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-
+      <div>
+        <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
+        <div class="lg:flex">
+          <div v-for="(featured, index) in data.featured_products" :key="index">
+            <ProductCard :data="featured" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
+        <div class="lg:flex">
+          <div
+            v-for="(category, index) in data.recent_sales"
+            :key="index"
+          >
+            <ProductCard :data="category" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold mt-4 mb-2">Most Viewed</div>
+        <div class="lg:flex flex-wrap">
+          <div
+            v-for="(category, index) in data.most_viewed_products"
+            :key="index"
+            class="lg:w-1/3"
+          >
+            <ProductCard :data="category" />
+          </div>
+        </div>
+      </div>
       <div class="lg:flex">
         <div class="lg:p-20 p-8 blue rounded-xl lg:w-1/2 text-white">
           <div class="lg:w-96 my-auto">
@@ -202,6 +233,7 @@ export default {
           items: "200 goods",
         },
       ],
+      data: [],
     };
   },
   methods: {
@@ -227,6 +259,7 @@ export default {
           })
           .then((response) => {
             console.log(response.data);
+            this.data = response.data;
           });
       } catch (error) {
         console.log(error);
