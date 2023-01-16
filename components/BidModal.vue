@@ -12,10 +12,12 @@
                 <div class="text-xs mb-1">Enter Amount BId</div>
                 <input
                   type="number"
+                  v-model="bid"
                   class="p-2 border rounded-sm border-gray-200"
                 />
                 <div class="flex justify-between mt-1">
                   <div
+                    @click="bid = 10000"
                     class="
                       bg-green-200
                       text-green-900
@@ -28,6 +30,7 @@
                     10,000
                   </div>
                   <div
+                    @click="bid = 30000"
                     class="
                       bg-green-200
                       text-green-900
@@ -41,6 +44,7 @@
                     30,000
                   </div>
                   <div
+                    @click="bid = 50000"
                     class="
                       bg-green-200
                       text-green-900
@@ -55,6 +59,7 @@
                 </div>
                 <button
                   class="p-2 bg-blue-600 text-white w-full rounded-sm mt-4"
+                  @click="makeBid"
                 >
                   Make Bid
                 </button>
@@ -68,7 +73,43 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  props: { isCardModalActive: Boolean },
+  props: { isCardModalActive: Boolean, id: String, toggle: Function },
+  computed: mapState(["token"]),
+  data() {
+    return {
+      bid: "",
+    };
+  },
+  methods: {
+    makeBid() {
+      try {
+        this.$axios
+          .$post(
+            `products/${this.id}/bid`,
+            {
+              amount: this.bid,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.$toast.success("Bid made successfully!");
+            this.toggle();
+          });
+      } catch (error) {
+        console.log(error);
+        this.$toast.error("Oops! something happened");
+      }
+    },
+  },
 };
 </script>

@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <BidModal :isCardModalActive="isCardModalActive" />
+      <BidModal :isCardModalActive="isCardModalActive" :id="product.id" :toggle="toggleCard" />
       <FooterNav />
     </div>
   </div>
@@ -112,6 +112,11 @@ export default {
       console.log(error);
     }
   },
+  methods:{
+    toggleCard(){
+      this.isCardModalActive = !this.isCardModalActive
+    }
+  }
 };
 </script>
 <style scoped>

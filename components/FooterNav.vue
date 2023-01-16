@@ -37,7 +37,7 @@
           />
         </div>
         <div class="text-xs mt-1">
-          * Will send you weekly updates for your healthy meals
+          * Will send you tips and updates on top deals
         </div>
       </div>
     </div>
