@@ -83,7 +83,7 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  computed: mapState(["sidebar"]),
+  computed: mapState(["sidebar", "token"]),
   data() {
     return {};
   },
@@ -93,6 +93,27 @@ export default {
   mounted() {
     if (screen.width <= 600) {
       this.toggleSidenav();
+    }
+    try {
+      this.$axios
+        .$post(
+          `messaging/chat-messages`,
+          {
+            messaging_id: "",
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data)
+        });
+    } catch (error) {
+      console.log(error);
     }
   },
 };
