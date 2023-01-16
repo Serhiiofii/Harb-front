@@ -19,9 +19,11 @@
             >
               Make a Bid
             </button>
-            <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
+            <NuxtLink to="/messages">
+              <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
               Chat
             </button>
+            </NuxtLink>
             <button class="p-3 w-32 border border-yellow-600 rounded-sm">
               Call
             </button>
@@ -104,7 +106,7 @@ export default {
           },
         })
         .then((response) => {
-          // console.log();
+          console.log(response.data);
           this.product = response.data.product
           this.data = response.data;
         });
