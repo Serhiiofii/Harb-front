@@ -44,7 +44,9 @@ export default {
         this.$axios
           .$post(
             `account/saved-items/${this.data.id}`,
-            {},
+            {
+              amount: 5000,
+            },
             {
               headers: {
                 "Content-Type": "application/json",
@@ -54,7 +56,8 @@ export default {
             }
           )
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
+            this.$toast.success("Product Saved Successfully");
           });
       } catch (error) {
         console.log(error);

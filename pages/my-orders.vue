@@ -12,7 +12,8 @@
           lg:w-1/2
           w-full
           bg-white
-          p-4 lg:ml-4
+          p-4
+          lg:ml-4
           rounded-md
           lg:relative
           fixed
@@ -50,9 +51,9 @@
                 border-gray-200
                 rounded-sm
               "
+              v-model="user.delivery_address"
             >
-            No 10 Agip Estate, Rumuoduma, Port Harcourt, Nigeria.</textarea
-            >
+            </textarea>
           </div>
           <div>
             <div class="text-sm mt-3 mb-1">Phone Number</div>
@@ -66,7 +67,7 @@
                 border-gray-200
                 rounded-sm
               "
-              value="2348135126541"
+              :value="user.phone"
             />
           </div>
           <div>
@@ -79,6 +80,32 @@
         <button class="bg-blue-600 p-2 w-full text-white">Checkout</button>
       </div>
     </div>
+    <div class="mx-20">
+      <div class="my-3">
+        <div class="text-3xl font-bold mt-4 mb-2">Similar Items</div>
+        <div class="lg:flex flex-wrap">
+          <div
+            v-for="(category, index) in data.similar_products"
+            :key="index"
+            class="lg:w-1/3"
+          >
+            <ProductCard :data="category" />
+          </div>
+        </div>
+      </div>
+      <div class="my-3">
+        <div class="text-3xl font-bold mt-4 mb-2">Similar Services</div>
+        <div class="lg:flex flex-wrap">
+          <div
+            v-for="(category, index) in data.similar_services"
+            :key="index"
+            class="lg:w-1/3"
+          >
+            <ServiceCard :data="category" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -87,9 +114,11 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  computed: mapState(["sidebar"]),
+  computed: mapState(["sidebar", "token", "user"]),
   data() {
-    return {};
+    return {
+      data: [],
+    };
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
@@ -97,6 +126,22 @@ export default {
   mounted() {
     if (screen.width <= 600) {
       this.toggleSidenav();
+    }
+    try {
+      this.$axios
+        .$get("account/cart-items", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.data = response.data;
+        });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

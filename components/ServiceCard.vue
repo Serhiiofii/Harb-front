@@ -1,17 +1,24 @@
 <template>
-  <div class="bg-white border border-gray-100 rounded-sm p-4">
+  <div class="bg-white border border-gray-100 rounded-sm p-4 m-2">
     <div class="flex justify-between">
       <div class="flex w-80">
         <img src="/user.png" alt="" />
         <div class="ml-4">
-          <div class="text-base font-bold">Yamaha Services</div>
-          <div class="text-sm">Sea Equipments</div>
+          <div class="text-base font-bold">{{ data.seller.company_name }}</div>
+          <div class="text-sm">{{ data.seller.company_role }}</div>
         </div>
       </div>
       <div>
         <button
           v-if="path === '/account'"
-          class="p-3 border border-yellow-500 w-32 rounded-sm flex justify-evenly"
+          class="
+            p-3
+            border border-yellow-500
+            w-32
+            rounded-sm
+            flex
+            justify-evenly
+          "
         >
           <img class="w-4 my-auto h-4" src="/icons/close.svg" alt="" />
           Remove
@@ -22,10 +29,9 @@
       </div>
     </div>
     <div class="my-3 text-sm">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor
-      venenatis nisl magnis gravida gravida. Sed nibh in mattis et eget. Iaculis
-      in aliquet pretium, lectus varius mus. Posuere.
+      {{ data.seller.business_description }}
     </div>
+    <div  class="text-sm">Verified</div>
   </div>
 </template>
 <style>
@@ -35,6 +41,9 @@
 </style>
 <script>
 export default {
+  props: {
+    data: Object,
+  },
   data() {
     return {
       path: null,

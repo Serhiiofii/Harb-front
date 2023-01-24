@@ -62,7 +62,10 @@
         ></textarea>
       </div>
       <div class="mt-6">
-        <button @click="upload" class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
+        <button
+          @click="upload"
+          class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
+        >
           {{ loading ? "Loading..." : "Proceed" }}
         </button>
       </div>
@@ -86,13 +89,13 @@ export default {
       name: "",
       category: "",
       description: "",
-      loading: false
+      loading: false,
     };
   },
   methods: {
     async upload() {
+      this.loading = true;
       try {
-        this.loading = true;
         const data = await this.$axios.$post(
           "seller/services/add",
           {
@@ -111,7 +114,7 @@ export default {
         console.log(data);
         this.loading = false;
         this.$toast.success("Services uploaded successfully!");
-        this.$router.push("/products");
+        this.$router.push("/seller/services");
       } catch (error) {
         console.log(error);
         this.loading = false;

@@ -4,11 +4,40 @@
     <div class="lg:mx-20 container">
       <div class="text-2xl my-3 font-bold">Saved items</div>
       <div class="lg:flex justify-between">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        <ProductCard v-for="(item, index) in saved" :key="index" :data="item.equipment" />
       </div>
       <FooterNav />
     </div>
   </div>
 </template>
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: mapState(["token"]),
+
+  data() {
+    return {
+      saved: [],
+    };
+  },
+  mounted() {
+    try {
+      this.$axios
+        .$get("account/saved-items", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.saved = response.data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>
