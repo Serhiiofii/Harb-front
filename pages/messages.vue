@@ -68,9 +68,15 @@
             type="text"
             class="p-3 w-full bg-gray-100 rounded-md"
             placeholder="Type a message"
+            v-model="message"
           />
           <div class="flex absolute top-1 right-4">
-            <img class="p-2" src="/icons/send.svg" alt="" />
+            <img
+              @click="sendMessage"
+              class="p-2 cursor-pointer"
+              src="/icons/send.svg"
+              alt=""
+            />
             <img class="p-2" src="/icons/img.svg" alt="" />
           </div>
         </div>
@@ -85,12 +91,15 @@ import { mapMutations } from "vuex";
 export default {
   computed: mapState(["sidebar", "token"]),
   data() {
-    return {};
+    return {
+      message: "",
+    };
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
   },
   mounted() {
+    // console.log(this.$router.history.current.params.slug);
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
@@ -99,7 +108,7 @@ export default {
         .$post(
           `messaging/chat-messages`,
           {
-            messaging_id: "",
+            messaging_id: "qtrtPH1q4i",
           },
           {
             headers: {
@@ -110,11 +119,37 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response.data)
+          console.log(response.data);
         });
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    sendMessage() {
+      try {
+        this.$axios
+          .$post(
+            `messaging/send-message`,
+            {
+              content: this.message,
+              sent_to: this.$router.history.current.params.slug,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

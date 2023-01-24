@@ -19,10 +19,10 @@
             >
               Make a Bid
             </button>
-            <NuxtLink to="/messages">
+            <NuxtLink :to="{ name: 'messages', params: { slug: product.seller_id } }">
               <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
-              Chat
-            </button>
+                Chat
+              </button>
             </NuxtLink>
             <button class="p-3 w-32 border border-yellow-600 rounded-sm">
               Call
@@ -74,7 +74,11 @@
           </div>
         </div>
       </div>
-      <BidModal :isCardModalActive="isCardModalActive" :id="product.id" :toggle="toggleCard" />
+      <BidModal
+        :isCardModalActive="isCardModalActive"
+        :id="product.id"
+        :toggle="toggleCard"
+      />
       <FooterNav />
     </div>
   </div>
@@ -91,7 +95,7 @@ export default {
       isCardModalActive: false,
       single: "",
       data: [],
-      product: []
+      product: [],
     };
   },
   mounted() {
@@ -107,18 +111,18 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.product = response.data.product
+          this.product = response.data.product;
           this.data = response.data;
         });
     } catch (error) {
       console.log(error);
     }
   },
-  methods:{
-    toggleCard(){
-      this.isCardModalActive = !this.isCardModalActive
-    }
-  }
+  methods: {
+    toggleCard() {
+      this.isCardModalActive = !this.isCardModalActive;
+    },
+  },
 };
 </script>
 <style scoped>
