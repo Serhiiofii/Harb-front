@@ -1,7 +1,9 @@
 <template>
   <div class="px-20 nav flex py-4 justify-between bg-white">
     <div class="my-auto">
-      <img class="my-auto" src="/logo.svg" alt="" />
+      <NuxtLink to="/">
+        <img class="my-auto" src="/logo.svg" alt="" />
+      </NuxtLink>
     </div>
     <div>
       <NuxtLink to="/">

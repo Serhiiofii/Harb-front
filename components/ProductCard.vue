@@ -1,7 +1,11 @@
 <template>
   <div class="m-2 lg:my-0 my-4">
     <NuxtLink :to="data.id">
-      <img src="/cardimg.png" alt="" />
+      <img
+        v-if="data.equipment_images[0] === undefined"
+        src="/cardimg.png"
+        alt=""
+      />
     </NuxtLink>
 
     <div class="flex justify-between">

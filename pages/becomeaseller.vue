@@ -245,9 +245,8 @@ export default {
   methods: {
     async uploadFile(id) {
       const files = event.target.files;
-      const formData = new FormData();
-      formData.append("myFile", files[0]);
-      this[`image${id}`] = formData;
+      this[`image${id}`] = files[0];
+
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = async (e) => {
@@ -257,18 +256,31 @@ export default {
     async registerSeller() {
       try {
         this.loading = true;
+        const formData = new FormData();
+        formData.append("company_name", this.company_name);
+        formData.append("company_email", this.company_email);
+        formData.append("otp", this.otp);
+        formData.append("business_entity", this.business_entity);
+        formData.append("company_role", this.company_role);
+        formData.append("business_location", this.business_location);
+        formData.append("business_description", this.business_description);
+        formData.append("business_documents[]", this.image1);
+        formData.append("business_documents[]", this.image2);
+        formData.append("business_documents[]", this.image3);
+
         const data = await this.$axios.$post(
           "seller/register",
-          {
-            company_name: this.company_name,
-            company_email: this.company_email,
-            otp: this.otp,
-            business_entity: this.business_entity,
-            company_role: this.company_role,
-            business_location: this.business_location,
-            business_description: this.business_description,
-            business_documents: [this.image1, this.image2, this.image3],
-          },
+          formData,
+          // {
+          //   company_name: this.company_name,
+          //   company_email: this.company_email,
+          //   otp: this.otp,
+          //   business_entity: this.business_entity,
+          //   company_role: this.company_role,
+          //   business_location: this.business_location,
+          //   business_description: this.business_description,
+          //   business_documents: [this.image1, this.image2, this.image3],
+          // },
           {
             headers: {
               "Content-Type": "application/json",
@@ -280,9 +292,12 @@ export default {
         console.log(data);
         this.loading = false;
         this.$toast.success("Seller Registered Successfully");
-        this.$router.push("/businessdetails");
-      } catch {
-        console.log("error");
+        this.$router.push({
+          name: "businessdetails",
+          params: { slug: data.response.seller_id },
+        });
+      } catch (error) {
+        console.log(error);
         this.loading = false;
         this.$toast.error("Oops! Something happened");
       }

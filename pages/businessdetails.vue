@@ -140,7 +140,7 @@ export default {
       company_position: "",
       account_officer_name: "",
       account_officer_phone: "",
-      seller_id: "",
+      seller_id: this.$router.history.current.params.slug,
     };
   },
   methods: {
@@ -171,6 +171,8 @@ export default {
         this.loading = false;
         this.$toast.success("Bank Details added Successfully");
         this.isComponentModalActive = true;
+        window.localStorage.clear();
+        this.$router.push("/login");
       } catch {
         console.log("error");
         this.loading = false;

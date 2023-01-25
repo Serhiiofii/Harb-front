@@ -96,7 +96,8 @@ export default {
         this.loading = false;
         window.localStorage.setItem("data", JSON.stringify(data));
         this.loading = false;
-        this.$router.push("/");
+        // this.$router.push("/");
+        window.location.href = "/";
       } catch (error) {
         console.log(error);
         this.loading = false;

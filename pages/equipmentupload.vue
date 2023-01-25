@@ -273,7 +273,7 @@ export default {
     async uploadFile(id) {
       const files = event.target.files;
       this[`image${id}`] = files[0];
-
+      // console.log(this[`image${id}`]);
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = async (e) => {
@@ -283,33 +283,41 @@ export default {
     async upload() {
       try {
         this.loading = true;
-        const formData1 = new FormData();
-        formData1.append("myFile1", this.image1);
+        const formData = new FormData();
+        formData.append("name", this.name);
+        formData.append("category", this.category);
+        formData.append("manufacturer", this.manufacturer);
+        formData.append("equipment_specification", this.specification);
+        formData.append("build_year", this.year_of_build);
+        formData.append("description", this.description);
+        formData.append("sale_type", this.type);
+        formData.append("custom_specifications", {
+          title: this.custom_title,
+          details: this.custom_details,
+        });
 
-        const formData2 = new FormData();
-        formData2.append("myFile2", this.image2);
-
-        const formData3 = new FormData();
-        formData3.append("myFile3", this.image3);
+        formData.append("images[]", this.image1);
+        formData.append("images[]", this.image2);
+        formData.append("images[]", this.image3);
 
         const data = await this.$axios.$post(
           "seller/equipments/add",
-          {
-            name: this.name,
-            category: this.category,
-            manufacturer: this.manufacturer,
-            equipment_specification: this.specification,
-            build_year: this.year_of_build,
-            description: this.description,
-            images: [formData1, formData2, formData3],
-            sale_type: this.type,
-            custom_specifications: [
-              {
-                title: this.custom_title,
-                details: this.custom_details,
-              },
-            ],
-          },
+          formData,
+          // {
+          //   name: this.name,
+          //   category: this.category,
+          //   manufacturer: this.manufacturer,
+          //   equipment_specification: this.specification,
+          //   build_year: this.year_of_build,
+          //   description: this.description,
+          //   sale_type: this.type,
+          //   custom_specifications: [
+          // {
+          //   title: this.custom_title,
+          //   details: this.custom_details,
+          // },
+          //   ],
+          // },
           {
             headers: {
               "Content-Type": "application/json",

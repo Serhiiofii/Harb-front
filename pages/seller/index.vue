@@ -53,7 +53,7 @@
                   <span class="text-sm">Company’s Name</span> <br />
                   <input
                     type="text"
-                    v-model="first_name"
+                    v-model="name"
                     class="p-2 border border-gray-200 rounded-sm w-full"
                   />
                 </div>
@@ -121,7 +121,7 @@
                     <textarea
                       class="w-full p-1 h-20 rounded-md"
                       name=""
-                      v-model="delivery_address"
+                      v-model="location"
                     ></textarea>
                   </div>
                 </div>
@@ -152,7 +152,7 @@
               <span class="text-sm my-1">Bank Name</span> <br />
               <input
                 type="text"
-                v-model="first_name"
+                v-model="bank_name"
                 class="p-2 border border-gray-200 rounded-sm w-full"
               />
               <div
@@ -166,7 +166,7 @@
               <span class="text-sm my-1">Bank Account Number</span> <br />
               <input
                 type="text"
-                v-model="first_name"
+                v-model="account"
                 class="p-2 border border-gray-200 rounded-sm w-full"
               />
               <div
@@ -180,7 +180,7 @@
               <span class="text-sm my-1">Enter your Phone Number</span> <br />
               <input
                 type="text"
-                v-model="first_name"
+                v-model="phone"
                 class="p-2 border border-gray-200 rounded-sm w-full"
               />
               <div
@@ -203,42 +203,36 @@ export default {
   middleware: "authenticated",
   data() {
     return {
-      first_name: "",
-      last_name: "",
+      name: "",
       email: "",
       phone: "",
       bio: "",
       location: "",
-      delivery_address: "",
+      account: "",
+      bank_name: "",
       loading: false,
       currentImage: undefined,
     };
   },
-  computed: mapState(["token"]),
+  computed: mapState(["token", "user"]),
   mounted() {
-    let local = JSON.parse(window.localStorage.getItem("data"));
     try {
       this.$axios
-        .$get("account/profile", {
+        .$get(`account/sellers/${this.user.seller_id}`, {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + local.data.token,
+            Authorization: "Bearer " + this.token,
           },
         })
         .then((response) => {
           console.log(response.data);
-          this.first_name = response.data.first_name;
-          this.last_name = response.data.last_name;
-          this.email = response.data.email;
-          this.phone = response.data.phone;
-          this.location = response.data.location;
-          this.delivery_address = response.data.delivery_address;
-          this.bio = response.data.bio;
+          this.name = response.data.seller.company_name;
+          this.email = response.data.seller.company_email;
+          this.phone = response.data.seller.user.phone;
+          this.location = response.data.seller.business_location;
+          this.bio = response.data.seller.business_description;
         });
-      this.first_name = data.first_name;
-
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -351,7 +345,6 @@ export default {
         this.$toast.error("Oops! Something happened");
       }
     },
-
     async uploadPhoto() {
       try {
         let formData = new FormData();
