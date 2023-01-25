@@ -35,11 +35,46 @@
           </div>
         </div>
         <div class="p-2 flex justify-between flex-wrap">
-          <div class="p-2 w-1/2"><ServiceCard /></div>
-          <div class="p-2 w-1/2"><ServiceCard /></div>
-          <div class="p-2 w-1/2"><ServiceCard /></div>
+          <div
+            class="p-2 w-1/2"
+            v-for="(service, index) in services"
+            :key="index"
+          >
+            <ServiceCard :data="service" />
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { mapState } from "vuex";
+
+export default {
+  data() {
+    return {
+      services: [],
+    };
+  },
+  computed: mapState(["token", "user"]),
+  mounted() {
+    try {
+      let seller = JSON.parse(window.localStorage.getItem("seller_id"));
+      this.$axios
+        .$get(`account/sellers/${seller}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.services = response.data.services;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

@@ -176,7 +176,7 @@
                 <img class="w-4 h-4" src="/edit.png" alt="" />
               </div>
             </div>
-            <div class="p-2 relative">
+            <!-- <div class="p-2 relative">
               <span class="text-sm my-1">Enter your Phone Number</span> <br />
               <input
                 type="text"
@@ -189,7 +189,7 @@
               >
                 <img class="w-4 h-4" src="/edit.png" alt="" />
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -217,8 +217,9 @@ export default {
   computed: mapState(["token", "user"]),
   mounted() {
     try {
+      let seller = JSON.parse(window.localStorage.getItem("seller_id"));
       this.$axios
-        .$get(`account/sellers/${this.user.seller_id}`, {
+        .$get(`account/sellers/${seller}`, {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -232,6 +233,11 @@ export default {
           this.phone = response.data.seller.user.phone;
           this.location = response.data.seller.business_location;
           this.bio = response.data.seller.business_description;
+
+          this.bank_name =
+            response.data.seller.business_accounts[0].account_name;
+          this.account =
+            response.data.seller.business_accounts[0].account_number;
         });
     } catch (error) {
       console.log(error);

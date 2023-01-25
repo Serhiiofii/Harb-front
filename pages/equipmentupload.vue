@@ -330,10 +330,11 @@ export default {
         this.loading = false;
         this.$toast.success("Equipment uploaded successfully!");
         this.$router.push("/seller/products");
+        
       } catch (error) {
         console.log(error);
         this.loading = false;
-        this.$toast.error("Oops! Something");
+        this.$toast.error("Oops! Something went wrong");
       }
     },
   },

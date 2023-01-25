@@ -4,13 +4,13 @@
       <div class="flex w-80">
         <img src="/user.png" alt="" />
         <div class="ml-4">
-          <div class="text-base font-bold">{{ data.seller.company_name }}</div>
-          <div class="text-sm">{{ data.seller.company_role }}</div>
+          <div class="text-base font-bold">{{ data.name }}</div>
+          <div class="text-sm">{{ data.category }}</div>
         </div>
       </div>
       <div>
         <button
-          v-if="path === '/account'"
+          v-if="path === '/account' || '/seller/services'"
           class="
             p-3
             border border-yellow-500
@@ -29,9 +29,9 @@
       </div>
     </div>
     <div class="my-3 text-sm">
-      {{ data.seller.business_description }}
+      {{ data.description }}
     </div>
-    <div  class="text-sm">Verified</div>
+    <div class="text-sm text-left">Verified</div>
   </div>
 </template>
 <style>

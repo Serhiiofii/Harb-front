@@ -300,6 +300,10 @@ export default {
         console.log(error);
         this.loading = false;
         this.$toast.error("Oops! Something happened");
+        window.localStorage.setItem(
+          "seller_id",
+          JSON.stringify(data.response.seller_id)
+        );
       }
     },
     async getOtp() {
