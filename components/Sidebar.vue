@@ -16,7 +16,7 @@
       left-0
     "
   >
-    <div class="my-4 text-gray-400 uppercase">Hi Louis,</div>
+    <div class="my-4 text-gray-400 uppercase">Hi {{user.first_name}},</div>
     <NuxtLink to="/account">
       <div class="flex my-5">
         <img src="/icons/user.svg" alt="" />

@@ -174,12 +174,10 @@ export default {
       delivery_address: "",
       loading: false,
       currentImage: undefined,
-      token: ""
     };
   },
   computed: mapState(["token"]),
   mounted() {
-    this.token = JSON.parse(window.localStorage.getItem("token"));
     try {
       this.$axios
         .$get("account/profile", {

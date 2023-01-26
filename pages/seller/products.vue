@@ -35,8 +35,9 @@
           </div>
         </div>
         <div>
-          <Product />
-          <Product />
+          <div v-for="(product, index) in products" :key="index">
+            <Product :data="product" />
+          </div>
         </div>
       </div>
     </div>

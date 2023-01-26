@@ -2,8 +2,8 @@
   <div class="m-2 lg:my-0 my-4">
     <NuxtLink :to="data.id">
       <img
-        v-if="data.equipment_images[0] === undefined"
-        src="/cardimg.png"
+        :src="data.equipment_images[0].image"
+        class="h-40 w-full"
         alt=""
       />
     </NuxtLink>

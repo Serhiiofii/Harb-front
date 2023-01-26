@@ -1,13 +1,25 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="lg:mx-20 my-8 container">
+    <div v-if="product !== null" class="lg:mx-20 my-8 container">
       <div class="lg:flex">
-        <div class="lg:w-3/5">
-          <img src="/cardimg.png" class="w-full lg:h-80" alt="" />
+        <div  class="lg:w-3/5">
+          <img
+            :src="product.equipment_images[0].image"
+            class="w-full lg:h-80"
+            alt=""
+          />
           <div class="flex my-4 justify-between">
-            <img src="/cardimg.png" class="img mr-2" alt="" />
-            <img src="/cardimg.png" class="img ml-2 lg:h-52" alt="" />
+            <img
+              :src="product.equipment_images[1].image"
+              class="img mr-2"
+              alt=""
+            />
+            <img
+              :src="product.equipment_images[2].image"
+              class="img ml-2 lg:h-52"
+              alt=""
+            />
           </div>
         </div>
         <div class="lg:w-2/5 lg:px-8">
@@ -19,7 +31,9 @@
             >
               Make a Bid
             </button>
-            <NuxtLink :to="{ name: 'messages', params: { slug: product.seller_id } }">
+            <NuxtLink
+              :to="{ name: 'messages', params: { slug: product.seller_id } }"
+            >
               <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
                 Chat
               </button>
@@ -89,13 +103,12 @@ import { mapState } from "vuex";
 
 export default {
   computed: mapState(["token"]),
-
   data() {
     return {
       isCardModalActive: false,
       single: "",
       data: [],
-      product: [],
+      product: null,
     };
   },
   mounted() {
@@ -110,7 +123,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data.product.equipment_images);
           this.product = response.data.product;
           this.data = response.data;
         });

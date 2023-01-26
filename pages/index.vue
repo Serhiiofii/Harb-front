@@ -71,30 +71,35 @@
               </NuxtLink>
             </div>
           </div>
-          <div>
+          <!-- <div>
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="lg:flex">
               <div v-for="(top, index) in data.top_deals" :key="index">
                 <ProductCard :data="top" />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div>
         <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
-        <div class="lg:flex">
-          <div v-for="(featured, index) in data.featured_products" :key="index">
+        <div class="lg:flex justify-between flex-wrap">
+          <div
+            v-for="(featured, index) in data.featured_products"
+            :key="index"
+            class="lg:w-1/3"
+          >
             <ProductCard :data="featured" />
           </div>
         </div>
       </div>
       <div>
         <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
-        <div class="lg:flex">
+        <div class="lg:flex justify-between flex-wrap">
           <div
             v-for="(category, index) in data.recent_sales"
             :key="index"
+            class="lg:w-1/3"
           >
             <ProductCard :data="category" />
           </div>
@@ -102,7 +107,7 @@
       </div>
       <div>
         <div class="text-3xl font-bold mt-4 mb-2">Most Viewed</div>
-        <div class="lg:flex flex-wrap">
+        <div class="lg:flex justify-between flex-wrap">
           <div
             v-for="(category, index) in data.most_viewed_products"
             :key="index"
@@ -240,12 +245,10 @@ export default {
     // ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
   },
   mounted() {
-    const token = JSON.parse(window.localStorage.getItem("data"));
-
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
-    if (token) {
+    if (this.token) {
       try {
         this.$axios
           .$get("products/get-products", {

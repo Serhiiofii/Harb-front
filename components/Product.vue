@@ -7,20 +7,16 @@
       <div class="flex">
         <img src="/user.png" alt="" />
         <div class="ml-3">
-          <div class="font-bold">Industrail Hose</div>
-          <div>Off Shore service</div>
+          <div class="font-bold">{{data.name}}</div>
+          <div>{{data.category}}</div>
         </div>
       </div>
       <div class="lg:text-sm text-xs my-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id ridiculus
-        purus tempus faucibus non pretium. Aenean at laoreet sodales tellus
-        orci. In proin pretium purus, fermentum arcu, curabitur. Porta feugiat
-        diam justo, orci morbi ultrices. Proin phasellus cras libero,
-        consectetur feugiat purus.
+        {{data.description}}
       </div>
       <div class="flex">
         <div class="mr-6 lg:text-sm text-xs">Date Uploaded:</div>
-        <div class="lg:text-sm text-xs">25/02/2022</div>
+        <div class="lg:text-sm text-xs">{{data.created_at.substring(0, 10)}}</div>
       </div>
       <div class="lg:mt-0 absolute right-6 bottom-6 mt-2">
         <button
@@ -42,3 +38,13 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    data: Object,
+  },
+  mounted(){
+    console.log(this.data)
+  }
+};
+</script>

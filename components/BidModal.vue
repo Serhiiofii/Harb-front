@@ -4,8 +4,8 @@
       <div class="card">
         <div class="card-content">
           <div class="text-2xl font-bold text-center my-3">Place a Bid:</div>
-          <div class="flex justify-evenly">
-            <div class="w-44 rounded-md bg-blue-100"></div>
+          <div class="">
+            <!-- <div class="w-44 rounded-md bg-blue-100"></div> -->
             <div>
               <div class="font-bold my-1">Tatomh Hose:</div>
               <div>
@@ -13,7 +13,7 @@
                 <input
                   type="number"
                   v-model="bid"
-                  class="p-2 border rounded-sm border-gray-200"
+                  class="p-2 border rounded-sm w-full border-gray-200"
                 />
                 <div class="flex justify-between mt-1">
                   <div
