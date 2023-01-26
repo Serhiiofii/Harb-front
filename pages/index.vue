@@ -237,7 +237,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
+    // ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
   },
   mounted() {
     const token = JSON.parse(window.localStorage.getItem("data"));
@@ -246,8 +246,6 @@ export default {
       this.toggleSidenav();
     }
     if (token) {
-      this.mutateToken();
-      this.mutateUser();
       try {
         this.$axios
           .$get("products/get-products", {

@@ -38,14 +38,14 @@
 <script>
 export default {
   mounted() {
-    let local = JSON.parse(window.localStorage.getItem("data"));
+    let local = JSON.parse(window.localStorage.getItem("token"));
     try {
       this.$axios
         .$get("account/notifications", {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + local.data.token,
+            Authorization: "Bearer " + local,
           },
         })
         .then((response) => {

@@ -42,3 +42,36 @@
     </div>
   </div>
 </template>
+
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  data() {
+    return {
+      products: [],
+    };
+  },
+  computed: mapState(["token", "user"]),
+  mounted() {
+    try {
+      let seller = JSON.parse(window.localStorage.getItem("seller_id"));
+      this.$axios
+        .$get(`account/sellers/${seller}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.products = response.data.equipments;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>

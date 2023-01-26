@@ -85,7 +85,7 @@ export default {
     async signupUser() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
+        let local = JSON.parse(window.localStorage.getItem("token"));
         const data = await this.$axios.$put(
           "account/password",
           {
@@ -97,7 +97,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + local,
             },
           }
         );

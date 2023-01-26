@@ -63,7 +63,7 @@
 
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -72,32 +72,47 @@ export default {
       loading: false,
     };
   },
+  mounted() {
+    window.localStorage.clear();
+  },
   methods: {
-    ...mapMutations(["userLoggedIn"]),
+    ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),
 
     async signupUser() {
       try {
         this.loading = true;
-        const data = await this.$axios.$post(
-          "auth/login",
-          {
-            email: this.email,
-            password: this.password,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
+        await this.$axios
+          .$post(
+            "auth/login",
+            {
+              email: this.email,
+              password: this.password,
             },
-          }
-        );
-        console.log(data);
-        this.userLoggedIn();
-        this.$toast.success("Successfully authenticated");
-        this.loading = false;
-        window.localStorage.setItem("data", JSON.stringify(data));
-        this.loading = false;
-        // this.$router.push("/");
-        window.location.href = "/";
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data.user);
+            this.userLoggedIn();
+            this.$toast.success("Successfully authenticated");
+            this.loading = false;
+            window.localStorage.setItem(
+              "user",
+              JSON.stringify(response.data.user)
+            );
+            window.localStorage.setItem(
+              "token",
+              JSON.stringify(response.data.token)
+            );
+            this.loading = false;
+            this.mutateToken();
+            this.mutateUser();
+            this.$router.push("/");
+          });
+        // window.location.href = "/";
       } catch (error) {
         console.log(error);
         this.loading = false;

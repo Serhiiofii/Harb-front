@@ -159,6 +159,8 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+
 export default {
   middleware: "authenticated",
   data() {
@@ -172,22 +174,26 @@ export default {
       delivery_address: "",
       loading: false,
       currentImage: undefined,
+      token: ""
     };
   },
   computed: mapState(["token"]),
   mounted() {
-    let local = JSON.parse(window.localStorage.getItem("data"));
+    this.token = JSON.parse(window.localStorage.getItem("token"));
     try {
       this.$axios
         .$get("account/profile", {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: "Bearer " + local.data.token,
+            Authorization: "Bearer " + this.token,
           },
         })
         .then((response) => {
+          window.localStorage.setItem("user", JSON.stringify(response.data));
           console.log(response.data);
+                this.mutateUser();
+
           this.first_name = response.data.first_name;
           this.last_name = response.data.last_name;
           this.email = response.data.email;
@@ -196,16 +202,15 @@ export default {
           this.delivery_address = response.data.delivery_address;
           this.bio = response.data.bio;
         });
-      this.first_name = data.first_name;
     } catch (error) {
       console.log(error);
     }
   },
   methods: {
+    ...mapMutations(["mutateUser"]),
     async updateInfo() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/personal-info",
           {
@@ -218,7 +223,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -234,7 +239,6 @@ export default {
     async updateDelivery() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/delivery-address",
           {
@@ -244,7 +248,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -260,7 +264,6 @@ export default {
     async updateBio() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/bio",
           {
@@ -270,7 +273,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -286,7 +289,6 @@ export default {
     async updateLocation() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/location",
           {
@@ -296,7 +298,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -318,11 +320,10 @@ export default {
         formData.append("photo", file);
 
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$post("account/update-photo", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + local.data.token,
+            Authorization: "Bearer " + this.token,
           },
         });
         console.log(data);

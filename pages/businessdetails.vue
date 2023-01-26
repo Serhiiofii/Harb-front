@@ -147,7 +147,7 @@ export default {
     async accountDetails() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
+        let local = JSON.parse(window.localStorage.getItem("token"));
         const data = await this.$axios.$post(
           "seller/account-details",
           {
@@ -163,7 +163,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + local,
             },
           }
         );
@@ -171,8 +171,7 @@ export default {
         this.loading = false;
         this.$toast.success("Bank Details added Successfully");
         this.isComponentModalActive = true;
-        window.localStorage.clear();
-        this.$router.push("/login");
+        this.$router.push("/account");
       } catch {
         console.log("error");
         this.loading = false;

@@ -281,56 +281,56 @@ export default {
       };
     },
     async upload() {
+      const formData = new FormData();
+      formData.append("name", this.name);
+      formData.append("category", this.category);
+      formData.append("manufacturer", this.manufacturer);
+      formData.append("equipment_specification", this.specification);
+      formData.append("build_year", this.year_of_build);
+      formData.append("description", this.description);
+      formData.append("sale_type", this.type);
+      formData.append("custom_specifications", {
+        title: this.custom_title,
+        details: this.custom_details,
+      });
+      formData.append("images[]", this.image1);
+      formData.append("images[]", this.image2);
+      formData.append("images[]", this.image3);
       try {
         this.loading = true;
-        const formData = new FormData();
-        formData.append("name", this.name);
-        formData.append("category", this.category);
-        formData.append("manufacturer", this.manufacturer);
-        formData.append("equipment_specification", this.specification);
-        formData.append("build_year", this.year_of_build);
-        formData.append("description", this.description);
-        formData.append("sale_type", this.type);
-        formData.append("custom_specifications", {
-          title: this.custom_title,
-          details: this.custom_details,
-        });
-
-        formData.append("images[]", this.image1);
-        formData.append("images[]", this.image2);
-        formData.append("images[]", this.image3);
-
-        const data = await this.$axios.$post(
-          "seller/equipments/add",
-          formData,
-          // {
-          //   name: this.name,
-          //   category: this.category,
-          //   manufacturer: this.manufacturer,
-          //   equipment_specification: this.specification,
-          //   build_year: this.year_of_build,
-          //   description: this.description,
-          //   sale_type: this.type,
-          //   custom_specifications: [
-          // {
-          //   title: this.custom_title,
-          //   details: this.custom_details,
-          // },
-          //   ],
-          // },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: "Bearer " + this.token,
-            },
-          }
-        );
-        console.log(data);
-        this.loading = false;
-        this.$toast.success("Equipment uploaded successfully!");
-        this.$router.push("/seller/products");
-        
+        await this.$axios
+          .$post(
+            "seller/equipments/add",
+            formData,
+            // {
+            //   name: this.name,
+            //   category: this.category,
+            //   manufacturer: this.manufacturer,
+            //   equipment_specification: this.specification,
+            //   build_year: this.year_of_build,
+            //   description: this.description,
+            //   sale_type: this.type,
+            //   custom_specifications: [
+            // {
+            //   title: this.custom_title,
+            //   details: this.custom_details,
+            // },
+            //   ],
+            // },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.loading = false;
+            this.$toast.success("Equipment uploaded successfully!");
+            this.$router.push("/seller/products");
+          });
       } catch (error) {
         console.log(error);
         this.loading = false;

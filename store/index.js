@@ -16,9 +16,9 @@ export const mutations = {
         state.authenticated = false
     },
     mutateToken: function (state) {
-        state.token = JSON.parse(window.localStorage.getItem("data")).data.token;
+        state.token = JSON.parse(window.localStorage.getItem("token"));
     },
     mutateUser: function (state) {
-        state.user = JSON.parse(window.localStorage.getItem("data")).data.user
+        state.user = JSON.parse(window.localStorage.getItem("user"))
     },
 }
