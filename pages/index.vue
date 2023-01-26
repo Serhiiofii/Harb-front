@@ -71,14 +71,18 @@
               </NuxtLink>
             </div>
           </div>
-          <!-- <div>
+          <div>
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="lg:flex">
-              <div v-for="(top, index) in data.top_deals" :key="index">
+              <div
+                v-for="(top, index) in data.top_deals"
+                :key="index"
+                class="lg:w-1/2"
+              >
                 <ProductCard :data="top" />
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       <div>

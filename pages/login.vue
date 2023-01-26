@@ -73,7 +73,8 @@ export default {
     };
   },
   mounted() {
-    window.localStorage.clear();
+    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("token");
   },
   methods: {
     ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),

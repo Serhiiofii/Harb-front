@@ -1,10 +1,13 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="lg:mx-20 container lg:flex mt-4">
+    <div
+      v-if="cart !== null && cart.length > 0"
+      class="lg:mx-20 container lg:flex mt-4"
+    >
       <div class="w-full bg-white p-2">
-        <Product />
-        <Product />
+        <!-- <Product />
+        <Product /> -->
       </div>
       <div
         v-show="sidebar"
@@ -118,6 +121,7 @@ export default {
   data() {
     return {
       data: [],
+      cart: null,
     };
   },
   methods: {
@@ -139,6 +143,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.data = response.data;
+          this.cart = response.data.cart_items;
         });
     } catch (error) {
       console.log(error);
