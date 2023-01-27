@@ -57,9 +57,9 @@ export default {
   computed: mapState(["token", "user"]),
   mounted() {
     try {
-      let seller = JSON.parse(window.localStorage.getItem("seller_id"));
+      // let seller = JSON.parse(window.localStorage.getItem("seller_id"));
       this.$axios
-        .$get(`account/sellers/${seller}`, {
+        .$get(`account/sellers/${this.user.seller.id}`, {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",

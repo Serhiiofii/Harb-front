@@ -25,13 +25,19 @@
           class="bg-gray-100 p-3 w-full rounded-md"
           placeholder="Search a message"
         />
-        <div class="flex py-4">
-          <img src="/user.png" alt="" />
-          <div class="lg:ml-3">
-            <div>Offshore Winch</div>
-            <div class="text-sm">Dunlop Oil & Marine Industrail Hose</div>
+        <div v-for="(single, index) in list" :key="index">
+          <div class="flex py-4" @click="singleMessage(single.messaging_id)">
+            <img src="/user.png" alt="" />
+            <div class="lg:ml-3 my-auto">
+              <div>
+                {{ single.sender.first_name }} {{ single.sender.last_name }}
+              </div>
+              <div class="text-sm">{{ single.sender.bio }}</div>
+            </div>
+            <div class="text-xs ml-auto mt-auto">
+              {{ single.created_at.substring(0, 10) }}
+            </div>
           </div>
-          <div class="text-xs ml-auto mt-auto">12:20pm</div>
         </div>
       </div>
       <div class="w-full lg:ml-4 bg-white p-4">
@@ -93,33 +99,29 @@ export default {
   data() {
     return {
       message: "",
+      list: null,
+      chats: [],
     };
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
   },
   mounted() {
-    // console.log(this.$router.history.current.params.slug);
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
     try {
       this.$axios
-        .$post(
-          `messaging/chat-messages`,
-          {
-            messaging_id: "qtrtPH1q4i",
+        .$get(`messaging/chat-list`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: "Bearer " + this.token,
-            },
-          }
-        )
+        })
         .then((response) => {
           console.log(response.data);
+          this.list = response.data;
         });
     } catch (error) {
       console.log(error);
@@ -145,6 +147,30 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    singleMessage(id) {
+      try {
+        this.$axios
+          .$post(
+            `messaging/chat-messages`,
+            {
+              messaging_id: id,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.chats = response.data;
           });
       } catch (error) {
         console.log(error);

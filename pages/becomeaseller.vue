@@ -296,10 +296,10 @@ export default {
               name: "businessdetails",
               params: { slug: response.data.seller.id },
             });
-            window.localStorage.setItem(
-              "seller_id",
-              JSON.stringify(response.data.seller.id)
-            );
+            // window.localStorage.setItem(
+            //   "seller_id",
+            //   JSON.stringify(response.data.seller.id)
+            // );
           });
       } catch (error) {
         console.log(error);
