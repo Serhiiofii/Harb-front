@@ -35,7 +35,7 @@
         <div class="ml-4">My Orders</div>
       </div>
     </NuxtLink>
-    <NuxtLink to="messages">
+    <NuxtLink to="/messages">
       <div class="flex my-5">
         <img src="/icons/msg.svg" alt="" />
         <div class="ml-4">Messages</div>

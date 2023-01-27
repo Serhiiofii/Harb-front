@@ -6,8 +6,9 @@
       class="lg:mx-20 container lg:flex mt-4"
     >
       <div class="w-full bg-white p-2">
-        <!-- <Product />
-        <Product /> -->
+        <div v-for="(single, index) in cart" :key="index">
+          <Product :data="single" />
+        </div>
       </div>
       <div
         v-show="sidebar"

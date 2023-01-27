@@ -19,7 +19,8 @@
                 {{ not.created_at.substring(0, 10) }}
               </div>
             </div>
-            <!-- <div
+            <div
+              v-if="not.equipment_id === null"
               class="
                 text-xs text-green-800 text-center
                 bg-green-100
@@ -30,8 +31,8 @@
               "
             >
               View
-            </div> -->
-            <div class="flex justify-between w-44">
+            </div>
+            <div v-else class="flex justify-between w-44">
               <div
                 @click="approve(not.equipment_id)"
                 class="
@@ -41,6 +42,7 @@
                   p-1
                   my-auto
                   w-20
+                  cursor-pointer
                 "
               >
                 Approve
@@ -54,6 +56,7 @@
                   p-1
                   my-auto
                   w-20
+                  cursor-pointer
                 "
               >
                 Decline

@@ -193,7 +193,7 @@
               </NuxtLink>
             </b-dropdown-item>
             <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="">
+              <NuxtLink to="/messages">
                 <div class="flex">
                   <img src="/icons/msg.svg" alt="" />
                   <div class="ml-3">Messages</div>

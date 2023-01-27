@@ -1,22 +1,28 @@
 <template>
   <div class="lg:flex lg:p-3 my-2 border border-gray-100 relative">
     <div class="lg:w-96">
-      <img class="lg:h-52 lg:w-80 w-full" src="/product.png" alt="" />
+      <img
+        class="lg:h-52 lg:w-80 w-full"
+        :src="data.equipment_images[0].image"
+        alt=""
+      />
     </div>
     <div class="lg:ml-5 w-full lg:mt-0 mt-2 lg:p-0 p-2">
       <div class="flex">
         <img src="/user.png" alt="" />
         <div class="ml-3">
-          <div class="font-bold">{{data.name}}</div>
-          <div>{{data.category}}</div>
+          <div class="font-bold">{{ data.name }}</div>
+          <div>{{ data.category }}</div>
         </div>
       </div>
       <div class="lg:text-sm text-xs my-2">
-        {{data.description}}
+        {{ data.description }}
       </div>
       <div class="flex">
         <div class="mr-6 lg:text-sm text-xs">Date Uploaded:</div>
-        <div class="lg:text-sm text-xs">{{data.created_at.substring(0, 10)}}</div>
+        <div class="lg:text-sm text-xs">
+          {{ data.created_at.substring(0, 10) }}
+        </div>
       </div>
       <div class="lg:mt-0 absolute right-6 bottom-6 mt-2">
         <button
@@ -43,8 +49,8 @@ export default {
   props: {
     data: Object,
   },
-  mounted(){
+  mounted() {
     // console.log(this.data)
-  }
+  },
 };
 </script>
