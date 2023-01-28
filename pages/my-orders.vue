@@ -7,7 +7,7 @@
     >
       <div class="w-full bg-white p-2">
         <div v-for="(single, index) in cart" :key="index">
-          <Product :data="single" />
+          <Product :data="single.equipment" />
         </div>
       </div>
       <div
@@ -33,11 +33,11 @@
           <div class="line bg-gray-100"></div>
           <div class="flex justify-between my-1 mt-3">
             <div class="text-sm">Sub Total:</div>
-            <div class="font-bold">₦14,500</div>
+            <div class="font-bold">₦ {{ total }}</div>
           </div>
           <div class="flex justify-between my-1">
             <div class="text-sm">Grand Total:</div>
-            <div class="font-bold text-yellow-500">₦14,500</div>
+            <div class="font-bold text-yellow-500">₦ {{ total }}</div>
           </div>
         </div>
         <div class="bg-white my-4 p-2">
@@ -74,14 +74,26 @@
               :value="user.phone"
             />
           </div>
-          <div>
+          <!-- <div>
             <div class="text-sm mt-3 mb-1">Delivery Method:</div>
             <button class="p-2 bg-red-100 font-bold px-4 text-sm">
               Pay Using Card
             </button>
-          </div>
+          </div> -->
         </div>
-        <button class="bg-blue-600 p-2 w-full text-white">Checkout</button>
+
+        <button class="bg-blue-600 p-2 w-full text-white">
+          <paystack
+            :amount="total * 100"
+            :email="user.email"
+            :paystackkey="PUBLIC_KEY"
+            :reference="reference"
+            :callback="processPayment"
+            :close="close"
+          >
+            Checkout
+          </paystack>
+        </button>
       </div>
     </div>
     <div class="mx-20">
@@ -116,18 +128,42 @@
 <script>
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import paystack from "vue-paystack";
 
 export default {
-  computed: mapState(["sidebar", "token", "user"]),
+  components: {
+    paystack,
+  },
   data() {
     return {
       data: [],
       cart: null,
+      total: 0,
     };
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
+    processPayment() {
+      this.$toast.success("Payment complete! Reference ");
+    },
+    close() {
+      this.$toast.error("Transaction was not completed, window closed.");
+    },
   },
+  computed: mapState(["sidebar", "token", "user"]),
+
+  // computed: {
+  //   reference() {
+  //     let text = "";
+  //     let possible =
+  //       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  //     for (let i = 0; i < 10; i++)
+  //       text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  //     return text;
+  //   },
+  // },
   mounted() {
     if (screen.width <= 600) {
       this.toggleSidenav();
@@ -142,9 +178,12 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.data = response.data;
           this.cart = response.data.cart_items;
+          this.cart.map((single) => {
+            this.total = this.total + +single.bid_amount;
+          });
         });
     } catch (error) {
       console.log(error);

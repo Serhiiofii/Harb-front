@@ -74,10 +74,30 @@
                   "
                 >
                   <div class="font-bold text-base my-auto">Avatar</div>
-                  <div class="w-20 rounded-full bg-blue-100 w-20">
-                    <img src="/icons/user.svg" class="mx-auto my-8" alt="" />
-                  </div>
-                  <!-- <input @change="uploadPhoto" type="file" name="" ref="file" /> -->
+                  <label for="fileInput">
+                    <div
+                      v-if="imageURL === null && avatar === null"
+                      class="w-20 rounded-full bg-blue-100 h-20"
+                    >
+                      <img
+                        src="/icons/user.svg"
+                        class="mx-auto my-auto"
+                        alt=""
+                      />
+                    </div>
+                    <img
+                      v-else
+                      :src="imageURL || avatar"
+                      class="w-20 h-20 rounded-full"
+                      alt=""
+                    />
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    @change="updatePhoto"
+                    class="hidden"
+                  />
                 </div>
                 <div
                   class="
@@ -174,6 +194,9 @@ export default {
       delivery_address: "",
       loading: false,
       currentImage: undefined,
+      avatar: null,
+      image: "",
+      imageURL: null,
     };
   },
   computed: mapState(["token"]),
@@ -190,8 +213,7 @@ export default {
         .then((response) => {
           window.localStorage.setItem("user", JSON.stringify(response.data));
           console.log(response.data);
-                this.mutateUser();
-
+          this.mutateUser();
           this.first_name = response.data.first_name;
           this.last_name = response.data.last_name;
           this.email = response.data.email;
@@ -199,6 +221,7 @@ export default {
           this.location = response.data.location;
           this.delivery_address = response.data.delivery_address;
           this.bio = response.data.bio;
+          this.avatar = response.data.avatar;
         });
     } catch (error) {
       console.log(error);
@@ -310,12 +333,18 @@ export default {
       }
     },
 
-    async uploadPhoto() {
+    async updatePhoto() {
       try {
+        const files = event.target.files;
+        this.image = files[0];
+
+        const reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onload = async (e) => {
+          this.imageURL = await e.target.result;
+        };
         let formData = new FormData();
-        let file = this.$refs.file.files.item(0);
-        console.log(file);
-        formData.append("photo", file);
+        formData.append("photo", this.image);
 
         this.loading = true;
         const data = await this.$axios.$post("account/update-photo", formData, {

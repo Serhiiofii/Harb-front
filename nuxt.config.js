@@ -21,7 +21,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat:wght@500&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans&family=Montserrat:wght@500&display=swap' },
     ]
   },
 

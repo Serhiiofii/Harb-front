@@ -140,8 +140,12 @@ export default {
       company_position: "",
       account_officer_name: "",
       account_officer_phone: "",
-      seller_id: this.$router.history.current.params.slug,
+      seller_id: "",
     };
+  },
+  mounted() {
+    this.seller_id = this.$router.history.current.params.slug;
+    console.log(this.$router);
   },
   methods: {
     async accountDetails() {

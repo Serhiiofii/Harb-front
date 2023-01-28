@@ -131,12 +131,12 @@
             </b-dropdown-item>
             <div class="h-1 bg-gray-100 w-full"></div>
             <b-dropdown-item aria-role="listitem">
-              <div class="flex justify-between w-80 my-2">
+              <div v-for="(single , index) in notifications" :key="index" class="flex justify-between w-80 my-2">
                 <div class="">
-                  <div>Bid for tathoth Hose - N300,000</div>
-                  <div class="text-xs text-gray-200">6 - Sep - 2022, 13:02</div>
+                  <div>{{single.title}}</div>
+                  <div class="text-xs text-gray-200">{{single.created_at.substring(0, 10)}}</div>
                 </div>
-                <div
+                <!-- <div
                   class="
                     text-xs text-green-800 text-center
                     bg-green-100
@@ -147,14 +147,25 @@
                   "
                 >
                   View
-                </div>
+                </div> -->
               </div>
             </b-dropdown-item>
             <div class="h-1 bg-gray-100 w-full"></div>
           </b-dropdown>
         </div>
         <div class="flex my-auto nav-item">
-          <img src="/user.png" class="w-8 my-auto h-8" alt="" />
+          <img
+            v-if="avatar === null"
+            src="/user.png"
+            class="w-8 my-auto h-8"
+            alt=""
+          />
+          <img
+            v-else
+            :src="avatar"
+            class="w-8 my-auto h-8 rounded-full"
+            alt=""
+          />
           <b-dropdown aria-role="list">
             <template #trigger="{ active }">
               <b-button
@@ -236,7 +247,7 @@ import { mapMutations } from "vuex";
 import { mapState } from "vuex";
 
 export default {
-  computed: mapState(["user"]),
+  computed: mapState(["user", "token"]),
   data() {
     return {
       data: [],
@@ -244,11 +255,30 @@ export default {
       sidebar: false,
       role: "",
       name: "",
+      avatar: null,
+      notifications: null,
     };
   },
   mounted() {
     this.name = this.user.first_name;
     this.role = this.user.user_role;
+    this.avatar = this.user.avatar;
+    try {
+      this.$axios
+        .$get("account/notifications", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          // console.log(response.data);
+          this.notifications = response.data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),

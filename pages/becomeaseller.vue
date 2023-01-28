@@ -294,7 +294,7 @@ export default {
             this.$toast.success("Seller Registered Successfully");
             this.$router.push({
               name: "businessdetails",
-              params: { slug: response.data.seller.id },
+              params: { slug: response.data.seller.user_id},
             });
             // window.localStorage.setItem(
             //   "seller_id",
