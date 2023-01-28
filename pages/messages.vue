@@ -26,8 +26,17 @@
           placeholder="Search a message"
         />
         <div v-for="(single, index) in list" :key="index">
-          <div class="flex py-4" @click="singleMessage(single.messaging_id)">
-            <img src="/user.png" alt="" />
+          <div
+            class="flex py-4"
+            @click="singleMessage(single.messaging_id, index)"
+          >
+            <img v-if="single.sender.avatar === null" src="/user.png" alt="" />
+            <img
+              v-else
+              :src="single.sender.avatar"
+              class="w-12 h-12 rounded-full"
+              alt=""
+            />
             <div class="lg:ml-3 my-auto">
               <div>
                 {{ single.sender.first_name }} {{ single.sender.last_name }}
@@ -35,57 +44,68 @@
               <div class="text-sm">{{ single.sender.bio }}</div>
             </div>
             <div class="text-xs ml-auto mt-auto">
-              {{ single.created_at.substring(0, 10) }}
+              <time-ago :refresh="60" :datetime="single.created_at"></time-ago>
             </div>
           </div>
         </div>
       </div>
       <div class="w-full lg:ml-4 bg-white p-4">
-        <div class="flex py-4">
-          <img src="/user.png" alt="" />
-          <div class="ml-3">
-            <div>Offshore Winch</div>
-            <div class="text-sm">Dunlop Oil & Marine Industrail Hose</div>
-          </div>
-        </div>
-        <div class="border-b border-gray-100 mb-8"></div>
-        <div class="lg:w-2/3 mr-auto flex my-5">
-          <div class="text-sm p-2 bg-blue-100 rounded-md">
-            Vel et commodo et scelerisque aliquam. Sed libero, non praesent
-            felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu
-            mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras
-            nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate
-            vitae.
-          </div>
-          <div class="text-xs mt-auto ml-4">12:20pm</div>
-        </div>
-        <div class="lg:w-2/3 ml-auto flex my-5">
-          <div class="text-xs mt-auto mr-4">12:20pm</div>
-          <div class="text-sm p-2 bg-yellow-100 rounded-md">
-            Vel et commodo et scelerisque aliquam. Sed libero, non praesent
-            felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu
-            mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras
-            nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate
-            vitae.
-          </div>
-        </div>
-        <div class="w-full relative">
-          <input
-            type="text"
-            class="p-3 w-full bg-gray-100 rounded-md"
-            placeholder="Type a message"
-            v-model="message"
-          />
-          <div class="flex absolute top-1 right-4">
+        <div v-if="chats !== null">
+          <div class="flex py-4">
+            <img v-if="sender.avatar === null" src="/user.png" alt="" />
             <img
-              @click="sendMessage"
-              class="p-2 cursor-pointer"
-              src="/icons/send.svg"
+              v-else
+              :src="sender.avatar"
+              class="w-12 h-12 rounded-full"
               alt=""
             />
-            <img class="p-2" src="/icons/img.svg" alt="" />
+            <div class="ml-3">
+              <div>{{ sender.first_name }} {{ sender.last_name }}</div>
+              <div class="text-sm">{{ sender.bio }}</div>
+            </div>
+          </div>
+          <div class="border-b border-gray-100 mb-8"></div>
+          <div v-for="(chat, index) in chats" :key="index">
+            <div
+              v-if="chat.sender === user.id"
+              class="lg:w-2/3 mr-auto flex my-5"
+            >
+              <div class="text-sm p-2 bg-blue-100 rounded-md">
+                {{ chat.content }}
+              </div>
+              <div class="text-xs mt-auto ml-4">
+                <time-ago :refresh="60" :datetime="chat.created_at"></time-ago>
+              </div>
+            </div>
+            <div v-else class="lg:w-2/3 ml-auto flex justify-end my-5">
+              <div class="text-xs mt-auto mr-4">
+                <time-ago :refresh="60" :datetime="chat.created_at"></time-ago>
+                <!-- {{ chat.created_at.substring(0, 10) }} -->
+              </div>
+              <div class="text-sm p-2 bg-yellow-100 rounded-md">
+                {{ chat.content }}
+              </div>
+            </div>
+          </div>
+          <div class="w-full relative">
+            <input
+              type="text"
+              class="p-3 w-full bg-gray-100 rounded-md"
+              placeholder="Type a message"
+              v-model="message"
+            />
+            <div class="flex absolute top-1 right-4">
+              <img
+                @click="sendMessage"
+                class="p-2 cursor-pointer"
+                src="/icons/send.svg"
+                alt=""
+              />
+              <img class="p-2" src="/icons/img.svg" alt="" />
+            </div>
           </div>
         </div>
+        <div v-else class="text-center p-4">No selected chats!</div>
       </div>
     </div>
   </div>
@@ -93,14 +113,20 @@
 <script>
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import { TimeAgo } from "vue2-timeago";
 
 export default {
-  computed: mapState(["sidebar", "token"]),
+  computed: mapState(["sidebar", "token", "user"]),
+  components: {
+    TimeAgo,
+  },
   data() {
     return {
       message: "",
       list: null,
-      chats: [],
+      chats: null,
+      sender: [],
+      num: null,
     };
   },
   methods: {
@@ -135,7 +161,9 @@ export default {
             `messaging/send-message`,
             {
               content: this.message,
-              sent_to: this.$router.history.current.params.slug,
+              sent_to:
+                this.$router.history.current.params.slug ||
+                this.chats[0].sent_to,
             },
             {
               headers: {
@@ -147,12 +175,15 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
+            this.singleMessage(this.chats[0].messaging_id, this.num);
           });
       } catch (error) {
         console.log(error);
       }
     },
-    singleMessage(id) {
+    singleMessage(id, index) {
+      this.sender = this.list[index].sender;
+      this.num = index;
       try {
         this.$axios
           .$post(
@@ -170,7 +201,7 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
-            this.chats = response.data;
+            this.chats = response.data.reverse();
           });
       } catch (error) {
         console.log(error);
