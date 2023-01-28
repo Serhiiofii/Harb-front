@@ -86,7 +86,7 @@
           <paystack
             :amount="total * 100"
             :email="user.email"
-            :paystackkey="PUBLIC_KEY"
+            paystackkey="pk_test_d5d28afc7480b03bab11b88a84879d68f8a089af"
             :reference="reference"
             :callback="processPayment"
             :close="close"
@@ -144,26 +144,48 @@ export default {
   methods: {
     ...mapMutations(["toggleSidenav"]),
     processPayment() {
-      this.$toast.success("Payment complete! Reference ");
+      try {
+        this.$axios
+          .$post(
+            "transactions/verify",
+            {
+              paystack_reference_id: this.reference,
+              cart_reference_id: "WqKPJqbysO",
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.$toast.success("Payment completed!");
+          });
+      } catch (e) {
+        console.log(e);
+      }
     },
     close() {
       this.$toast.error("Transaction was not completed, window closed.");
     },
   },
-  computed: mapState(["sidebar", "token", "user"]),
 
-  // computed: {
-  //   reference() {
-  //     let text = "";
-  //     let possible =
-  //       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  computed: {
+    ...mapState(["sidebar", "token", "user"]),
+    reference() {
+      let text = "";
+      let possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  //     for (let i = 0; i < 10; i++)
-  //       text += possible.charAt(Math.floor(Math.random() * possible.length));
+      for (let i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-  //     return text;
-  //   },
-  // },
+      return text;
+    },
+  },
   mounted() {
     if (screen.width <= 600) {
       this.toggleSidenav();
