@@ -73,8 +73,10 @@
           </div>
         </div>
         <div>
-          <AdminProductCard />
-          <AdminProductCard />
+          <!-- <AdminProductCard /> -->
+          <div v-for="(product, index) in products" :key="index">
+            <Product :data="product" />
+          </div>
         </div>
       </div>
     </div>

@@ -65,11 +65,12 @@
                 <b-field>
                   <b-switch
                     type="is-info"
-                    v-model="isSwitchedCustom"
+                    v-model="admin.admin_roles[0].payments"
                     true-value="Yes"
                     false-value="No"
+                    @click.native="toggle(admin.id)"
                   >
-                    {{ isSwitchedCustom }}
+                    {{ admin.admin_roles[0].payments === 1 ? "Yes" : "No" }}
                   </b-switch>
                 </b-field>
               </div>
@@ -77,11 +78,12 @@
                 <b-field>
                   <b-switch
                     type="is-info"
-                    v-model="isSwitchedCustom"
+                    v-model="admin.admin_roles[0].orders"
                     true-value="Yes"
                     false-value="No"
+                    @click.native="toggle"
                   >
-                    {{ isSwitchedCustom }}
+                    {{ admin.admin_roles[0].orders === 1 ? "Yes" : "No" }}
                   </b-switch>
                 </b-field>
               </div>
@@ -89,11 +91,12 @@
                 <b-field>
                   <b-switch
                     type="is-info"
-                    v-model="isSwitchedCustom"
+                    v-model="admin.admin_roles[0].products"
                     true-value="Yes"
                     false-value="No"
+                    @click.native="toggle"
                   >
-                    {{ isSwitchedCustom }}
+                    {{ admin.admin_roles[0].products === 1 ? "Yes" : "No" }}
                   </b-switch>
                 </b-field>
               </div>
@@ -101,11 +104,12 @@
                 <b-field>
                   <b-switch
                     type="is-info"
-                    v-model="isSwitchedCustom"
+                    v-model="admin.admin_roles[0].services"
                     true-value="Yes"
                     false-value="No"
+                    @click.native="toggle"
                   >
-                    {{ isSwitchedCustom }}
+                    {{ admin.admin_roles[0].services === 1 ? "Yes" : "No" }}
                   </b-switch>
                 </b-field>
               </div>
@@ -127,7 +131,7 @@ export default {
   data() {
     return {
       admins: [],
-      isSwitchedCustom: "yes",
+      isSwitchedCustom: ["no", "yes"],
     };
   },
   mounted() {
@@ -148,6 +152,30 @@ export default {
       console.log(error);
     }
   },
-  methods: {},
+  methods: {
+    toggle(id) {
+      this.$axios
+        .$put(
+          `admin/${id}/roles`,
+          {
+            orders: 0,
+            products: 1,
+            payments: 1,
+            services: 1,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          this.$toast.success("Admin role updated successfully!");
+        });
+    },
+  },
 };
 </script>
