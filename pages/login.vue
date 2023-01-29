@@ -111,7 +111,11 @@ export default {
             this.loading = false;
             this.mutateToken();
             this.mutateUser();
-            this.$router.push("/");
+            if (response.data.user.user_role === "admin") {
+              this.$router.push("/admin");
+            } else {
+              this.$router.push("/");
+            }
           });
         // window.location.href = "/";
       } catch (error) {

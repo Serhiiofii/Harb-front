@@ -16,7 +16,7 @@
       left-0
     "
   >
-    <div class="my-4 text-gray-400 uppercase">Hi {{user.first_name}},</div>
+    <div class="my-4 text-gray-400 uppercase">Hi {{ user.first_name }},</div>
     <NuxtLink to="/account">
       <div class="flex my-5">
         <img src="/icons/user.svg" alt="" />
@@ -82,7 +82,7 @@
         <div class="ml-4">Help / Support</div>
       </div>
     </NuxtLink>
-    <div class="flex my-5">
+    <div @click="logout" class="flex my-5 cursor-pointer">
       <img src="/icons/logout.svg" alt="" />
       <div class="ml-4">Logout</div>
     </div>
@@ -99,6 +99,10 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
+    },
   },
   mounted() {
     if (screen.width <= 600) {

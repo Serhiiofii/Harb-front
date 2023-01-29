@@ -74,7 +74,7 @@
       </div>
     </NuxtLink>
 
-    <div class="flex my-5">
+    <div @click="logout" class="flex my-5 cursor-pointer">
       <img src="/icons/logout.svg" alt="" />
       <div class="ml-4">Logout</div>
     </div>
@@ -91,6 +91,10 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSidenav"]),
+    logout() {
+      localStorage.clear();
+      this.$router.push("/login");
+    },
   },
   mounted() {
     if (screen.width <= 600) {

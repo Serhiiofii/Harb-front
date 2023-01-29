@@ -53,10 +53,10 @@
               <div
                 v-for="(single, index) in data.recent_transactions"
                 :key="index"
-                class="flex justify-between w-80 my-2"
+                class="flex justify-between my-2"
               >
                 <div class="">
-                  <div>{{ single.title }}</div>
+                  <div>{{ single.amount }} {{single.user.first_name}}</div>
                   <div class="text-xs text-gray-200">
                     {{ single.created_at.substring(0, 10) }}
                   </div>
