@@ -62,56 +62,72 @@
                 {{ admin.first_name }} {{ admin.last_name }}
               </div>
               <div class="w-40">
-                <b-field>
-                  <b-switch
-                    type="is-info"
-                    v-model="admin.admin_roles[0].payments"
-                    true-value="Yes"
-                    false-value="No"
-                    @click.native="toggle(admin.id)"
-                  >
-                    {{ admin.admin_roles[0].payments === 1 ? "Yes" : "No" }}
-                  </b-switch>
-                </b-field>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="admin.admin_roles[0].payments"
+                    @change="
+                      toggle(admin.id, {
+                        orders: admin.admin_roles[0].orders,
+                        products: admin.admin_roles[0].products,
+                        payments: admin.admin_roles[0].payments === 0 ? 1 : 0,
+                        services: admin.admin_roles[0].services,
+                      })
+                    "
+                  />
+                  <span class="slider round"></span>
+                </label>
               </div>
               <div class="w-40">
-                <b-field>
-                  <b-switch
-                    type="is-info"
-                    v-model="admin.admin_roles[0].orders"
-                    true-value="Yes"
-                    false-value="No"
-                    @click.native="toggle"
-                  >
-                    {{ admin.admin_roles[0].orders === 1 ? "Yes" : "No" }}
-                  </b-switch>
-                </b-field>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="admin.admin_roles[0].orders"
+                    @change="
+                      toggle(admin.id, {
+                        orders: admin.admin_roles[0].orders === 0 ? 1 : 0,
+                        products: admin.admin_roles[0].products,
+                        payments: admin.admin_roles[0].payments,
+                        services: admin.admin_roles[0].services,
+                      })
+                    "
+                  />
+                  <span class="slider round"></span>
+                </label>
               </div>
               <div class="w-40">
-                <b-field>
-                  <b-switch
-                    type="is-info"
-                    v-model="admin.admin_roles[0].products"
-                    true-value="Yes"
-                    false-value="No"
-                    @click.native="toggle"
-                  >
-                    {{ admin.admin_roles[0].products === 1 ? "Yes" : "No" }}
-                  </b-switch>
-                </b-field>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="admin.admin_roles[0].products"
+                    @change="
+                      toggle(admin.id, {
+                        orders: admin.admin_roles[0].orders,
+                        products: admin.admin_roles[0].products === 0 ? 1 : 0,
+                        payments: admin.admin_roles[0].payments,
+                        services: admin.admin_roles[0].services,
+                      })
+                    "
+                  />
+                  <span class="slider round"></span>
+                </label>
               </div>
               <div class="w-40">
-                <b-field>
-                  <b-switch
-                    type="is-info"
-                    v-model="admin.admin_roles[0].services"
-                    true-value="Yes"
-                    false-value="No"
-                    @click.native="toggle"
-                  >
-                    {{ admin.admin_roles[0].services === 1 ? "Yes" : "No" }}
-                  </b-switch>
-                </b-field>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="admin.admin_roles[0].services"
+                    @change="
+                      toggle(admin.id, {
+                        orders: admin.admin_roles[0].orders,
+                        products: admin.admin_roles[0].products,
+                        payments: admin.admin_roles[0].payments,
+                        services: admin.admin_roles[0].services === 0 ? 1 : 0,
+                      })
+                    "
+                  />
+                  <span class="slider round"></span>
+                </label>
               </div>
             </div>
             <div class="bg-gray-300 h-1 w-full my-3"></div>
@@ -153,24 +169,15 @@ export default {
     }
   },
   methods: {
-    toggle(id) {
+    toggle(id, roles) {
       this.$axios
-        .$put(
-          `admin/${id}/roles`,
-          {
-            orders: 0,
-            products: 1,
-            payments: 1,
-            services: 1,
+        .$put(`admin/${id}/roles`, roles, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: "Bearer " + this.token,
-            },
-          }
-        )
+        })
         .then((response) => {
           console.log(response.data);
           this.$toast.success("Admin role updated successfully!");
@@ -179,3 +186,65 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>

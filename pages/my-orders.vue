@@ -150,7 +150,7 @@ export default {
             "transactions/verify",
             {
               paystack_reference_id: this.reference,
-              cart_reference_id: "WqKPJqbysO",
+              cart_reference_id: "",
             },
             {
               headers: {
@@ -200,7 +200,7 @@ export default {
           },
         })
         .then((response) => {
-          // console.log(response.data);
+          console.log(response.data);
           this.data = response.data;
           this.cart = response.data.cart_items;
           this.cart.map((single) => {
