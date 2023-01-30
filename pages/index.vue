@@ -39,13 +39,13 @@
           </div>
         </div>
         <div class="lg:m-2">
-          <div class="w-full lg:m-2 rounded-md relative">
+          <div class="w-full lg:m-2 rounded-md relative mt-28">
             <img
               src="/hero.png"
               class="rounded-md w-full lg:h-auto h-60"
               alt=""
             />
-            <div class="absolute top-12 lg:left-20 left-4 lg:w-1/2">
+            <div class="absolute lg:top-12 top-6 lg:left-20 left-4 lg:w-1/2">
               <div class="lg:text-4xl text-xl font-bold text-white">
                 Get offshore <br />
                 equipments on demand
@@ -252,6 +252,7 @@ export default {
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
+    // this.toggleSidenav();
     if (this.token) {
       try {
         this.$axios

@@ -182,7 +182,7 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  middleware: "authenticated",
+  // middleware: "authenticated",
   data() {
     return {
       first_name: "",
