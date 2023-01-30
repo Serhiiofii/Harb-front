@@ -56,7 +56,7 @@
                 class="flex justify-between my-2"
               >
                 <div class="">
-                  <div>{{ single.amount }} {{single.user.first_name}}</div>
+                  <div>{{ single.amount }} {{ single.user.first_name }}</div>
                   <div class="text-xs text-gray-200">
                     {{ single.created_at.substring(0, 10) }}
                   </div>
@@ -141,6 +141,8 @@ import { mapState } from "vuex";
 
 export default {
   computed: mapState(["token"]),
+  middleware: "authenticated",
+
   data() {
     return {
       data: null,

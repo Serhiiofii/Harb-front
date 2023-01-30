@@ -203,7 +203,7 @@ import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 
 export default {
-  middleware: "authenticated",
+  // middleware: "authenticated",
   computed: mapState(["sidebar", "token", "user"]),
 
   data() {
