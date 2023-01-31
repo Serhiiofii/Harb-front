@@ -1,9 +1,11 @@
 <template>
   <div class="flex py-4 px-20 nav justify-between bg-white">
     <div class="flex justify-between w-96">
-      <div>
-        <img class="my-auto" src="/logo.svg" alt="" />
-      </div>
+      <NuxtLink to="/admin">
+        <div>
+          <img class="my-auto" src="/logo.svg" alt="" />
+        </div>
+      </NuxtLink>
       <div>
         <div class="text-xl">Good Morning</div>
         <div class="text-sm">Welcome back, Admin</div>

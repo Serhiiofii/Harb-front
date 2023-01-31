@@ -22,7 +22,7 @@
             rounded-sm
             text-sm
           "
-          placeholder="Enter Company Name"
+          placeholder="Enter Equipment Name"
         />
       </div>
       <div class="my-3">
@@ -40,8 +40,14 @@
             text-sm
           "
         >
-          <option value="hello word">Select a Category</option>
-          <option value="hello word">hello world</option>
+          <!-- <option value="hello word">Select a Category</option> -->
+          <option
+            v-for="(category, index) in categories"
+            :value="category.title"
+            :key="index"
+          >
+            {{ category.title }}
+          </option>
         </select>
       </div>
       <div class="my-3">
@@ -78,7 +84,19 @@
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Year of Build</div>
-        <select
+        <input
+          type="date"
+          v-model="year_of_build"
+          class="
+            p-3
+            rounded-sm
+            border border-gray-200
+            w-full
+            rounded-sm
+            text-sm
+          "
+        />
+        <!-- <select
           name=""
           v-model="year_of_build"
           id=""
@@ -93,7 +111,7 @@
         >
           <option value="hello word">Select Year</option>
           <option value="hello word">hello world</option>
-        </select>
+        </select> -->
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Sale Type</div>
@@ -249,6 +267,40 @@ export default {
   computed: mapState(["token"]),
   data() {
     return {
+      categories: [
+        {
+          title: "Hauling Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Vessels",
+          items: "200 goods",
+        },
+        {
+          title: "Subsea Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Cranes",
+          items: "200 goods",
+        },
+        {
+          title: "Pumps and Hoses",
+          items: "200 goods",
+        },
+        {
+          title: "OCTG Pipes",
+          items: "200 goods",
+        },
+        {
+          title: "Safety Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Power",
+          items: "200 goods",
+        },
+      ],
       name: "",
       category: "",
       manufacturer: "",

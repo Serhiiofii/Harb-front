@@ -96,6 +96,7 @@
         </button>
       </div>
     </div>
+    <div v-else class="text-center p-2">No equipments in your cart.</div>
     <div class="mx-20">
       <div class="my-3">
         <div class="text-3xl font-bold mt-4 mb-2">Similar Items</div>

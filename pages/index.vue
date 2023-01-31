@@ -260,7 +260,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + this.token,
+              // Authorization: "Bearer " + this.token,
             },
           })
           .then((response) => {
