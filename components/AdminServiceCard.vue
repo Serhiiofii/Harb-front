@@ -4,8 +4,10 @@
       <div class="flex w-80">
         <img src="/user.png" alt="" />
         <div class="ml-4">
-          <div class="text-base font-bold">{{service.seller.company_name}}</div>
-          <div class="text-sm">{{service.category}}</div>
+          <div class="text-base font-bold">
+            {{ service.seller.company_name }}
+          </div>
+          <div class="text-sm">{{ service.category }}</div>
         </div>
       </div>
       <div>
@@ -26,7 +28,7 @@
       </div>
     </div>
     <div class="my-3 text-sm">
-      {{service.description}}
+      {{ service.description }}
     </div>
   </div>
 </template>
@@ -65,7 +67,7 @@ export default {
           })
           .then((response) => {
             console.log(response.message);
-            this.$toast.success(response.message);
+            this.$toast.success("Service deleted successfully!");
           });
       } catch (error) {
         console.log(error);

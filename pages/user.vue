@@ -11,17 +11,17 @@
         />
         <div class="lg:flex justify-evenly lg:ml-20 p-4 lg:mt-0 mt-10">
           <div class="lg:w-1/2">
-            <div class="font-bold">{{ data.seller.company_name }}</div>
+            <div class="font-bold">{{ seller.company_name }}</div>
             <div>
               <div class="text-xs text-blue-600">About:</div>
               <div class="text-sm">
-                {{ data.seller.business_description }}
+                {{ seller.business_description }}
               </div>
             </div>
           </div>
           <div class="my-auto textp-sm">
             <div class="text-xs text-blue-600">Location:</div>
-            <div>{{ data.seller.business_location }}</div>
+            <div>{{ seller.business_location }}</div>
           </div>
           <div class="flex text-white lg:w-52 lg:mt-0 mt-3 justify-between">
             <button class="bg-blue-800 p-3 w-24 h-12 my-auto rounded-sm">
@@ -41,7 +41,7 @@
         <div class="text-2xl my-3 font-bold">Equipments for sale/rent</div>
         <div class="lg:flex justify-between flex-wrap">
           <div
-            v-for="(category, index) in data.products"
+            v-for="(category, index) in data.equipments"
             :key="index"
             class="lg:w-1/3"
           >
@@ -57,7 +57,7 @@
             :key="index"
             class="lg:w-1/3"
           >
-            <ServiceCard :data="category" />
+            <ServiceCard :data="category" :remove="false" />
           </div>
         </div>
       </div>
@@ -74,13 +74,15 @@ export default {
   data() {
     return {
       data: [],
+      seller: [],
     };
   },
   computed: mapState(["token", "user"]),
   mounted() {
+    console.log();
     try {
       this.$axios
-        .$get(`account/sellers/${this.user.seller.id}`, {
+        .$get(`account/sellers/${this.$router.history.current.query.slug}`, {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -89,7 +91,8 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.products = response.data;
+          this.data = response.data;
+          this.seller = response.data.seller;
         });
     } catch (error) {
       console.log(error);

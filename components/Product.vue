@@ -26,6 +26,7 @@
       </div>
       <div class="lg:mt-0 absolute right-6 bottom-6 mt-2">
         <button
+          @click="removeProduct(data.id)"
           class="
             flex
             justify-between
@@ -44,13 +45,40 @@
     </div>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     data: Object,
   },
+  computed: mapState(["token"]),
   mounted() {
     // console.log(this.data)
+  },
+  methods: {
+    async removeProduct(id) {
+      try {
+        this.loading = true;
+        await this.$axios
+          .$delete(`seller/equipments/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+            // this.loading = false;
+            this.$toast.success("Product deleted successfully!");
+          });
+      } catch {
+        console.log("error");
+        this.$toast.error("Oops! Something happened");
+      }
+    },
   },
 };
 </script>

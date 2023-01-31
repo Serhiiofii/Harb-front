@@ -118,7 +118,7 @@
             :key="index"
             class="lg:w-1/3"
           >
-            <ServiceCard :data="category" />
+            <ServiceCard :data="category" :remove="false" />
           </div>
         </div>
       </div>

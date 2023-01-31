@@ -40,7 +40,7 @@
             v-for="(service, index) in services"
             :key="index"
           >
-            <ServiceCard :data="service" />
+            <ServiceCard :data="service"  :remove="true" />
           </div>
         </div>
       </div>
