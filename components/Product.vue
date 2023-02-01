@@ -15,7 +15,7 @@
           <div>{{ data.category }}</div>
         </div>
       </div>
-      <div class="lg:text-sm text-xs my-2">
+      <div class="lg:text-base text-xs my-2">
         {{ data.description }}
       </div>
       <div class="flex">
@@ -82,3 +82,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+img {
+  object-fit: cover;
+}
+</style>

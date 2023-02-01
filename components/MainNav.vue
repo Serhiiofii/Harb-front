@@ -32,49 +32,8 @@
               :icon-right="active ? 'menu-up' : 'menu-down'"
             />
           </template>
-          <div class="flex w-96">
-            <b-dropdown-item aria-role="listitem">Sort by</b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">Location</b-dropdown-item>
-          </div>
-          <div class="flex">
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Price -
-              Highest</b-dropdown-item
-            >
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Lagos</b-dropdown-item
-            >
-          </div>
-          <div class="flex">
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Price -
-              Lowest</b-dropdown-item
-            >
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />London</b-dropdown-item
-            >
-          </div>
-          <div class="flex">
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Recent
-              Item</b-dropdown-item
-            >
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Abuja</b-dropdown-item
-            >
-          </div>
-          <div class="flex">
-            <b-dropdown-item aria-role="listitem"></b-dropdown-item>
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Port
-              harcourt</b-dropdown-item
-            >
-          </div>
-          <div class="flex">
-            <b-dropdown-item aria-role="listitem"></b-dropdown-item>
-            <b-dropdown-item aria-role="listitem"
-              ><input type="radio" class="m-1 my-auto" />Africa</b-dropdown-item
-            >
+          <div v-for="(single, index) in categories" :key="index" class="p-2">
+            {{ single.title }}
           </div>
         </b-dropdown>
         <input
@@ -131,10 +90,16 @@
             </b-dropdown-item>
             <div class="h-1 bg-gray-100 w-full"></div>
             <b-dropdown-item aria-role="listitem">
-              <div v-for="(single , index) in notifications" :key="index" class="flex justify-between w-80 my-2">
+              <div
+                v-for="(single, index) in notifications"
+                :key="index"
+                class="flex justify-between w-80 my-2"
+              >
                 <div class="">
-                  <div>{{single.title}}</div>
-                  <div class="text-xs text-gray-200">{{single.created_at.substring(0, 10)}}</div>
+                  <div>{{ single.title }}</div>
+                  <div class="text-xs text-gray-200">
+                    {{ single.created_at.substring(0, 10) }}
+                  </div>
                 </div>
                 <!-- <div
                   class="
@@ -257,6 +222,40 @@ export default {
       name: "",
       avatar: null,
       notifications: null,
+      categories: [
+        {
+          title: "Hauling Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Vessels",
+          items: "200 goods",
+        },
+        {
+          title: "Subsea Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Cranes",
+          items: "200 goods",
+        },
+        {
+          title: "Pumps and Hoses",
+          items: "200 goods",
+        },
+        {
+          title: "OCTG Pipes",
+          items: "200 goods",
+        },
+        {
+          title: "Safety Equipment",
+          items: "200 goods",
+        },
+        {
+          title: "Power",
+          items: "200 goods",
+        },
+      ],
     };
   },
   mounted() {

@@ -3,13 +3,16 @@
     <MainNav />
     <div v-if="product !== null" class="lg:mx-20 my-8 container">
       <div class="lg:flex">
-        <div  class="lg:w-3/5">
+        <div class="lg:w-3/5">
           <img
             :src="product.equipment_images[0].image"
             class="w-full lg:h-80"
             alt=""
           />
-          <div v-if="product.equipment_images.length >=2" class="flex my-4 justify-between">
+          <div
+            v-if="product.equipment_images.length >= 2"
+            class="flex my-4 justify-between"
+          >
             <img
               :src="product.equipment_images[1].image"
               class="img mr-2"
@@ -38,9 +41,9 @@
                 Chat
               </button>
             </NuxtLink>
-            <button class="p-3 w-32 border border-yellow-600 rounded-sm">
+            <!-- <button class="p-3 w-32 border border-yellow-600 rounded-sm">
               Call
-            </button>
+            </button> -->
           </div>
           <div class="text-xs my-2">Type of Product:</div>
           <button
@@ -141,5 +144,8 @@ export default {
 <style scoped>
 .img {
   width: 49%;
+}
+img {
+  object-fit: cover;
 }
 </style>

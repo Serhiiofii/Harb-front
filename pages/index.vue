@@ -29,7 +29,7 @@
           <div
             v-for="(single, index) in categories"
             :key="index"
-            class="flex lg:my-8"
+            class="flex lg:my-6"
           >
             <img
               :src="require(`~/assets/icons/${single.img}.jpeg`)"
