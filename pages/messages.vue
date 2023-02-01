@@ -25,26 +25,39 @@
           class="bg-gray-100 p-3 w-full rounded-md"
           placeholder="Search a message"
         />
-        <div v-for="(single, index) in list" :key="index">
+        <div v-if="single === undefined">
           <div
-            class="flex py-4"
-            @click="singleMessage(single.messaging_id, index)"
+            v-for="(single, index) in list"
+            :key="index"
+            class="cursor-pointer"
           >
-            <img v-if="single.sender.avatar === null" src="/user.png" alt="" />
-            <img
-              v-else
-              :src="single.sender.avatar"
-              class="w-12 h-12 rounded-full"
-              alt=""
-            />
-            <div class="lg:ml-3 my-auto">
-              <div>
-                {{ single.sender.first_name }} {{ single.sender.last_name }}
+            <div
+              class="flex py-4"
+              @click="singleMessage(single.messaging_id, index)"
+            >
+              <img
+                v-if="single.sender.avatar === null"
+                src="/user.png"
+                alt=""
+              />
+              <img
+                v-else
+                :src="single.sender.avatar"
+                class="w-12 h-12 rounded-full"
+                alt=""
+              />
+              <div class="lg:ml-3 my-auto">
+                <div>
+                  {{ single.sender.first_name }} {{ single.sender.last_name }}
+                </div>
+                <div class="text-sm">{{ single.sender.bio }}</div>
               </div>
-              <div class="text-sm">{{ single.sender.bio }}</div>
-            </div>
-            <div class="text-xs ml-auto mt-auto">
-              <time-ago :refresh="60" :datetime="single.created_at"></time-ago>
+              <div class="text-xs ml-auto mt-auto">
+                <time-ago
+                  :refresh="60"
+                  :datetime="single.created_at"
+                ></time-ago>
+              </div>
             </div>
           </div>
         </div>
@@ -148,7 +161,6 @@ export default {
     if (screen.width <= 600) {
       this.toggleSidenav();
     }
-    console.log(this.single);
     try {
       this.$axios
         .$get(`messaging/chat-list`, {
@@ -186,6 +198,8 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
+            this.message = "";
+            this.$router.push("/messages");
             this.singleMessage(this.chats[0].messaging_id, this.num);
           });
       } catch (error) {
