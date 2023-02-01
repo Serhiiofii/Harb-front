@@ -28,7 +28,7 @@
               Contact
             </button>
             <NuxtLink
-              :to="{ name: 'messages', params: { slug: data.seller.id } }"
+              :to="{ name: 'messages', params: { slug: seller.id } }"
             >
               <button class="bg-yellow-300 p-3 w-24 h-12 my-auto rounded-sm">
                 Chat

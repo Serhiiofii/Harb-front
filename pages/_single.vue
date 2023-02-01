@@ -9,7 +9,7 @@
             class="w-full lg:h-80"
             alt=""
           />
-          <div class="flex my-4 justify-between">
+          <div v-if="product.equipment_images.length >=2" class="flex my-4 justify-between">
             <img
               :src="product.equipment_images[1].image"
               class="img mr-2"
@@ -123,7 +123,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data.product.equipment_images);
+          console.log(response.data);
           this.product = response.data.product;
           this.data = response.data;
         });

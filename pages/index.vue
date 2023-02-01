@@ -25,16 +25,20 @@
             left-0
           "
         >
-          <div>Categories</div>
+          <div class="font-bold text-xl mb-8 mt-4">Categories</div>
           <div
             v-for="(single, index) in categories"
             :key="index"
-            class="flex my-5"
+            class="flex lg:my-8"
           >
-            <img src="/shape.png" class="" alt="" />
+            <img
+              :src="require(`~/assets/icons/${single.img}.jpeg`)"
+              class="w-10 h-10 m-1"
+              alt=""
+            />
             <div class="p-1 my-auto">
               <div class="text-sm font-bold">{{ single.title }}</div>
-              <div class="text-xs">{{ single.items }}</div>
+              <!-- <div class="text-xs">{{ single.items }}</div> -->
             </div>
           </div>
         </div>
@@ -211,35 +215,35 @@ export default {
       categories: [
         {
           title: "Hauling Equipment",
-          items: "200 goods",
+          img: "img1",
         },
         {
           title: "Vessels",
-          items: "200 goods",
+          img: "img2",
         },
         {
           title: "Subsea Equipment",
-          items: "200 goods",
+          img: "img3",
         },
         {
           title: "Cranes",
-          items: "200 goods",
+          img: "img4",
         },
         {
           title: "Pumps and Hoses",
-          items: "200 goods",
+          img: "img5",
         },
         {
           title: "OCTG Pipes",
-          items: "200 goods",
+          img: "img6",
         },
         {
           title: "Safety Equipment",
-          items: "200 goods",
+          img: "img7",
         },
         {
           title: "Power",
-          items: "200 goods",
+          img: "img8",
         },
       ],
       data: [],
