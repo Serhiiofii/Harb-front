@@ -34,9 +34,7 @@
             >
               Make a Bid
             </button>
-            <NuxtLink
-              :to="{ name: 'messages', params: { slug: product.seller_id } }"
-            >
+            <NuxtLink :to="'/messages/?slug=' + product.seller_id">
               <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
                 Chat
               </button>
