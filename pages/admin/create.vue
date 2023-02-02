@@ -1,9 +1,11 @@
 <template>
   <div class="bg-gray-50">
     <div class="px-20 nav flex py-4 justify-between bg-white">
-      <div class="my-auto">
+     <NuxtLink to="/admin">
+       <div class="my-auto">
         <img class="my-auto" src="/logo.svg" alt="" />
       </div>
+     </NuxtLink>
     </div>
     <div class="lg:w-96 bg-white mx-auto p-4 mt-8 shadow-md rounded-lg">
       <div class="text-center">
@@ -125,6 +127,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: mapState(["token"]),
+  middleware: "authenticated",
 
   data() {
     return {
