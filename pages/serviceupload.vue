@@ -5,8 +5,8 @@
       <div class="text-center">
         <div class="font-bold text-2xl">Services Upload</div>
         <div class="text-xs">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla at
-          morbi adipiscing id elementum tristique imperdiet quis a. At diam.
+          Welcome to the service upload section, please upload your service with
+          the right descriptions.
         </div>
       </div>
       <div class="my-3">

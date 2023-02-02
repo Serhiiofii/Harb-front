@@ -20,7 +20,7 @@
         <NuxtLink to="/login"> <div class="my-1">Login</div> </NuxtLink>
         <NuxtLink to="/signup"> <div class="my-1">Sign Up</div> </NuxtLink>
         <NuxtLink to="/my-orders"> <div class="my-1">Cart</div> </NuxtLink>
-        <NuxtLink to="/"> <div class="my-1">Vendors</div> </NuxtLink>
+        <NuxtLink to="/"> <div class="my-1">Contact Us</div> </NuxtLink>
       </div>
       <div>
         <div class="font-bold mb-4">Join Our Newsletter</div>

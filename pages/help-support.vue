@@ -94,16 +94,24 @@ export default {
       isOpen: null,
       collapses: [
         {
-          title: "Title 1",
-          text: "Text 1",
+          title: "What products do you offer?",
+          text: "Our company offers a wide range of products including vessels, pumps, pipes, cranes, safety equipment, hauling equipment like bulldozers, and a lot more.",
         },
         {
-          title: "Title 2",
-          text: "Text 2",
+          title: "Do you offer any warranties or guarantees on your products?",
+          text: "Yes, there are limited warranties on most of our products",
         },
         {
-          title: "Title 3",
-          text: "Text 3",
+          title: "Can I change or cancel my order?",
+          text: "You can change or cancel your order as long as it hasn't already been processed and shipped.",
+        },
+        {
+          title: "What payment methods do you accept?",
+          text: "You pay directly to the seller through bank transfer or any other means agreed by both parties",
+        },
+        {
+          title: "How do I contact customer service?",
+          text: "You can contact us by email - info@harbourhubs.com",
         },
       ],
     };

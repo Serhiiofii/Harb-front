@@ -5,8 +5,7 @@
       <div class="text-center">
         <div class="font-bold text-2xl">Business Account Details</div>
         <div class="text-xs">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla at
-          morbi adipiscing id elementum tristique imperdiet quis a. At diam.
+          Please upload your business details with the right information
         </div>
       </div>
       <div class="my-3">

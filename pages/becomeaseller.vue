@@ -5,8 +5,10 @@
       <div class="text-center">
         <div class="font-bold text-2xl">Register a Seller</div>
         <div class="text-xs">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla at
-          morbi adipiscing id elementum tristique imperdiet quis a. At diam.
+          Join our network of trusted sellers and expand your reach in the
+          offshore market. By becoming a seller on our platform, you will gain
+          access to a global audience and benefit from our streamlined,
+          user-friendly sales process.
         </div>
       </div>
       <div class="my-3">
@@ -294,7 +296,7 @@ export default {
             this.$toast.success("Seller Registered Successfully");
             this.$router.push({
               name: "businessdetails",
-              params: { slug: response.data.seller.user_id},
+              params: { slug: response.data.seller.user_id },
             });
             // window.localStorage.setItem(
             //   "seller_id",

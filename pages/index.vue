@@ -257,24 +257,24 @@ export default {
       this.toggleSidenav();
     }
     // this.toggleSidenav();
-    if (this.token) {
-      try {
-        this.$axios
-          .$get("products/get-products", {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              // Authorization: "Bearer " + this.token,
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            this.data = response.data;
-          });
-      } catch (error) {
-        console.log(error);
-      }
+    // if (this.token) {
+    try {
+      this.$axios
+        .$get("products/get-products", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            // Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.data = response.data;
+        });
+    } catch (error) {
+      console.log(error);
     }
+    // }
   },
 };
 </script>
