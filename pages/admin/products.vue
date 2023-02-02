@@ -9,6 +9,8 @@
             type="text"
             class="p-3 w-full rounded-md bg-transparent border"
             placeholder="Search"
+            v-model="search"
+            @change="searchData"
           />
         </div>
         <div class="flex">
@@ -96,6 +98,8 @@ export default {
       sold: 0,
       rented: 0,
       total: 0,
+      store: [],
+      search: "",
     };
   },
   mounted() {
@@ -111,6 +115,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.products = response.data.equipments;
+          this.store = response.data.equipments;
           this.sold = response.data.sold_equipments;
           this.rented = response.data.rented_equipments;
           this.total = response.data.total_equipments;
@@ -118,6 +123,32 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    searchData() {
+      if (this.search !== "") {
+        this.$axios
+          .$post(
+            "admin/equipments/search",
+            {
+              search: this.search,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.products = response.data;
+          });
+      } else {
+        this.products = this.store;
+      }
+    },
   },
 };
 </script>

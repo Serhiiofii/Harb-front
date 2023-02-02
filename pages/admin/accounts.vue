@@ -9,6 +9,8 @@
             type="text"
             class="p-3 border w-1/2 rounded-md bg-transparent"
             placeholder="Search"
+            v-model="search"
+            @change="searchData"
           />
         </div>
         <div class="flex justify-between">
@@ -127,7 +129,7 @@
                 </div>
                 <div>
                   <button
-                  @click="deleteAccount(account.id)"
+                    @click="deleteAccount(account.id)"
                     class="bg-red-200 p-2 rounded-md text-sm text-red-800"
                   >
                     Delete Account
@@ -152,7 +154,9 @@ export default {
 
   data() {
     return {
+      search: "",
       accounts: [],
+      store: [],
     };
   },
   mounted() {
@@ -168,12 +172,37 @@ export default {
         .then((response) => {
           // console.log(response.data);
           this.accounts = response.data;
+          this.store = response.data;
         });
     } catch (error) {
       console.log(error);
     }
   },
   methods: {
+    searchData() {
+      if (this.search !== "") {
+        this.$axios
+          .$post(
+            "admin/users/search",
+            {
+              search: this.search,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.accounts = response.data;
+          });
+      } else {
+        this.accounts = this.store;
+      }
+    },
     deleteAccount(id) {
       try {
         this.$axios

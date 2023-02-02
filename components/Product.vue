@@ -24,7 +24,7 @@
           {{ data.created_at.substring(0, 10) }}
         </div>
       </div>
-      <div class="lg:mt-0 absolute right-6 bottom-6 mt-2">
+      <div v-if="path !== '/my-orders'" class="lg:mt-0 absolute right-6 bottom-6 mt-2">
         <button
           @click="removeProduct(data.id)"
           class="
@@ -53,9 +53,15 @@ export default {
   props: {
     data: Object,
   },
+  data() {
+    return {
+      path: "",
+    };
+  },
   computed: mapState(["token"]),
   mounted() {
     // console.log(this.data)
+    this.path = this.$router.history.current.path;
   },
   methods: {
     async removeProduct(id) {

@@ -4,18 +4,18 @@
     <div class="lg:mx-20 flex mt-4 container">
       <AdminSidebar />
       <div class="lg:ml-4 w-full">
-        <div class="my-4">
+        <!-- <div class="my-4">
           <input
             type="text"
             class="p-3 border bg-transparent w-full rounded-md"
             placeholder="Search"
           />
-        </div>
+        </div> -->
         <div class="flex my-3">
           <div class="border bg-white p-4 w-1/2 lg:mr-2">
-            <div class="uppercase text-gray-500 my-3">Jane Harry OKONUMI</div>
+            <div class="uppercase text-gray-500 my-3">{{account.first_name}} {{account.last_name}}</div>
             <div class="flex justify-between">
-              <div class="my-auto">jane@email.com</div>
+              <div class="my-auto">{{account.email}}</div>
               <button
                 class="bg-green-100 text-green-900 flex p-3 rounded-md text-sm"
               >

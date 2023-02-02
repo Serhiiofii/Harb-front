@@ -10,6 +10,8 @@
               type="text"
               class="p-3 w-full rounded-md bg-transparent border"
               placeholder="Search"
+              v-model="search"
+              @change="searchData"
             />
           </div>
           <div class="flex">
@@ -105,7 +107,9 @@
                   {{ company.created_at.substring(0, 10) }}
                 </div>
                 <div class="w-52 text-sm my-auto text-gray-400">
-                  {{ company.user.first_name }} {{ company.user.last_name }}
+                  <div v-if="company.user !== null">
+                    {{ company.user.first_name }} {{ company.user.last_name }}
+                  </div>
                 </div>
                 <div class="w-20" @click="verifyCompany(company.id)">
                   <b-field>
@@ -149,6 +153,8 @@ export default {
       suspended: 0,
       verified: 0,
       total: 0,
+      search: "",
+      store: [],
     };
   },
   mounted() {
@@ -164,6 +170,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.companies = response.data.companies;
+          this.store = response.data.companies;
           this.suspended = response.data.suspended_companies;
           this.verified = response.data.verified_companies;
           this.total = response.data.total_companies;
@@ -188,6 +195,30 @@ export default {
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    searchData() {
+      if (this.search !== "") {
+        this.$axios
+          .$post(
+            "admin/companies/search",
+            {
+              search: this.search,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.companies = response.data;
+          });
+      } else {
+        this.companies = this.store;
       }
     },
   },

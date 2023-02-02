@@ -151,7 +151,7 @@ export default {
             "transactions/verify",
             {
               paystack_reference_id: this.reference,
-              cart_reference_id: "",
+              cart_reference_id: this.cart[0].checkout_id,
             },
             {
               headers: {

@@ -9,6 +9,8 @@
             type="text"
             class="p-3 w-full rounded-md bg-transparent border"
             placeholder="Search"
+            v-model="search"
+            @change="searchData"
           />
         </div>
         <div class="flex">
@@ -102,6 +104,8 @@ export default {
       booked: 0,
       unbooked: 0,
       total: 0,
+      store: [],
+      search: "",
     };
   },
   mounted() {
@@ -117,6 +121,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.services = response.data.services;
+          this.store = response.data.services;
           this.booked = response.data.booked_services;
           this.unbooked = response.data.unbooked_services;
           this.total = response.data.total_services;
@@ -124,6 +129,32 @@ export default {
     } catch (error) {
       console.log(error);
     }
+  },
+  methods: {
+    searchData() {
+      if (this.search !== "") {
+        this.$axios
+          .$post(
+            "admin/services/search",
+            {
+              search: this.search,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.services = response.data;
+          });
+      } else {
+        this.services = this.store;
+      }
+    },
   },
 };
 </script>
