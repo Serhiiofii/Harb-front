@@ -252,6 +252,7 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
+
   },
   mounted() {
     if (screen.width <= 600) {

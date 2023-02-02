@@ -169,7 +169,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: mapState(["token"]),
-  middleware: "authenticated",
+  middleware: "admin",
 
   data() {
     return {
