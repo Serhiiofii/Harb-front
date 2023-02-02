@@ -247,10 +247,12 @@ export default {
         },
       ],
       data: [],
+      search: "forklift",
     };
   },
   methods: {
     ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
+    
   },
   mounted() {
     if (screen.width <= 600) {

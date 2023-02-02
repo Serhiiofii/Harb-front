@@ -37,9 +37,11 @@
           </div>
         </b-dropdown>
         <input
+          v-model="search"
           type="text"
           class="p-3 border border-gray-100 lg:w-96 w-full h-12 nav-item"
           placeholder="Search items on harbour hub"
+          @change="searchData"
         />
       </div>
       <div class="lg:flex lg:w-96 justify-between lg:p-0 p-3">
@@ -222,6 +224,7 @@ export default {
       name: "",
       avatar: null,
       notifications: null,
+      search: "",
       categories: [
         {
           title: "Hauling Equipment",
@@ -284,6 +287,26 @@ export default {
     logout() {
       localStorage.clear();
       this.$router.push("/login");
+    },
+    searchData() {
+      this.$axios
+        .$post(
+          "equipments/search",
+          {
+            search: this.search,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: "Bearer " + this.token,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          // this.data = response.data;
+        });
     },
   },
 };

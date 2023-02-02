@@ -104,6 +104,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: mapState(["token"]),
+  middleware: "authenticated",
   data() {
     return {
       isCardModalActive: false,
