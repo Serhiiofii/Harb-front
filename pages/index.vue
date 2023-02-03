@@ -43,6 +43,33 @@
           </div>
         </div>
         <div class="lg:m-2">
+          <div class="lg:flex my-auto lg:p-0 p-2">
+            <b-dropdown aria-role="list" class="z-10 lg:-mr-1 nav-item">
+              <template #trigger="{ active }">
+                <b-button
+                  label="All Categories"
+                  type="is-info"
+                  class="h-12"
+                  :icon-right="active ? 'menu-up' : 'menu-down'"
+                />
+              </template>
+              <div
+                v-for="(single, index) in categories"
+                :key="index"
+                class="p-2"
+              >
+                {{ single.title }}
+              </div>
+            </b-dropdown>
+            <input
+              v-model="search"
+              type="text"
+              class="p-3 border border-gray-100 w-full h-12 nav-item"
+              placeholder="Search items on harbour hub"
+              @change="searchData"
+            />
+          </div>
+
           <div class="w-full lg:m-2 rounded-md relative mt-20">
             <img
               src="/hero.png"
@@ -75,7 +102,14 @@
               </NuxtLink>
             </div>
           </div>
-          <div>
+          <div v-if="search !== '' && data[0] !== undefined">
+            <div class="lg:flex flex-wrap">
+              <div v-for="(top, index) in data" :key="index" class="lg:w-1/2">
+                <ProductCard :data="top" />
+              </div>
+            </div>
+          </div>
+          <div v-if="search === ''">
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="lg:flex">
               <div
@@ -89,39 +123,41 @@
           </div>
         </div>
       </div>
-      <div>
-        <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
-        <div class="lg:flex justify-between flex-wrap">
-          <div
-            v-for="(featured, index) in data.featured_products"
-            :key="index"
-            class="lg:w-1/3"
-          >
-            <ProductCard :data="featured" />
+      <div v-if="search === ''">
+        <div>
+          <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
+          <div class="lg:flex justify-between flex-wrap">
+            <div
+              v-for="(featured, index) in data.featured_products"
+              :key="index"
+              class="lg:w-1/3"
+            >
+              <ProductCard :data="featured" />
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
-        <div class="lg:flex justify-between flex-wrap">
-          <div
-            v-for="(category, index) in data.recent_sales"
-            :key="index"
-            class="lg:w-1/3"
-          >
-            <ProductCard :data="category" />
+        <div>
+          <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
+          <div class="lg:flex justify-between flex-wrap">
+            <div
+              v-for="(category, index) in data.recent_sales"
+              :key="index"
+              class="lg:w-1/3"
+            >
+              <ProductCard :data="category" />
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="text-3xl font-bold mt-4 mb-2">Most Viewed</div>
-        <div class="lg:flex justify-between flex-wrap">
-          <div
-            v-for="(category, index) in data.most_viewed_products"
-            :key="index"
-            class="lg:w-1/3"
-          >
-            <ProductCard :data="category" />
+        <div>
+          <div class="text-3xl font-bold mt-4 mb-2">Most Viewed</div>
+          <div class="lg:flex justify-between flex-wrap">
+            <div
+              v-for="(category, index) in data.most_viewed_products"
+              :key="index"
+              class="lg:w-1/3"
+            >
+              <ProductCard :data="category" />
+            </div>
           </div>
         </div>
       </div>
@@ -212,6 +248,8 @@ export default {
 
   data() {
     return {
+      search: "",
+      store: [],
       categories: [
         {
           title: "Hauling Equipment",
@@ -247,12 +285,34 @@ export default {
         },
       ],
       data: [],
-      search: "forklift",
     };
   },
   methods: {
     ...mapMutations(["toggleSidenav", "mutateToken", "mutateUser"]),
-
+    searchData() {
+      if (this.search !== "") {
+        this.$axios
+          .$post(
+            "equipments/search",
+            {
+              search: this.search,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: "Bearer " + this.token,
+              },
+            }
+          )
+          .then((response) => {
+            // console.log(response.data);
+            this.data = response.data;
+          });
+      } else {
+        this.data = this.store;
+      }
+    },
   },
   mounted() {
     if (screen.width <= 600 && this.sidebar === true) {
@@ -272,6 +332,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.data = response.data;
+          this.store = response.data;
         });
     } catch (error) {
       console.log(error);
