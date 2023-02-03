@@ -163,9 +163,9 @@ export default {
         this.$toast.success("Successfully authenticated");
         this.$router.push("/login");
       } catch (error) {
-        console.log(error);
+        console.log(error.status);
         this.loading = false;
-        this.$toast.error("Oops! Something");
+        this.$toast.error(error.message);
       }
     },
   },

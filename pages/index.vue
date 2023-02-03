@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="lg:m-2">
-          <div class="w-full lg:m-2 rounded-md relative mt-28">
+          <div class="w-full lg:m-2 rounded-md relative mt-20">
             <img
               src="/hero.png"
               class="rounded-md w-full lg:h-auto h-60"
