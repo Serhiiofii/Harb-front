@@ -52,35 +52,12 @@
           </div>
         </NuxtLink>
 
-        <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
-          <div class="my-auto nav-item">Become a seller</div>
-        </NuxtLink>
-        <b-dropdown v-else aria-role="list">
-          <template #trigger="{ active }">
-            <b-button
-              label="Sell an Item"
-              class="border-none"
-              :icon-right="active ? 'menu-up' : 'menu-down'"
-            />
-          </template>
-          <NuxtLink class="my-auto" to="/equipmentupload">
-            <b-dropdown-item aria-role="listitem"
-              >Equipment Upload</b-dropdown-item
-            >
-          </NuxtLink>
-          <NuxtLink class="my-auto" to="/serviceupload">
-            <b-dropdown-item aria-role="listitem"
-              >Service Upload</b-dropdown-item
-            >
-          </NuxtLink>
-        </b-dropdown>
-
         <div class="my-auto nav-item">
           <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
             <template #trigger="{}">
               <img
                 src="/icons/bell.png"
-                class="h-4 w-4 mr-4 cursor-pointer"
+                class="h-4 w-4 ml-4 cursor-pointer"
                 alt=""
               />
             </template>
@@ -120,6 +97,30 @@
             <div class="h-1 bg-gray-100 w-full"></div>
           </b-dropdown>
         </div>
+        <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
+          <div class="my-auto nav-item">Become a seller</div>
+        </NuxtLink>
+
+        <b-dropdown v-else aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+              label="Sell an Item"
+              class="border-none"
+              :icon-right="active ? 'menu-up' : 'menu-down'"
+            />
+          </template>
+          <NuxtLink class="my-auto" to="/equipmentupload">
+            <b-dropdown-item aria-role="listitem"
+              >Equipment Upload</b-dropdown-item
+            >
+          </NuxtLink>
+          <NuxtLink class="my-auto" to="/serviceupload">
+            <b-dropdown-item aria-role="listitem"
+              >Service Upload</b-dropdown-item
+            >
+          </NuxtLink>
+        </b-dropdown>
+
         <div class="flex my-auto nav-item">
           <img
             v-if="avatar === null"
