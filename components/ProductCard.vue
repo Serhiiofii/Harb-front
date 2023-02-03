@@ -1,7 +1,7 @@
 <template>
   <div class="m-2 lg:my-0 my-4">
     <NuxtLink :to="data.id">
-      <img :src="data.equipment_images[0].image" class="h-52 w-full" alt="" />
+      <img :src="data.equipment_images[0].image" class="h-52 w-full rounded-md" alt="" />
     </NuxtLink>
 
     <div class="flex justify-between">

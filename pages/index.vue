@@ -6,7 +6,7 @@
     <div v-else>
       <MainNav />
     </div>
-    <div class="lg:mx-20">
+    <div class="lg:mx-20 p-2">
       <div class="lg:flex">
         <div
           v-show="sidebar"
@@ -255,7 +255,7 @@ export default {
 
   },
   mounted() {
-    if (screen.width <= 600) {
+    if (screen.width <= 600 && this.sidebar === true) {
       this.toggleSidenav();
     }
     // this.toggleSidenav();
