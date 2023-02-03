@@ -80,7 +80,7 @@
             <template #trigger="{}">
               <img
                 src="/icons/bell.png"
-                class="h-4 w-4 cursor-pointer"
+                class="h-4 w-4 mr-4 cursor-pointer"
                 alt=""
               />
             </template>
@@ -285,7 +285,7 @@ export default {
     ...mapMutations(["toggleSidenav"]),
     logout() {
       localStorage.clear();
-      this.$router.push("/login");
+      this.$router.push("/");
     },
   },
 };

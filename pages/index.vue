@@ -71,36 +71,54 @@
             />
           </div>
 
-          <div class="w-full lg:m-2 rounded-md relative mt-2">
-            <img
+          <div class="w-full lg:m-2 rounded-md relative mt-2 bg-img p-4">
+            <!-- <img
               src="/hero.png"
-              class="rounded-md w-full lg:h-auto h-60"
+              class="rounded-md w-full h-full"
               alt=""
-            />
-            <div class="absolute lg:top-12 top-6 lg:left-20 left-4 lg:w-1/2">
+            /> -->
+            <div class="lg:w-2/3 m-10">
               <div class="lg:text-4xl text-xl font-bold text-white">
                 Get offshore <br />
-                equipments on demand
+                equipment on demand
               </div>
               <div class="my-3 text-white text-sm">
                 Find marine equipment, equipment for industrial use, and
                 industrial spare parts. Whether you're looking to buy or sell
                 you'll find the best deals here
               </div>
-              <NuxtLink to="/becomeaseller">
-                <button
-                  class="
-                    bg-transparent
-                    border border-white
-                    w-44
-                    rounded-md
-                    text-white
-                    p-3
-                  "
-                >
-                  Become a Seller
-                </button>
-              </NuxtLink>
+              <div v-if="user.user_role === 'user' || undefined">
+                <NuxtLink to="/becomeaseller">
+                  <button
+                    class="
+                      bg-transparent
+                      border border-white
+                      w-44
+                      rounded-md
+                      text-white
+                      p-3
+                    "
+                  >
+                    Become a Seller
+                  </button>
+                </NuxtLink>
+              </div>
+              <div v-else>
+                <NuxtLink to="/seller">
+                  <button
+                    class="
+                      bg-transparent
+                      border border-white
+                      w-44
+                      rounded-md
+                      text-white
+                      p-3
+                    "
+                  >
+                    Sell an Iten
+                  </button>
+                </NuxtLink>
+              </div>
             </div>
           </div>
           <div v-if="search !== '' && data[0] !== undefined">
@@ -165,7 +183,7 @@
       <div class="lg:flex">
         <div class="lg:p-20 p-8 blue rounded-xl lg:w-1/2 text-white">
           <div class="lg:w-96 my-auto">
-            <div class="text-4xl font-bold">Become a Vendor on Harbour Hub</div>
+            <div class="text-4xl font-bold">Become a Seller on Harbour Hub</div>
             <div class="my-3 text-sm">
               Sell your equipment at the best price. Experience the ease of
               listing and selling your equipment in the hub with secured payment
@@ -181,7 +199,7 @@
                 bg-transparent
               "
             >
-              Become a Vendor
+              Become a Seller
             </button>
           </div>
         </div>
@@ -358,5 +376,10 @@ export default {
 } */
 .nav-item {
   margin-top: 8px !important;
+}
+.bg-img {
+  background-image: url("/hero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
