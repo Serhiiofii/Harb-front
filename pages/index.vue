@@ -43,10 +43,11 @@
           </div>
         </div>
         <div class="lg:m-2">
-          <div class="lg:flex my-auto lg:p-0 p-2">
-            <b-dropdown aria-role="list" class="z-10 lg:-mr-1 nav-item">
+          <div class="lg:flex lg:my-auto lg:p-0 p-2 mt-20">
+            <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
               <template #trigger="{ active }">
                 <b-button
+                  expanded
                   label="All Categories"
                   type="is-info"
                   class="h-12"
@@ -70,7 +71,7 @@
             />
           </div>
 
-          <div class="w-full lg:m-2 rounded-md relative mt-20">
+          <div class="w-full lg:m-2 rounded-md relative mt-2">
             <img
               src="/hero.png"
               class="rounded-md w-full lg:h-auto h-60"
@@ -355,4 +356,7 @@ export default {
 /* .show {
   width: 25% !important;
 } */
+.nav-item {
+  margin-top: 8px !important;
+}
 </style>
