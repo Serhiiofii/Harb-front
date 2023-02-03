@@ -189,18 +189,38 @@
               listing and selling your equipment in the hub with secured payment
               methods and have your equipment sold to the best-fit buyer.
             </div>
-            <button
-              class="
-                p-2
-                lg:w-80
-                w-full
-                rounded-full
-                border-2 border-white
-                bg-transparent
-              "
-            >
-              Become a Seller
-            </button>
+            <div v-if="user.user_role === 'user' || undefined">
+              <NuxtLink to="/becomeaseller">
+                <button
+                  class="
+                    p-2
+                    lg:w-80
+                    w-full
+                    rounded-full
+                    border-2 border-white
+                    bg-transparent
+                  "
+                >
+                  Become a Seller
+                </button>
+              </NuxtLink>
+            </div>
+            <div v-else>
+              <NuxtLink to="/seller">
+                <button
+                  class="
+                    p-2
+                    lg:w-80
+                    w-full
+                    rounded-full
+                    border-2 border-white
+                    bg-transparent
+                  "
+                >
+                  Sell an Item
+                </button>
+              </NuxtLink>
+            </div>
           </div>
         </div>
         <div class="lg:w-1/2 lg:ml-4 top">
