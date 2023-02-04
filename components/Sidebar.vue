@@ -101,7 +101,7 @@ export default {
     ...mapMutations(["toggleSidenav"]),
     logout() {
       localStorage.clear();
-      this.$router.push("/");
+      window.location.href = "/";
     },
   },
   mounted() {

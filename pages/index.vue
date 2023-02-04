@@ -77,7 +77,7 @@
               class="rounded-md w-full h-full"
               alt=""
             /> -->
-            <div class="lg:w-2/3 m-10">
+            <div class="lg:w-2/3 lg:m-10 m-4">
               <div class="lg:text-4xl text-xl font-bold text-white">
                 Get offshore <br />
                 equipment on demand
@@ -87,7 +87,7 @@
                 industrial spare parts. Whether you're looking to buy or sell
                 you'll find the best deals here
               </div>
-              <div v-if="user.user_role === 'user' || undefined">
+              <div v-if="user === null || user.user_role === 'user'">
                 <NuxtLink to="/becomeaseller">
                   <button
                     class="
@@ -189,7 +189,7 @@
               listing and selling your equipment in the hub with secured payment
               methods and have your equipment sold to the best-fit buyer.
             </div>
-            <div v-if="user.user_role === 'user' || undefined">
+            <div v-if="user === null || user.user_role === 'user'">
               <NuxtLink to="/becomeaseller">
                 <button
                   class="
@@ -401,5 +401,6 @@ export default {
   background-image: url("/hero.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 </style>

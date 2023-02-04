@@ -1,7 +1,9 @@
 <template>
   <div class="flex py-4 px-20 nav justify-between bg-white">
-    <div>
-      <img class="my-auto" src="/logo.svg" alt="" />
+    <div class="my-auto">
+      <NuxtLink to="/">
+        <img class="my-auto" src="/logo.svg" alt="" />
+      </NuxtLink>
     </div>
     <div>
       <NuxtLink to="/login" v-if="path === '/signup' || path === '/'">
