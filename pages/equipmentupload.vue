@@ -43,7 +43,7 @@
           <!-- <option value="hello word">Select a Category</option> -->
           <option
             v-for="(category, index) in categories"
-            :value="category.title"
+            :value="category.slug"
             :key="index"
           >
             {{ category.title }}
@@ -271,34 +271,42 @@ export default {
         {
           title: "Hauling Equipment",
           items: "200 goods",
+          slug: "hauling-equipment",
         },
         {
           title: "Vessels",
           items: "200 goods",
+          slug: "vessels",
         },
         {
           title: "Subsea Equipment",
           items: "200 goods",
+          slug: "subsea-equipment",
         },
         {
           title: "Cranes",
           items: "200 goods",
+          slug: "cranes",
         },
         {
           title: "Pumps and Hoses",
           items: "200 goods",
+          slug: "pumps-and-hoses",
         },
         {
           title: "OCTG Pipes",
           items: "200 goods",
+          slug: "octg-pipes",
         },
         {
           title: "Safety Equipment",
           items: "200 goods",
+          slug: "safety-equipment",
         },
         {
           title: "Power",
           items: "200 goods",
+          slug: "power",
         },
       ],
       name: "",
