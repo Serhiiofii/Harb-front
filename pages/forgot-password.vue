@@ -65,7 +65,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something");
+        this.$toast.error(error.response.data.message);
       }
     },
   },

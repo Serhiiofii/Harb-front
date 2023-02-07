@@ -307,8 +307,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
     async getOtp() {
       try {
@@ -334,8 +333,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
   },
 };

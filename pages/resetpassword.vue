@@ -19,7 +19,7 @@
             rounded-sm
             text-sm
           "
-          placeholder="Enter your new password"
+          placeholder="Enter your email"
         />
       </div>
       <div class="my-3">
@@ -95,13 +95,13 @@ export default {
           }
         );
         console.log(data);
-        this.$toast.success("Successfully authenticated");
-        this.$router.push("/resetpassword");
+        this.$toast.success("Password reset successful");
+        this.$router.push("/login");
         this.loading = false;
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something");
+        this.$toast.error(error.response.data.message);
       }
     },
   },

@@ -121,8 +121,7 @@ export default {
           });
       } catch (error) {
         console.log(error);
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
     decline(id) {
       try {
@@ -146,8 +145,7 @@ export default {
           });
       } catch (error) {
         console.log(error);
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
   },
 };

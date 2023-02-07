@@ -119,9 +119,9 @@ export default {
           });
         // window.location.href = "/";
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.message);
         this.loading = false;
-        this.$toast.error(error.message);
+        this.$toast.error(error.response.data.message);
       }
     },
   },

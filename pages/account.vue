@@ -254,7 +254,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
+        this.$toast.error(error.response.data.message);
       }
     },
     async updateDelivery() {
@@ -279,8 +279,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
     async updateBio() {
       try {
@@ -304,8 +303,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
     async updateLocation() {
       try {
@@ -329,8 +327,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
 
     async updatePhoto() {
@@ -359,8 +356,7 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error("Oops! Something happened");
-      }
+        this.$toast.error(error.response.data.message);      }
     },
   },
 };

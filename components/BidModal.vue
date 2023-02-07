@@ -107,7 +107,7 @@ export default {
           });
       } catch (error) {
         console.log(error);
-        this.$toast.error("Oops! something happened");
+        this.$toast.error(error.response.data.message);
       }
     },
   },
