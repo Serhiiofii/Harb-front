@@ -9,7 +9,7 @@
       <div class="my-3">
         <div class="text-sm my-1">Enter your email</div>
         <input
-          type="password"
+          type="text"
           v-model="email"
           class="
             p-3
