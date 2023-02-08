@@ -48,16 +48,20 @@
               <template #trigger="{ active }">
                 <b-button
                   expanded
-                  label="All Categories"
+                  :label="single"
                   type="is-info"
                   class="h-12"
                   :icon-right="active ? 'menu-up' : 'menu-down'"
                 />
               </template>
+              <div class="p-2" @click="single = 'All Categories'">
+                All Categories
+              </div>
               <div
                 v-for="(single, index) in categories"
                 :key="index"
                 class="p-2"
+                @click="categoryFilter(single)"
               >
                 {{ single.title }}
               </div>
@@ -289,6 +293,7 @@ export default {
     return {
       search: "",
       store: [],
+      single: "All Categories",
       categories: [
         {
           title: "Hauling Equipment",
@@ -352,13 +357,37 @@ export default {
         this.data = this.store;
       }
     },
+    categoryFilter(category) {
+      this.single = category.title;
+      // if (this.single !== "All Categories") {
+      //   this.$axios
+      //     .$post(
+      //       "equipments/search",
+      //       {
+      //         search: this.search,
+      //       },
+      //       {
+      //         headers: {
+      //           "Content-Type": "application/json",
+      //           Accept: "application/json",
+      //           Authorization: "Bearer " + this.token,
+      //         },
+      //       }
+      //     )
+      //     .then((response) => {
+      //       // console.log(response.data);
+      //       this.data = response.data;
+      //     });
+      // } else {
+      //   this.data = this.store;
+      // }
+    },
   },
   mounted() {
     if (screen.width <= 600 && this.sidebar === true) {
       this.toggleSidenav();
     }
-    // this.toggleSidenav();
-    // if (this.token) {
+
     try {
       this.$axios
         .$get("products/get-products", {

@@ -43,7 +43,7 @@ export default {
     data: Object,
   },
   mounted() {
-    console.log(this.data.id);
+    // console.log(this.data.id);
   },
   methods: {
     save() {

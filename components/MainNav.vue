@@ -44,43 +44,44 @@
           @change="searchData"
         />
       </div> -->
-      <div class="lg:flex lg:w-96 justify-between lg:p-0 p-3">
-        <NuxtLink to="my-orders" class="my-auto">
-          <div class="flex my-auto nav-item">
-            <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
-            Cart
-          </div>
-        </NuxtLink>
+      <b-navbar-item tag="div">
+        <div class="lg:flex lg:w-full justify-between lg:p-0 p-3">
+          <NuxtLink to="my-orders" class="my-auto">
+            <div class="flex my-auto nav-item">
+              <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
+              Cart
+            </div>
+          </NuxtLink>
 
-        <div class="my-auto nav-item">
-          <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
-            <template #trigger="{}">
-              <img
-                src="/icons/bell.png"
-                class="h-4 w-4 ml-4 cursor-pointer"
-                alt=""
-              />
-            </template>
-            <b-dropdown-item aria-role="listitem">
-              <div class="flex justify-between w-80">
-                <div class="uppercase text-gray-300">Notifications</div>
-                <div class="text-xs text-green-400 w-12">See all</div>
-              </div>
-            </b-dropdown-item>
-            <div class="h-1 bg-gray-100 w-full"></div>
-            <b-dropdown-item aria-role="listitem">
-              <div
-                v-for="(single, index) in notifications"
-                :key="index"
-                class="flex justify-between w-80 my-2"
-              >
-                <div class="">
-                  <div>{{ single.title }}</div>
-                  <div class="text-xs text-gray-200">
-                    {{ single.created_at.substring(0, 10) }}
-                  </div>
+          <div class="my-auto nav-item">
+            <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
+              <template #trigger="{}">
+                <img
+                  src="/icons/bell.png"
+                  class="h-4 w-4 mx-4 cursor-pointer"
+                  alt=""
+                />
+              </template>
+              <b-dropdown-item aria-role="listitem">
+                <div class="flex justify-between w-80">
+                  <div class="uppercase text-gray-300">Notifications</div>
+                  <div class="text-xs text-green-400 w-12">See all</div>
                 </div>
-                <!-- <div
+              </b-dropdown-item>
+              <div class="h-1 bg-gray-100 w-full"></div>
+              <b-dropdown-item aria-role="listitem">
+                <div
+                  v-for="(single, index) in notifications"
+                  :key="index"
+                  class="flex justify-between w-80 my-2"
+                >
+                  <div class="">
+                    <div>{{ single.title }}</div>
+                    <div class="text-xs text-gray-200">
+                      {{ single.created_at.substring(0, 10) }}
+                    </div>
+                  </div>
+                  <!-- <div
                   class="
                     text-xs text-green-800 text-center
                     bg-green-100
@@ -92,119 +93,120 @@
                 >
                   View
                 </div> -->
-              </div>
-            </b-dropdown-item>
-            <div class="h-1 bg-gray-100 w-full"></div>
-          </b-dropdown>
-        </div>
-        <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
-          <div class="my-auto nav-item">Become a seller</div>
-        </NuxtLink>
-
-        <b-dropdown v-else aria-role="list">
-          <template #trigger="{ active }">
-            <b-button
-              label="Sell an Item"
-              class="border-none"
-              :icon-right="active ? 'menu-up' : 'menu-down'"
-            />
-          </template>
-          <NuxtLink class="my-auto" to="/equipmentupload">
-            <b-dropdown-item aria-role="listitem"
-              >Equipment Upload</b-dropdown-item
-            >
+                </div>
+              </b-dropdown-item>
+              <div class="h-1 bg-gray-100 w-full"></div>
+            </b-dropdown>
+          </div>
+          <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
+            <div class="my-auto nav-item">Become a seller</div>
           </NuxtLink>
-          <NuxtLink class="my-auto" to="/serviceupload">
-            <b-dropdown-item aria-role="listitem"
-              >Service Upload</b-dropdown-item
-            >
-          </NuxtLink>
-        </b-dropdown>
 
-        <div class="flex my-auto nav-item">
-          <img
-            v-if="avatar === null"
-            src="/user.png"
-            class="w-8 my-auto h-8"
-            alt=""
-          />
-          <img
-            v-else
-            :src="avatar"
-            class="w-8 my-auto h-8 rounded-full"
-            alt=""
-          />
-          <b-dropdown aria-role="list">
+          <b-dropdown v-else aria-role="list">
             <template #trigger="{ active }">
               <b-button
+                label="Sell an Item"
                 class="border-none"
-                :label="'Hi ' + name"
                 :icon-right="active ? 'menu-up' : 'menu-down'"
               />
             </template>
-
-            <b-dropdown-item aria-role="listitem"
-              >Hi {{ name }}</b-dropdown-item
-            >
-            <div class="h-1 bg-gray-100 w-full"></div>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/account"
-                ><div class="flex">
-                  <img src="/icons/user.svg" alt="" />
-                  <div class="ml-3">Account</div>
-                </div></NuxtLink
+            <NuxtLink class="my-auto" to="/equipmentupload">
+              <b-dropdown-item aria-role="listitem"
+                >Equipment Upload</b-dropdown-item
               >
-            </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/saved">
-                <div class="flex">
-                  <img src="/icons/saved.svg" alt="" />
-                  <div class="ml-3">Saved Items</div>
-                </div>
-              </NuxtLink>
-            </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/my-orders">
-                <div class="flex">
-                  <img src="/icons/orders.svg" alt="" />
-                  <div class="ml-3">My Orders</div>
-                </div>
-              </NuxtLink>
-            </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/messages">
-                <div class="flex">
-                  <img src="/icons/msg.svg" alt="" />
-                  <div class="ml-3">Messages</div>
-                </div>
-              </NuxtLink>
-            </b-dropdown-item>
-            <div class="h-1 bg-gray-100 w-full"></div>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/change-password">
-                <div class="flex">
-                  <img src="/icons/pass.svg" alt="" />
-                  <div class="ml-3">Change Password</div>
-                </div>
-              </NuxtLink>
-            </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">
-              <NuxtLink to="/help-support"
-                ><div class="flex">
-                  <img src="/icons/help.svg" alt="" />
-                  <div class="ml-3">Help / Support</div>
-                </div></NuxtLink
+            </NuxtLink>
+            <NuxtLink class="my-auto" to="/serviceupload">
+              <b-dropdown-item aria-role="listitem"
+                >Service Upload</b-dropdown-item
               >
-            </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">
-              <div class="flex" @click="logout">
-                <img src="/icons/logout.svg" alt="" />
-                <div class="ml-3">Logout</div>
-              </div>
-            </b-dropdown-item>
+            </NuxtLink>
           </b-dropdown>
+
+          <div class="flex my-auto nav-item">
+            <img
+              v-if="avatar === null"
+              src="/user.png"
+              class="w-8 my-auto h-8 ml-4"
+              alt=""
+            />
+            <img
+              v-else
+              :src="avatar"
+              class="w-8 my-auto h-8 rounded-full ml-4"
+              alt=""
+            />
+            <b-dropdown aria-role="list">
+              <template #trigger="{ active }">
+                <b-button
+                  class="border-none"
+                  :label="'Hi ' + name"
+                  :icon-right="active ? 'menu-up' : 'menu-down'"
+                />
+              </template>
+
+              <b-dropdown-item aria-role="listitem"
+                >Hi {{ name }}</b-dropdown-item
+              >
+              <div class="h-1 bg-gray-100 w-full"></div>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/account"
+                  ><div class="flex">
+                    <img src="/icons/user.svg" alt="" />
+                    <div class="ml-3">Account</div>
+                  </div></NuxtLink
+                >
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/saved">
+                  <div class="flex">
+                    <img src="/icons/saved.svg" alt="" />
+                    <div class="ml-3">Saved Items</div>
+                  </div>
+                </NuxtLink>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/my-orders">
+                  <div class="flex">
+                    <img src="/icons/orders.svg" alt="" />
+                    <div class="ml-3">My Orders</div>
+                  </div>
+                </NuxtLink>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/messages">
+                  <div class="flex">
+                    <img src="/icons/msg.svg" alt="" />
+                    <div class="ml-3">Messages</div>
+                  </div>
+                </NuxtLink>
+              </b-dropdown-item>
+              <div class="h-1 bg-gray-100 w-full"></div>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/change-password">
+                  <div class="flex">
+                    <img src="/icons/pass.svg" alt="" />
+                    <div class="ml-3">Change Password</div>
+                  </div>
+                </NuxtLink>
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <NuxtLink to="/help-support"
+                  ><div class="flex">
+                    <img src="/icons/help.svg" alt="" />
+                    <div class="ml-3">Help / Support</div>
+                  </div></NuxtLink
+                >
+              </b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">
+                <div class="flex" @click="logout">
+                  <img src="/icons/logout.svg" alt="" />
+                  <div class="ml-3">Logout</div>
+                </div>
+              </b-dropdown-item>
+            </b-dropdown>
+          </div>
         </div>
-      </div>
+      </b-navbar-item>
     </template>
     <!-- </div> -->
     <!-- </div> -->
