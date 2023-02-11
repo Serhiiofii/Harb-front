@@ -54,7 +54,10 @@
                   :icon-right="active ? 'menu-up' : 'menu-down'"
                 />
               </template>
-              <div class="p-2" @click="single = 'All Categories'">
+              <div
+                class="p-2"
+                @click="categoryFilter({ title: 'All Categories' })"
+              >
                 All Categories
               </div>
               <div
@@ -125,6 +128,7 @@
               </div>
             </div>
           </div>
+
           <div v-if="search !== '' && data[0] !== undefined">
             <div class="lg:flex flex-wrap">
               <div v-for="(top, index) in data" :key="index" class="lg:w-1/2">
@@ -132,7 +136,10 @@
               </div>
             </div>
           </div>
-          <div v-if="search === ''">
+          <!-- <div v-if="data.top_deals === undefined">
+            no items in this category
+          </div> -->
+          <div v-if="search === '' && single === 'All Categories'">
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="lg:flex">
               <div
@@ -146,7 +153,7 @@
           </div>
         </div>
       </div>
-      <div v-if="search === ''">
+      <div v-if="search === '' && single === 'All Categories'">
         <div>
           <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
           <div class="lg:flex justify-between flex-wrap">
@@ -359,28 +366,22 @@ export default {
     },
     categoryFilter(category) {
       this.single = category.title;
-      // if (this.single !== "All Categories") {
-      //   this.$axios
-      //     .$post(
-      //       "equipments/search",
-      //       {
-      //         search: this.search,
-      //       },
-      //       {
-      //         headers: {
-      //           "Content-Type": "application/json",
-      //           Accept: "application/json",
-      //           Authorization: "Bearer " + this.token,
-      //         },
-      //       }
-      //     )
-      //     .then((response) => {
-      //       // console.log(response.data);
-      //       this.data = response.data;
-      //     });
-      // } else {
-      //   this.data = this.store;
-      // }
+      if (this.single === "All Categories") {
+        this.data = this.store;
+      } else {
+        this.$axios
+          .$get(`equipment/categories/${category.slug}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              // Authorization: "Bearer " + this.token,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+            this.data = response.data;
+          });
+      }
     },
   },
   mounted() {
