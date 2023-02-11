@@ -30,7 +30,6 @@
         <select
           name=""
           v-model="category"
-          id=""
           class="
             p-3
             rounded-sm
@@ -362,21 +361,6 @@ export default {
           .$post(
             "seller/equipments/add",
             formData,
-            // {
-            //   name: this.name,
-            //   category: this.category,
-            //   manufacturer: this.manufacturer,
-            //   equipment_specification: this.specification,
-            //   build_year: this.year_of_build,
-            //   description: this.description,
-            //   sale_type: this.type,
-            //   custom_specifications: [
-            // {
-            //   title: this.custom_title,
-            //   details: this.custom_details,
-            // },
-            //   ],
-            // },
             {
               headers: {
                 "Content-Type": "application/json",
