@@ -11,7 +11,7 @@
         <div
           v-show="sidebar"
           class="
-            lg:w-96
+            lg:w-1/4
             w-full
             bg-white
             p-4
@@ -26,23 +26,23 @@
           "
         >
           <div class="font-bold text-xl mb-8 mt-4">Categories</div>
-          <div
-            v-for="(single, index) in categories"
-            :key="index"
-            class="flex lg:my-6"
-          >
-            <img
-              :src="require(`~/assets/icons/${single.img}.jpeg`)"
-              class="w-10 h-10 m-1"
-              alt=""
-            />
-            <div class="p-1 my-auto">
-              <div class="text-sm font-bold">{{ single.title }}</div>
-              <!-- <div class="text-xs">{{ single.items }}</div> -->
-            </div>
+          <div v-for="(single, index) in categories" :key="index">
+            <NuxtLink :to="'categories?slug=' + single.slug">
+              <div class="flex lg:my-6">
+                <img
+                  :src="require(`~/assets/icons/${single.img}.jpeg`)"
+                  class="w-10 h-10 m-1"
+                  alt=""
+                />
+                <div class="p-1 my-auto">
+                  <div class="text-sm font-bold">{{ single.title }}</div>
+                  <!-- <div class="text-xs">{{ single.items }}</div> -->
+                </div>
+              </div>
+            </NuxtLink>
           </div>
         </div>
-        <div class="lg:m-2">
+        <div class="lg:m-2 lg:w-3/4 w-full">
           <div class="lg:flex lg:my-auto lg:p-0 p-2 mt-20">
             <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
               <template #trigger="{ active }">
@@ -129,7 +129,7 @@
             </div>
           </div>
 
-          <div v-if="search !== '' && data[0] !== undefined">
+          <div v-if="search !== '' || data[0] !== undefined">
             <div class="lg:flex flex-wrap">
               <div v-for="(top, index) in data" :key="index" class="lg:w-1/2">
                 <ProductCard :data="top" />
@@ -141,7 +141,7 @@
           </div> -->
           <div v-if="search === '' && single === 'All Categories'">
             <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
-            <div class="lg:flex">
+            <div class="lg:flex justify-between">
               <div
                 v-for="(top, index) in data.top_deals"
                 :key="index"
