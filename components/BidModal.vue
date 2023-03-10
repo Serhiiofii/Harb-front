@@ -7,7 +7,7 @@
           <div class="">
             <!-- <div class="w-44 rounded-md bg-blue-100"></div> -->
             <div>
-              <div class="font-bold my-1">Tatomh Hose:</div>
+              <!-- <div class="font-bold my-1">Tatomh Hose:</div> -->
               <div>
                 <div class="text-xs mb-1">Enter Amount BId</div>
                 <input
@@ -80,7 +80,7 @@ export default {
   computed: mapState(["token"]),
   data() {
     return {
-      bid: "",
+      bid: 1000,
     };
   },
   methods: {

@@ -44,6 +44,7 @@
         <NuxtLink to="/login"> <div class="my-1">Login</div> </NuxtLink>
         <NuxtLink to="/signup"> <div class="my-1">Sign Up</div> </NuxtLink>
         <NuxtLink to="/my-orders"> <div class="my-1">Cart</div> </NuxtLink>
+        <NuxtLink to="/help-support"> <div class="my-1">Help/Support</div> </NuxtLink>
         <a href="mailto:info@harbourhubs.com">
           <div class="my-1">Contact Us</div>
         </a>

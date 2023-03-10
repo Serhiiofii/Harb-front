@@ -8,7 +8,7 @@
     <div>
       <NuxtLink to="/login" v-if="path === '/signup' || path === '/'">
         <button class="p-3 bg-blue-600 rounded-md text-white lg:w-52">
-          Sign In Here
+          Sign Up / Login
         </button>
       </NuxtLink>
       <NuxtLink to="/signup" v-else>
