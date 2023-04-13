@@ -216,6 +216,7 @@
         </button>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 <script>

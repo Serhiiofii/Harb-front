@@ -43,3 +43,30 @@ body {
     top: 0px;
   }
 }
+
+.tabs.is-medium{
+  font-size: 16px !important;
+}
+
+/* ScrollBar */
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  border-radius: 200px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(197, 197, 197, 0.8);
+  border-radius: 200px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(65, 65, 65, 0.5);
+  border: 0 0 0 solid none;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(65, 65, 65, 0.8);
+  border-radius: 200px;
+}

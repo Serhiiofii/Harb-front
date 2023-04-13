@@ -85,6 +85,7 @@
         </b-tabs>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 <script>
@@ -118,3 +119,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .tabs.is-medium{
+    font-size: 16px !important;
+  }
+</style>

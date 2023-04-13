@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 h-screen">
     <MainNav />
-    <div class="lg:mx-20 lg:flex mt-4 container">
+    <div class="lg:mx-20 lg:flex mt-4 container min-h-[calc(100vh-470px)]">
       <div
         v-show="sidebar"
         class="
@@ -132,6 +132,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template> 
 <script>

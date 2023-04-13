@@ -1,33 +1,27 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div
-      v-if="cart !== null && cart.length > 0"
-      class="lg:mx-20 container lg:flex mt-4"
-    >
+    <div v-if="cart !== null && cart.length > 0" class="lg:mx-20 container lg:flex mt-4 min-h-[calc(100vh-500px)]">
       <div class="w-full bg-white p-2">
         <div v-for="(single, index) in cart" :key="index">
           <Product :data="single.equipment" />
         </div>
       </div>
-      <div
-        v-show="sidebar"
-        class="
-          lg:w-1/2
-          w-full
-          bg-white
-          p-4
-          lg:ml-4
-          rounded-md
-          lg:relative
-          fixed
-          z-10
-          lg:top-0
-          top-16
-          h-full
-          left-0
-        "
-      >
+      <div v-show="sidebar" class="
+            lg:w-1/2
+            w-full
+            bg-white
+            p-4
+            lg:ml-4
+            rounded-md
+            lg:relative
+            fixed
+            z-10
+            lg:top-0
+            top-16
+            h-full
+            left-0
+          ">
         <div class="bg-white lg:p-2">
           <div class="text-lg font-bold my-1">Checkout</div>
           <div class="line bg-gray-100"></div>
@@ -44,35 +38,28 @@
           <div class="line bg-gray-100"></div>
           <div>
             <div class="text-sm mt-3 mb-1">Delivery Address</div>
-            <textarea
-              name=""
-              class="
-                p-2
-                bg-gray-100
-                w-full
-                border
-                text-sm
-                border-gray-200
-                rounded-sm
-              "
-              v-model="user.delivery_address"
-            >
-            </textarea>
+            <textarea name="" class="
+                  p-2
+                  bg-gray-100
+                  w-full
+                  border
+                  text-sm
+                  border-gray-200
+                  rounded-sm
+                " v-model="user.delivery_address">
+              </textarea>
           </div>
           <div>
             <div class="text-sm mt-3 mb-1">Phone Number</div>
-            <input
-              class="
-                p-2
-                bg-gray-100
-                w-full
-                border
-                text-sm
-                border-gray-200
-                rounded-sm
-              "
-              :value="user.phone"
-            />
+            <input class="
+                  p-2
+                  bg-gray-100
+                  w-full
+                  border
+                  text-sm
+                  border-gray-200
+                  rounded-sm
+                " :value="user.phone" />
           </div>
           <!-- <div>
             <div class="text-sm mt-3 mb-1">Delivery Method:</div>
@@ -83,46 +70,34 @@
         </div>
 
         <button class="bg-blue-600 p-2 w-full text-white">
-          <paystack
-            :amount="total * 100"
-            :email="user.email"
-            paystackkey="pk_test_d5d28afc7480b03bab11b88a84879d68f8a089af"
-            :reference="reference"
-            :callback="processPayment"
-            :close="close"
-          >
+          <paystack :amount="total * 100" :email="user.email"
+            paystackkey="pk_test_d5d28afc7480b03bab11b88a84879d68f8a089af" :reference="reference"
+            :callback="processPayment" :close="close">
             Checkout
           </paystack>
         </button>
       </div>
     </div>
-    <div v-else class="text-center p-2">No equipments in your cart.</div>
+    <div v-else class="text-center p-2 min-h-[calc(100vh-500px)] text-xl pt-5">No equipments in your cart.</div>
     <div class="mx-20">
       <div class="my-3">
-        <div class="text-3xl font-bold mt-4 mb-2">Similar Items</div>
+        <div class="text-2xl font-bold mt-4 mb-2">Similar Items</div>
         <div class="lg:flex flex-wrap">
-          <div
-            v-for="(category, index) in data.similar_products"
-            :key="index"
-            class="lg:w-1/3"
-          >
+          <div v-for="(category, index) in data.similar_products" :key="index" class="lg:w-1/3">
             <ProductCard :data="category" />
           </div>
         </div>
       </div>
       <div class="my-3">
-        <div class="text-3xl font-bold mt-4 mb-2">Similar Services</div>
+        <div class="text-2xl font-bold mt-4 mb-2">Similar Services</div>
         <div class="lg:flex flex-wrap">
-          <div
-            v-for="(category, index) in data.similar_services"
-            :key="index"
-            class="lg:w-1/3"
-          >
+          <div v-for="(category, index) in data.similar_services" :key="index" class="lg:w-1/3">
             <ServiceCard :data="category" :remove="false" />
           </div>
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 
@@ -218,9 +193,11 @@ export default {
 .line {
   height: 1px;
 }
+
 textarea:focus {
   outline: none;
 }
+
 .show {
   width: 50% !important;
 }

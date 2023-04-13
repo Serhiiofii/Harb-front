@@ -391,11 +391,20 @@ export default {
           });
       }
     },
+    onResize() {
+      if(screen.width > 600 && this.sidebar === false) {
+        this.toggleSidenav();
+      }
+    }
   },
   mounted() {
     if (screen.width <= 600 && this.sidebar === true) {
       this.toggleSidenav();
     }
+    this.$nextTick(function () {
+      this.onResize();
+    })
+    window.addEventListener('resize', this.onResize)
 
     try {
       this.$axios

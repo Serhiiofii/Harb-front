@@ -6,13 +6,14 @@
     <div v-else>
       <MainNav />
     </div>
-    <div class="lg:mx-20 p-2">
+    <div class="lg:mx-20 p-2 min-h-[calc(100vh-470px)]">
       <div class="lg:flex justify-between flex-wrap">
         <div v-for="(featured, index) in data" :key="index" class="lg:w-1/3">
           <ProductCard :data="featured" />
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 

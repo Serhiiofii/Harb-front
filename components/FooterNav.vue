@@ -3,7 +3,7 @@
     <div class="lg:flex p-4 justify-between">
       <div class="w-72">
         <img src="/logo.svg" alt="" />
-        <div>
+        <div class="py-3">
           Harbour Hub is a marketplace for buying and selling marine and other
           industrial equipment.
         </div>

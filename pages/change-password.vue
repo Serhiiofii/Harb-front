@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 
