@@ -7,11 +7,12 @@
       <MainNav />
     </div>
     <div class="lg:mx-20 p-2 min-h-[calc(100vh-470px)]">
-      <div class="lg:flex justify-between flex-wrap">
+      <div v-if="data !== null && data.length > 0" class="lg:flex justify-between flex-wrap">
         <div v-for="(featured, index) in data" :key="index" class="lg:w-1/3">
           <ProductCard :data="featured" />
         </div>
       </div>
+      <div v-else class="text-center p-2 text-xl pt-5">No Data in Here.</div>
     </div>
     <FooterNav />
   </div>
