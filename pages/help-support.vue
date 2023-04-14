@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 h-screen">
     <MainNav />
-    <div class="mx-20 flex mt-4">
+    <div class="mx-20 flex mt-4 container mx-auto">
       <Sidebar />
       <div class="w-full bg-white ml-4 p-4">
         <b-tabs type="is-toggle" size="is-medium">
@@ -85,7 +85,9 @@
         </b-tabs>
       </div>
     </div>
-    <FooterNav />
+    <div class="lg:mx-20">
+      <FooterNav />
+    </div>
   </div>
 </template>
 <script>

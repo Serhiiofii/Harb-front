@@ -14,7 +14,9 @@
       </div>
       <div v-else class="text-center p-2 text-xl pt-5">No Data in Here.</div>
     </div>
-    <FooterNav />
+    <div class="lg:mx-20">
+      <FooterNav />
+    </div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="lg:mx-20 flex mt-4 container">
+    <div class="lg:mx-20 flex mt-4 container mx-auto">
       <Sidebar />
       <div class="lg:ml-4 w-full">
         <div class="bg-white">
@@ -174,7 +174,9 @@
         </div> -->
       </div>
     </div>
-    <FooterNav />
+    <div class="lg:mx-20">
+      <FooterNav />
+    </div>
   </div>
 </template>
 

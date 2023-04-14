@@ -7,7 +7,9 @@
         <ProductCard v-for="(item, index) in saved" :key="index" :data="item.equipment" />
       </div>
     </div>
-    <FooterNav />
+    <div class="lg:mx-20">
+      <FooterNav />
+    </div>
   </div>
 </template>
 <script>
