@@ -333,7 +333,7 @@ export default {
         );
         console.log(data);
         this.$toast.success("OTp sent Successfully");
-      } catch {
+      } catch (error) {
         console.log("error");
         this.loading = false;
         this.$toast.error(error.response.data.message);      }

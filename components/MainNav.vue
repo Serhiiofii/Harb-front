@@ -47,20 +47,23 @@
       <b-navbar-item tag="div">
         <div class="lg:flex lg:w-full justify-between lg:p-0 p-3">
           <NuxtLink to="my-orders" class="my-auto">
-            <div class="flex my-auto nav-item">
+            <div class="flex my-auto nav-item px-4 md:px-0">
               <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
-              Cart
+              <span class="block lg:hidden">Cart</span>
             </div>
           </NuxtLink>
 
           <div class="my-auto nav-item">
             <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
               <template #trigger="{}">
-                <img
-                  src="/icons/bell.png"
-                  class="h-4 w-4 mx-4 cursor-pointer"
-                  alt=""
-                />
+                <div class="flex items center">
+                  <img
+                    src="/icons/bell.png"
+                    class="h-4 w-4 mx-4 cursor-pointer"
+                    alt=""
+                  />
+                  <span class="-ml-3 block lg:hidden">Notifications</span>
+                </div>
               </template>
               <b-dropdown-item aria-role="listitem">
                 <div class="flex justify-between w-80">
@@ -99,7 +102,7 @@
             </b-dropdown>
           </div>
           <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
-            <div class="my-auto nav-item">Become a seller</div>
+            <div class="my-auto nav-item px-4 md:px-0">Become a seller</div>
           </NuxtLink>
 
           <b-dropdown v-else aria-role="list">
