@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:flex lg:p-3 my-2 border border-gray-100 relative">
+  <div class="lg:flex lg:p-3 my-2 border border-gray-100 relative bg-white">
     <div class="lg:w-96">
       <img
         class="lg:h-52 lg:w-80 w-full"

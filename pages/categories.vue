@@ -1,10 +1,12 @@
 <template>
   <div class="bg-gray-50">
-    <div v-if="user === null">
-      <HeaderNav />
-    </div>
-    <div v-else>
-      <MainNav />
+    <div class="min-h-[84px]">
+      <div v-if="user === null">
+        <HeaderNav />
+      </div>
+      <div v-else>
+        <MainNav />
+      </div>
     </div>
     <div class="lg:mx-20 p-2 min-h-[calc(100vh-470px)]">
       <div v-if="data !== null && data.length > 0" class="lg:flex justify-between flex-wrap">

@@ -1,10 +1,10 @@
 <template>
   <div class="bg-white border border-gray-100 rounded-sm p-4 m-2">
-    <div class="flex justify-between">
-      <NuxtLink :to="`/user?slug=${data.seller_id}`">
-        <div class="flex w-80">
-          <img src="/user.png" alt="" />
-          <div class="ml-4">
+    <div class="flex justify-between  items-center">
+      <NuxtLink :to="`/user?slug=${data.seller_id}`" class="w-2/3">
+        <div class="flex">
+          <img src="/user.png" width="50" alt="" />
+          <div class="">
             <div class="text-base font-bold">{{ data.name }}</div>
             <div class="text-sm">{{ data.category }}</div>
           </div>
@@ -15,7 +15,7 @@
           v-if="remove === true"
           @click="removeProduct(data.id)"
           class="
-            p-3
+            px-3 py-2
             border border-yellow-500
             w-32
             rounded-sm
@@ -26,7 +26,7 @@
           <img class="w-4 my-auto h-4" src="/icons/close.svg" alt="" />
           Remove
         </button>
-        <button v-else class="p-3 border border-yellow-500 w-32 rounded-sm">
+        <button v-else class="px-3 py-2 border border-yellow-500 w-32 rounded-sm">
           Follow
         </button>
       </div>

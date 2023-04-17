@@ -2,48 +2,25 @@
   <b-navbar class="lg:px-20 py-4 nav">
     <!-- <div class="flex py-4 px-20 justify-between bg-white nav"> -->
     <template #brand>
-      <div class="my-auto w-full flex justify-between lg:px-0 px-4">
-        <div class="bar w-10">
+      <div class="my-auto w-full flex justify-between">
+        <div class="flex items-center w-10 lg:hidden">
           <img
             @click="toggleSidenav()"
             src="/hamburger-menu.svg"
-            class="w-6"
+            class="w-6 mx-auto"
             alt=""
           />
         </div>
         <NuxtLink to="/" class="my-auto">
           <img class="w-40 my-auto" src="/logo.svg" alt="" />
         </NuxtLink>
-        <!-- <div class="bar w-10">
-          <img src="/hamburger-menu.svg" alt="" />
-        </div> -->
+        <div class="bar w-1">
+          <!-- <img src="/hamburger-menu.svg" alt="" /> -->
+        </div>
       </div>
     </template>
 
-    <!-- <div class="lg:flex hidden"> -->
     <template #end>
-      <!-- <div class="lg:flex my-auto lg:p-0 p-2">
-        <b-dropdown aria-role="list" class="z-10 lg:-mr-1 nav-item">
-          <template #trigger="{ active }">
-            <b-button
-              label="All Categories"
-              type="is-info"
-              class="h-12"
-              :icon-right="active ? 'menu-up' : 'menu-down'"
-            />
-          </template>
-          <div v-for="(single, index) in categories" :key="index" class="p-2">
-            {{ single.title }}
-          </div>
-        </b-dropdown>
-        <input
-          v-model="search"
-          type="text"
-          class="p-3 border border-gray-100 lg:w-96 w-full h-12 nav-item"
-          placeholder="Search items on harbour hub"
-          @change="searchData"
-        />
-      </div> -->
       <b-navbar-item tag="div">
         <div class="lg:flex lg:w-full justify-between lg:p-0 p-3">
           <NuxtLink to="my-orders" class="my-auto">
@@ -84,18 +61,6 @@
                       {{ single.created_at.substring(0, 10) }}
                     </div>
                   </div>
-                  <!-- <div
-                  class="
-                    text-xs text-green-800 text-center
-                    bg-green-100
-                    rounded-sm
-                    p-1
-                    my-auto
-                    w-12
-                  "
-                >
-                  View
-                </div> -->
                 </div>
               </b-dropdown-item>
               <div class="h-1 bg-gray-100 w-full"></div>
@@ -211,8 +176,6 @@
         </div>
       </b-navbar-item>
     </template>
-    <!-- </div> -->
-    <!-- </div> -->
   </b-navbar>
 </template>
 <script>
@@ -300,15 +263,15 @@ export default {
 .h-1 {
   height: 1px;
 }
-.bar {
+/* .bar {
   display: none;
-}
-@media (max-width: 600px) {
+} */
+/* @media (max-width: 600px) {
   .bar {
     display: block;
   }
   .nav-item {
     margin-top: 8px !important;
   }
-}
+} */
 </style>

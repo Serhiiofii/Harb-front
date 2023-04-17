@@ -3,7 +3,7 @@
     <MainNav />
     <div class="lg:mx-20 flex mt-4 container">
       <Sidebar />
-      <div class="lg:ml-4 w-full">
+      <div class="lg:ml-4 mt-4 w-full">
         <div class="flex">
           <div class="border rounded-md w-1/2 p-4 bg-white lg:mr-2">
             <div class="uppercase text-base text-gray-400">quick upload</div>
@@ -44,6 +44,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="lg:mx-20">
+      <FooterNav />
     </div>
   </div>
 </template>

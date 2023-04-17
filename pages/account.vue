@@ -3,7 +3,7 @@
     <MainNav />
     <div class="lg:mx-20 flex mt-4 container mx-auto">
       <Sidebar />
-      <div class="lg:ml-4 w-full">
+      <div class="lg:ml-4 w-full mt-4">
         <div class="bg-white">
           <div class="lg:flex">
             <div class="m-2 border relative border-gray-200 rounded-md">
@@ -57,7 +57,7 @@
                 @click="updateInfo"
                 class="absolute top-3 cursor-pointer right-3"
               >
-                <img class="w-4 h-4" src="/edit.png" alt="" />
+                <img class="w-4 h-4" src="/save.png" alt="" />
               </div>
             </div>
 
@@ -114,7 +114,7 @@
                     @click="updateDelivery"
                     class="absolute top-3 cursor-pointer right-3"
                   >
-                    <img class="w-4 h-4" src="/edit.png" alt="" />
+                    <img class="w-4 h-4" src="/save.png" alt="" />
                   </div>
                   <textarea
                     class="w-full p-1 bg-gray-200 h-full rounded-md"
@@ -129,7 +129,7 @@
                   @click="updateBio"
                   class="absolute top-3 cursor-pointer right-3"
                 >
-                  <img class="w-4 h-4" src="/edit.png" alt="" />
+                  <img class="w-4 h-4" src="/save.png" alt="" />
                 </div>
                 <textarea
                   class="w-full border-none h-20 rounded-md"
@@ -145,7 +145,7 @@
                   @click="updateLocation"
                   class="absolute top-3 cursor-pointer right-3"
                 >
-                  <img class="w-4 h-4" src="/edit.png" alt="" />
+                  <img class="w-4 h-4" src="/save.png" alt="" />
                 </div>
                 <input
                   type="text"

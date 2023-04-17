@@ -225,7 +225,7 @@
 import { mapState } from "vuex";
 
 export default {
-  computed: mapState(["token"]),
+  computed: mapState(["token", "mutateUser"]),
   middleware: "authenticated",
 
   data() {
@@ -297,6 +297,14 @@ export default {
           .then((response) => {
             console.log(response.data);
             this.loading = false;
+            window.localStorage.setItem(
+              "user",
+              JSON.stringify({
+                ...JSON.parse(window.localStorage.getItem("user")),
+                user_role: "seller",
+              })
+            );
+            this.mutateUser();
             this.$toast.success("Seller Registered Successfully");
             this.$router.push({
               name: "businessdetails",

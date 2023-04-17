@@ -8,32 +8,25 @@
     </div>
     <div class="lg:mx-20 p-2">
       <div class="lg:flex">
-        <div
-          v-show="sidebar"
-          class="
-            lg:w-1/4
-            w-full
-            bg-white
-            p-4
-            my-4
-            rounded-md
-            lg:relative
-            fixed
-            z-10
-            lg:top-0
-            top-12
-            left-0
-          "
-        >
+        <div v-show="sidebar" class="
+              lg:w-1/4
+              w-full
+              bg-white
+              p-4
+              my-4
+              rounded-md
+              lg:relative
+              fixed
+              z-10
+              lg:top-0
+              top-12
+              left-0
+            ">
           <div class="font-bold text-xl mb-8 mt-4">Categories</div>
           <div v-for="(single, index) in categories" :key="index">
             <NuxtLink :to="'categories?slug=' + single.slug">
               <div class="flex lg:my-6">
-                <img
-                  :src="require(`~/assets/icons/${single.img}.jpeg`)"
-                  class="w-10 h-10 m-1"
-                  alt=""
-                />
+                <img :src="require(`~/assets/icons/${single.img}.jpeg`)" class="w-10 h-10 m-1" alt="" />
                 <div class="p-1 my-auto">
                   <div class="text-sm font-bold">{{ single.title }}</div>
                   <!-- <div class="text-xs">{{ single.items }}</div> -->
@@ -46,92 +39,73 @@
           <div class="lg:flex lg:my-auto lg:p-0 p-2 mt-20">
             <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
               <template #trigger="{ active }">
-                <b-button
-                  expanded
-                  :label="single"
-                  type="is-info"
-                  class="h-12"
-                  :icon-right="active ? 'menu-up' : 'menu-down'"
-                />
+                <b-button expanded :label="single" type="is-info" class="h-12"
+                  :icon-right="active ? 'menu-up' : 'menu-down'" />
               </template>
-              <div
-                class="p-2"
-                @click="categoryFilter({ title: 'All Categories' })"
-              >
+              <div class="p-2" @click="categoryFilter({ title: 'All Categories' })">
                 All Categories
               </div>
-              <div
-                v-for="(single, index) in categories"
-                :key="index"
-                class="p-2"
-                @click="categoryFilter(single)"
-              >
+              <div v-for="(single, index) in categories" :key="index" class="p-2" @click="categoryFilter(single)">
                 {{ single.title }}
               </div>
             </b-dropdown>
-            <input
-              v-model="search"
-              type="text"
-              class="p-3 border border-gray-100 w-full h-12 nav-item"
-              placeholder="Search items on harbour hub"
-              @change="searchData"
-            />
+            <input v-model="search" type="text" class="p-3 border border-gray-100 w-full h-12 nav-item"
+              placeholder="Search items on harbour hub" @change="searchData" />
           </div>
 
-          <div class="w-full lg:m-2 rounded-md relative mt-2 bg-img p-4">
-            <!-- <img
-              src="/hero.png"
-              class="rounded-md w-full h-full"
-              alt=""
-            /> -->
-            <div class="lg:w-2/3 lg:m-10 m-4">
-              <div class="lg:text-4xl text-xl font-bold text-white">
-                Get offshore <br />
-                equipment on demand
-              </div>
-              <div class="my-3 text-white text-sm">
-                Find marine equipment, equipment for industrial use, and
-                industrial spare parts. Whether you're looking to buy or sell
-                you'll find the best deals here
-              </div>
-              <div v-if="user === null || user.user_role === 'user'">
-                <NuxtLink to="/becomeaseller">
-                  <button
-                    class="
-                      bg-transparent
-                      border border-white
-                      w-44
-                      rounded-md
-                      text-white
-                      p-3
-                    "
-                  >
-                    Become a Seller
-                  </button>
-                </NuxtLink>
-              </div>
-              <div v-else>
-                <NuxtLink to="/seller">
-                  <button
-                    class="
-                      bg-transparent
-                      border border-white
-                      w-44
-                      rounded-md
-                      text-white
-                      p-3
-                    "
-                  >
-                    Sell an Iten
-                  </button>
-                </NuxtLink>
+          <div class="p-4 lg:m-2 bg-img rounded-md">
+            <div class="w-full relative mt-2">
+              <!-- <img
+                src="/hero.png"
+                class="rounded-md w-full h-full"
+                alt=""
+              /> -->
+              <div class="lg:w-2/3 lg:m-10 m-4">
+                <div class="lg:text-4xl text-xl font-bold text-white">
+                  Get offshore <br />
+                  equipment on demand
+                </div>
+                <div class="my-3 text-white text-sm">
+                  Find marine equipment, equipment for industrial use, and
+                  industrial spare parts. Whether you're looking to buy or sell
+                  you'll find the best deals here
+                </div>
+                <div v-if="user === null || user.user_role === 'user'">
+                  <NuxtLink to="/becomeaseller">
+                    <button class="
+                          bg-transparent
+                          border border-white
+                          w-44
+                          rounded-md
+                          text-white
+                          p-3
+                        ">
+                      Become a Seller
+                    </button>
+                  </NuxtLink>
+                </div>
+                <div v-else>
+                  <NuxtLink to="/seller">
+                    <button class="
+                          bg-transparent
+                          border border-white
+                          w-44
+                          rounded-md
+                          text-white
+                          p-3
+                        ">
+                      Sell an Iten
+                    </button>
+                  </NuxtLink>
+                </div>
               </div>
             </div>
+
           </div>
 
           <div v-if="search !== '' || data[0] !== undefined">
             <div class="lg:flex flex-wrap">
-              <div v-for="(top, index) in data" :key="index" class="lg:w-1/2">
+              <div v-for="(top, index) in data" :key="index" class="lg:w-1/3">
                 <ProductCard :data="top" />
               </div>
             </div>
@@ -140,13 +114,9 @@
             no items in this category
           </div> -->
           <div v-if="search === '' && single === 'All Categories'">
-            <div class="text-3xl font-bold mt-4 mb-2">Top Deals</div>
-            <div class="lg:flex justify-between">
-              <div
-                v-for="(top, index) in data.top_deals"
-                :key="index"
-                class="lg:w-1/2"
-              >
+            <div class="text-2xl font-bold mt-4 mb-2">Top Deals</div>
+            <div class="flex flex-wrap xl:justify-between justify-around">
+              <div v-for="(top, index) in data.top_deals" :key="index" class="w-full lg:w-1/2 xl:w-1/3 px-3">
                 <ProductCard :data="top" />
               </div>
             </div>
@@ -154,38 +124,26 @@
         </div>
       </div>
       <div v-if="search === '' && single === 'All Categories'">
-        <div>
-          <div class="text-3xl font-bold mt-4 mb-2">Popular Products</div>
-          <div class="lg:flex justify-between flex-wrap">
-            <div
-              v-for="(featured, index) in data.featured_products"
-              :key="index"
-              class="lg:w-1/3"
-            >
+        <div class="w-full">
+          <div class="text-2xl font-bold mt-4 mb-2">Popular Products</div>
+          <div class="flex flex-wrap xl:justify-between justify-around">
+            <div v-for="(featured, index) in data.featured_products" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
               <ProductCard :data="featured" />
             </div>
           </div>
         </div>
-        <div>
-          <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
-          <div class="lg:flex justify-between flex-wrap">
-            <div
-              v-for="(category, index) in data.recent_sales"
-              :key="index"
-              class="lg:w-1/3"
-            >
+        <div class="w-full">
+          <div class="text-2xl font-bold mt-4 mb-2">Recent Sales</div>
+          <div class="flex flex-wrap xl:justify-between justify-around">
+            <div v-for="(category, index) in data.recent_sales" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
         </div>
-        <div>
-          <div class="text-3xl font-bold mt-4 mb-2">Most Viewed</div>
-          <div class="lg:flex justify-between flex-wrap">
-            <div
-              v-for="(category, index) in data.most_viewed_products"
-              :key="index"
-              class="lg:w-1/3"
-            >
+        <div class="w-full">
+          <div class="text-2xl font-bold mt-4 mb-2">Most Viewed</div>
+          <div class="flex flex-wrap xl:justify-between justify-around">
+            <div v-for="(category, index) in data.most_viewed_products" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
@@ -202,32 +160,28 @@
             </div>
             <div v-if="user === null || user.user_role === 'user'">
               <NuxtLink to="/becomeaseller">
-                <button
-                  class="
-                    p-2
-                    lg:w-80
-                    w-full
-                    rounded-full
-                    border-2 border-white
-                    bg-transparent
-                  "
-                >
+                <button class="
+                      p-2
+                      lg:w-80
+                      w-full
+                      rounded-full
+                      border-2 border-white
+                      bg-transparent
+                    ">
                   Become a Seller
                 </button>
               </NuxtLink>
             </div>
             <div v-else>
               <NuxtLink to="/seller">
-                <button
-                  class="
-                    p-2
-                    lg:w-80
-                    w-full
-                    rounded-full
-                    border-2 border-white
-                    bg-transparent
-                  "
-                >
+                <button class="
+                      p-2
+                      lg:w-80
+                      w-full
+                      rounded-full
+                      border-2 border-white
+                      bg-transparent
+                    ">
                   Sell an Item
                 </button>
               </NuxtLink>
@@ -238,18 +192,16 @@
           <div>
             <div class="p-8 brown rounded-xl w-full text-white">
               <div class="lg:w-80">
-                <div class="text-3xl font-bold">Get the best Harbour Deals</div>
-                <button
-                  class="
-                    p-2
-                    lg:w-80
-                    w-full
-                    rounded-full
-                    border-2 border-white
-                    bg-transparent
-                    mt-3
-                  "
-                >
+                <div class="text-2xl font-bold">Get the best Harbour Deals</div>
+                <button class="
+                      p-2
+                      lg:w-80
+                      w-full
+                      rounded-full
+                      border-2 border-white
+                      bg-transparent
+                      mt-3
+                    ">
                   Explore Top Deals
                 </button>
               </div>
@@ -258,24 +210,22 @@
           <div class="mt-4">
             <div class="p-8 weird rounded-xl w-full text-white">
               <div class="lg:w-80">
-                <div class="text-3xl font-bold">
+                <div class="text-2xl font-bold">
                   Subscribe to our newsletter
                 </div>
                 <!-- <div class="my-3 text-sm">
                   Be the first to know about the update of new equipment and
                   exclusive management and maintenance tips
                 </div> -->
-                <button
-                  class="
-                    p-2
-                    lg:w-80
-                    w-full
-                    rounded-full
-                    border-2 border-white
-                    bg-transparent
-                    mt-3
-                  "
-                >
+                <button class="
+                      p-2
+                      lg:w-80
+                      w-full
+                      rounded-full
+                      border-2 border-white
+                      bg-transparent
+                      mt-3
+                    ">
                   Subscribe
                 </button>
               </div>
@@ -386,13 +336,13 @@ export default {
             },
           })
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             this.data = response.data;
           });
       }
     },
     onResize() {
-      if(screen.width > 600 && this.sidebar === false) {
+      if (screen.width > 600 && this.sidebar === false) {
         this.toggleSidenav();
       }
     }
@@ -432,18 +382,22 @@ export default {
 .blue {
   background-color: #2b7edf;
 }
+
 .brown {
   background-color: #b98606;
 }
+
 .weird {
   background-color: #60bcd9;
 }
+
 /* .show {
   width: 25% !important;
 } */
 .nav-item {
   margin-top: 8px !important;
 }
+
 .bg-img {
   background-image: url("/hero.png");
   background-repeat: no-repeat;

@@ -1,6 +1,8 @@
 <template>
   <div class="bg-gray-50">
-    <MainNav />
+    <div class="min-h-[84px]">
+        <MainNav />
+    </div>
     <div v-if="cart !== null && cart.length > 0" class="lg:mx-20 container lg:flex mt-4 min-h-[calc(100vh-500px)]">
       <div class="w-full bg-white p-2">
         <div v-for="(single, index) in cart" :key="index">

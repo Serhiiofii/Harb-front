@@ -196,18 +196,21 @@
             id="fileInput"
             @change="uploadFile(1)"
             class="hidden"
+            accept="image/png, image/gif, image/jpeg"
           />
           <input
             type="file"
             id="fileInput1"
             @change="uploadFile(2)"
             class="hidden"
+            accept="image/png, image/gif, image/jpeg"
           />
           <input
             type="file"
             id="fileInput2"
             @change="uploadFile(3)"
             class="hidden"
+            accept="image/png, image/gif, image/jpeg"
           />
         </div>
       </div>
@@ -250,6 +253,9 @@
           {{ loading ? "Loading..." : "Proceed" }}
         </button>
       </div>
+    </div>
+    <div class="lg:mx-20">
+      <FooterNav />
     </div>
   </div>
 </template>
@@ -378,7 +384,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.loading = false;
-        this.$toast.error("Oops! Something went wrong");
+        this.$toast.error(error.response.data.message);
       }
     },
   },

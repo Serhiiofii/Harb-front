@@ -3,7 +3,7 @@
     <MainNav />
     <div class="mx-20 flex mt-4 container mx-auto">
       <Sidebar />
-      <div class="w-full bg-white ml-4 p-4">
+      <div class="w-full bg-white ml-4 p-4 mt-4">
         <b-tabs type="is-toggle" size="is-medium">
           <b-tab-item label="FAQs">
             <div>

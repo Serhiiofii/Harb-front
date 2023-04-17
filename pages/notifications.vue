@@ -3,7 +3,7 @@
     <MainNav />
     <div class="lg:mx-20 flex mt-4 container mx-auto">
       <Sidebar />
-      <div class="w-full ml-4 bg-white p-10 container">
+      <div class="w-full ml-4 mt-4 bg-white p-10 container">
         <div>
           <div class="flex justify-between">
             <div class="uppercase text-gray-300 my-2">Notifications</div>
