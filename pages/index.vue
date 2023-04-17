@@ -6,7 +6,7 @@
     <div v-else>
       <MainNav />
     </div>
-    <div class="lg:mx-20 p-2">
+    <div class="max-w-screen-2xl mx-auto mx-5 lg:mx-10 p-2">
       <div class="lg:flex">
         <div v-show="sidebar" class="
               lg:w-1/4
@@ -21,6 +21,7 @@
               lg:top-0
               top-12
               left-0
+              shadow-md
             ">
           <div class="font-bold text-xl mb-8 mt-4">Categories</div>
           <div v-for="(single, index) in categories" :key="index">
@@ -116,7 +117,7 @@
           <div v-if="search === '' && single === 'All Categories'">
             <div class="text-2xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="flex flex-wrap xl:justify-between justify-around">
-              <div v-for="(top, index) in data.top_deals" :key="index" class="w-full lg:w-1/2 xl:w-1/3 px-3">
+              <div v-for="(top, index) in data.top_deals" :key="index" class="w-full lg:w-1/2 px-3">
                 <ProductCard :data="top" />
               </div>
             </div>
@@ -127,7 +128,7 @@
         <div class="w-full">
           <div class="text-2xl font-bold mt-4 mb-2">Popular Products</div>
           <div class="flex flex-wrap xl:justify-between justify-around">
-            <div v-for="(featured, index) in data.featured_products" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
+            <div v-for="(featured, index) in data.featured_products" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="featured" />
             </div>
           </div>
@@ -135,7 +136,7 @@
         <div class="w-full">
           <div class="text-2xl font-bold mt-4 mb-2">Recent Sales</div>
           <div class="flex flex-wrap xl:justify-between justify-around">
-            <div v-for="(category, index) in data.recent_sales" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
+            <div v-for="(category, index) in data.recent_sales" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
@@ -143,7 +144,7 @@
         <div class="w-full">
           <div class="text-2xl font-bold mt-4 mb-2">Most Viewed</div>
           <div class="flex flex-wrap xl:justify-between justify-around">
-            <div v-for="(category, index) in data.most_viewed_products" :key="index" class="w-full lg:w-1/2 xl:w-1/4 px-3">
+            <div v-for="(category, index) in data.most_viewed_products" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
@@ -233,8 +234,8 @@
           </div>
         </div>
       </div>
-      <FooterNav />
     </div>
+    <FooterNav />
   </div>
 </template>
 
