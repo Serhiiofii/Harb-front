@@ -15,13 +15,10 @@
               p-4
               my-4
               rounded-md
-              lg:relative
-              fixed
-              z-10
-              lg:top-0
-              top-12
-              left-0
               shadow-md
+              lg:relative
+              lg:block
+              hidden
             ">
           <div class="font-bold text-xl mb-8 mt-4">Categories</div>
           <div v-for="(single, index) in categories" :key="index">
@@ -30,15 +27,14 @@
                 <img :src="require(`~/assets/icons/${single.img}.jpeg`)" class="w-10 h-10 m-1" alt="" />
                 <div class="p-1 my-auto">
                   <div class="text-sm font-bold">{{ single.title }}</div>
-                  <!-- <div class="text-xs">{{ single.items }}</div> -->
                 </div>
               </div>
             </NuxtLink>
           </div>
         </div>
         <div class="lg:m-2 lg:w-3/4 w-full">
-          <div class="lg:flex lg:my-auto lg:p-0 p-2 mt-20">
-            <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
+          <div class="lg:flex lg:my-auto items-center lg:p-0 p-2 mt-20">
+            <!-- <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
               <template #trigger="{ active }">
                 <b-button expanded :label="single" type="is-info" class="h-12"
                   :icon-right="active ? 'menu-up' : 'menu-down'" />
@@ -49,18 +45,14 @@
               <div v-for="(single, index) in categories" :key="index" class="p-2" @click="categoryFilter(single)">
                 {{ single.title }}
               </div>
-            </b-dropdown>
-            <input v-model="search" type="text" class="p-3 border border-gray-100 w-full h-12 nav-item"
+            </b-dropdown> -->
+            <button class="bg-blue-500 h-12 px-5 text-white" @click="searchData">Search</button>
+            <input v-model="search" type="text" class="p-3 border border-gray-100 w-full h-12"
               placeholder="Search items on harbour hub" @change="searchData" />
           </div>
 
           <div class="p-4 lg:m-2 bg-img rounded-md">
             <div class="w-full relative mt-2">
-              <!-- <img
-                src="/hero.png"
-                class="rounded-md w-full h-full"
-                alt=""
-              /> -->
               <div class="lg:w-2/3 lg:m-10 m-4">
                 <div class="lg:text-4xl text-xl font-bold text-white">
                   Get offshore <br />
@@ -104,16 +96,16 @@
 
           </div>
 
-          <div v-if="search !== '' || data[0] !== undefined">
-            <div class="lg:flex flex-wrap">
-              <div v-for="(top, index) in data" :key="index" class="lg:w-1/3">
+          <div v-if="search !== '' && data.length > 0">
+            <div class="flex flex-wrap xl:justify-between justify-around">
+              <div v-for="(top, index) in data" :key="index" class="w-full lg:w-1/2 px-3">
                 <ProductCard :data="top" />
               </div>
             </div>
           </div>
-          <!-- <div v-if="data.top_deals === undefined">
-            no items in this category
-          </div> -->
+          <div v-if="search !== '' && data.length === 0" class="text-center py-10">
+            Sorry, we couldn't find any results for "<i>{{ search }}</i>"
+          </div>
           <div v-if="search === '' && single === 'All Categories'">
             <div class="text-2xl font-bold mt-4 mb-2">Top Deals</div>
             <div class="flex flex-wrap xl:justify-between justify-around">
@@ -242,6 +234,7 @@
 <script>
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import categories from "~/assets/jsons/categories";
 
 export default {
   // middleware: "authenticated",
@@ -252,48 +245,7 @@ export default {
       search: "",
       store: [],
       single: "All Categories",
-      categories: [
-        {
-          title: "Hauling Equipment",
-          img: "img1",
-          slug: "hauling-equipment",
-        },
-        {
-          title: "Vessels",
-          img: "img2",
-          slug: "vessels",
-        },
-        {
-          title: "Subsea Equipment",
-          img: "img3",
-          slug: "subsea-equipment",
-        },
-        {
-          title: "Cranes",
-          img: "img4",
-          slug: "cranes",
-        },
-        {
-          title: "Pumps and Hoses",
-          img: "img5",
-          slug: "pumps-and-hoses",
-        },
-        {
-          title: "OCTG Pipes",
-          img: "img6",
-          slug: "octg-pipes",
-        },
-        {
-          title: "Safety Equipment",
-          img: "img7",
-          slug: "safety-equipment",
-        },
-        {
-          title: "Power",
-          img: "img8",
-          slug: "power",
-        },
-      ],
+      categories: categories,
       data: [],
     };
   },
@@ -367,7 +319,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.data = response.data;
           this.store = response.data;
         });

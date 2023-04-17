@@ -42,7 +42,7 @@
           <div
             v-for="(category, index) in data.equipments"
             :key="index"
-            class="lg:w-1/3"
+            class="flex flex-wrap xl:justify-between justify-around"
           >
             <ProductCard :data="category" />
           </div>

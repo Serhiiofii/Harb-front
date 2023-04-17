@@ -9,12 +9,12 @@
       </div>
     </div>
     <div class="max-w-screen-2xl mx-auto px-5 p-2 min-h-[calc(100vh-470px)]">
-      <div v-if="data !== null && data.length > 0" class="lg:flex justify-between flex-wrap">
-        <div v-for="(featured, index) in data" :key="index" class="lg:w-1/3">
+      <div v-if="data !== null && data.length > 0" class="flex flex-wrap xl:justify-between justify-around">
+        <div v-for="(featured, index) in data" :key="index" class="w-full lg:w-1/3 px-3">
           <ProductCard :data="featured" />
         </div>
       </div>
-      <div v-else class="text-center p-2 text-xl pt-5">No Data in Here.</div>
+      <div v-else class="text-center p-2 text-xl pt-5">No Data.</div>
     </div>
     <FooterNav />
   </div>

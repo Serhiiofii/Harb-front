@@ -84,16 +84,16 @@
     <div class="max-w-screen-2xl mx-auto px-5">
       <div class="my-3">
         <div class="text-2xl font-bold mt-4 mb-2">Similar Items</div>
-        <div class="lg:flex flex-wrap">
-          <div v-for="(category, index) in data.similar_products" :key="index" class="lg:w-1/3">
+        <div class="flex flex-wrap xl:justify-between justify-around">
+          <div v-for="(category, index) in data.similar_products" :key="index" class="w-full lg:w-1/3 px-3">
             <ProductCard :data="category" />
           </div>
         </div>
       </div>
       <div class="my-3">
         <div class="text-2xl font-bold mt-4 mb-2">Similar Services</div>
-        <div class="lg:flex flex-wrap">
-          <div v-for="(category, index) in data.similar_services" :key="index" class="lg:w-1/3">
+        <div class="flex flex-wrap xl:justify-between justify-around">
+          <div v-for="(category, index) in data.similar_services" :key="index" class="w-full lg:w-1/3 px-3">
             <ServiceCard :data="category" :remove="false" />
           </div>
         </div>

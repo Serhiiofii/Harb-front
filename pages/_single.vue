@@ -1,11 +1,11 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div v-if="product !== null" class="lg:mx-20 my-8 container">
+    <div v-if="product !== null" class="max-w-screen-2xl mx-auto px-5 min-h-[calc(100vh-500px)] my-8 container">
       <div class="lg:flex">
         <div class="lg:w-3/5">
           <img
-            :src="product.equipment_images[0].image"
+            :src="product.equipment_images[0]?.image"
             class="w-full lg:h-80"
             alt=""
           />
@@ -14,12 +14,12 @@
             class="flex my-4 justify-between"
           >
             <img
-              :src="product.equipment_images[1].image"
+              :src="product.equipment_images[1]?.image"
               class="img mr-2"
               alt=""
             />
             <img
-              :src="product.equipment_images[2].image"
+              :src="product.equipment_images[2]?.image"
               class="img ml-2 lg:h-52"
               alt=""
             />
@@ -43,40 +43,20 @@
               Call
             </button> -->
           </div>
-          <div class="text-xs my-2">Type of Product:</div>
-          <button
-            v-if="product.sale_type === 'rent'"
-            class="p-3 bg-red-100 capitalize w-20 rounded-md"
-          >
-            {{ product.sale_type }}
-          </button>
-          <button v-else class="p-3 bg-green-100 capitalize w-20 rounded-md">
-            {{ product.sale_type }}
-          </button>
-          <!-- <div class="my-4">
-            <div class="text-xs">Length:</div>
-            <div class="font-bold text-lg">62.3m (204.4ft)</div>
+          <div class="flex items-center">
+            <div class="text-sm my-2">Type of Product:</div>
+            <button
+              v-if="product.sale_type === 'rent'"
+              class="px-3 py-0 ml-5 bg-red-100 capitalize w-20 rounded-md "
+            >
+              {{ product.sale_type }}
+            </button>
+            <button v-else class="px-3 py-0 ml-5 bg-green-100 capitalize w-20 rounded-md ">
+              {{ product.sale_type }}
+            </button>
           </div>
-          <div class="text-xs w-52 my-4">
-            <div class="my-1 flex justify-between">
-              Specification: <span class="w-20">Specification</span>
-            </div>
-            <div class="my-1 flex justify-between">
-              Colour: <span class="w-20">Colour</span>
-            </div>
-            <div class="my-1 flex justify-between">
-              Year: <span class="w-20">2020</span>
-            </div>
-            <div class="my-1 flex justify-between">
-              Location:<span class="w-20">China</span>
-            </div>
-            <div class="my-1 flex justify-between">
-              Company: <span class="text-blue-600 w-20">Long Tee Mack</span>
-            </div>
-          </div> -->
           <div class="font-bold my-3">Full Specificiation:</div>
-          <div class="text-xs">
-            <!-- <div class="font-bold mb-3">About:</div> -->
+          <div class="text-sm">
             {{ product.equipment_specification }}
           </div>
         </div>
@@ -94,8 +74,8 @@
         :id="product.id"
         :toggle="toggleCard"
       />
-      <FooterNav />
     </div>
+    <FooterNav />
   </div>
 </template>
 

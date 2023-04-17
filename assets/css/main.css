@@ -5,27 +5,8 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
-/* .show {
-  display: block;
-  background-color: white;
-  padding: 15px;
-  border-radius: 5px;
-  margin-top: 15px;
-} */
 
 @media (max-width: 600px) {
-  /* .show {
-    display: block !important;
-    position: fixed !important;
-    z-index: 10 !important;
-    top: 980px !important;
-    height: 100vh !important;
-    left: 0px !important;
-    padding: 20px !important;
-    background-color: white !important;
-    width: 100% !important;
-  } */
-
   .top {
     margin-top: 15px;
   }
@@ -46,6 +27,15 @@ body {
 
 .tabs.is-medium{
   font-size: 16px !important;
+}
+
+
+.categories-inheader .navbar-burger{
+  margin-left: 0;
+}
+.user-dropdown .dropdown-menu{
+  right: 0;
+  left: auto;
 }
 
 /* ScrollBar */

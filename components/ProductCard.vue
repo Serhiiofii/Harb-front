@@ -2,7 +2,7 @@
   <div class="max-w-md m-2 lg:my-0 my-4 rounded-xl shadow-md overflow-hidden mx-auto">
     <NuxtLink :to="data.id">
       <img
-        :src="data.equipment_images[0].image"
+        :src="data?.equipment_images[0]?.image"
         class="h-52 w-full"
         alt=""
       />

@@ -3,11 +3,25 @@
     <b-navbar class="max-w-screen-2xl px-5 mx-auto py-4 fixed lg:relative top-0 w-full">
       <template #brand>
         <div class="my-auto w-full flex justify-between">
-          <div class="flex items-center w-10 lg:hidden">
-            <img @click="toggleSidenav()" src="/hamburger-menu.svg" class="w-6 mx-auto" alt="" />
+          <div class="flex items-center w-6 relative lg:hidden">
+            <!-- <img @click="toggleSidenav()" src="/hamburger-menu.svg" class="w-6 mx-auto" alt="" /> -->
+            <b-navbar class="absolute top-0 left-0 categories-inheader">
+              <template #end>
+                <b-navbar-item v-for="(single, index) in categories" :key="index" class=" w-[350px]">
+                  <a :href="'categories?slug=' + single.slug">
+                    <div class="flex lg:my-6">
+                      <img :src="require(`~/assets/icons/${single.img}.jpeg`)" class="w-10 h-10 m-1" alt="" />
+                      <div class="p-1 my-auto">
+                        <div class="text-sm font-bold">{{ single.title }}</div>
+                      </div>
+                    </div>
+                  </a>
+                </b-navbar-item>
+              </template>
+            </b-navbar>
           </div>
           <NuxtLink to="/" class="my-auto">
-            <img class="w-40 my-auto" src="/logo.svg" alt="" />
+            <img class="w-40 my-auto ml-8 lg:ml-0" src="/logo.svg" alt="" />
           </NuxtLink>
           <div class="bar w-1">
             <!-- <img src="/hamburger-menu.svg" alt="" /> -->
@@ -18,14 +32,14 @@
       <template #end>
         <b-navbar-item tag="div">
           <div class="lg:flex lg:w-full justify-between lg:p-0 p-3">
-            <NuxtLink to="my-orders" class="my-auto">
+            <NuxtLink to="my-orders" class="my-auto py-3">
               <div class="flex my-auto nav-item px-4 md:px-0">
                 <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />
                 <span class="block lg:hidden">Cart</span>
               </div>
             </NuxtLink>
 
-            <div class="my-auto nav-item">
+            <div class="my-auto nav-item py-3">
               <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
                 <template #trigger="{}">
                   <div class="flex items center">
@@ -53,11 +67,12 @@
                 <div class="h-1 bg-gray-100 w-full"></div>
               </b-dropdown>
             </div>
+
             <NuxtLink v-if="role === 'user'" to="/becomeaseller" class="my-auto">
               <div class="my-auto nav-item px-4 md:px-0">Become a seller</div>
             </NuxtLink>
 
-            <b-dropdown v-else aria-role="list">
+            <b-dropdown v-else aria-role="list" class="my-auto">
               <template #trigger="{ active }">
                 <b-button label="Sell an Item" class="border-none" :icon-right="active ? 'menu-up' : 'menu-down'" />
               </template>
@@ -69,7 +84,7 @@
               </NuxtLink>
             </b-dropdown>
 
-            <div class="flex my-auto nav-item">
+            <div class="flex my-auto nav-item user-dropdown">
               <img v-if="avatar === null" src="/user.png" class="w-8 my-auto h-8 ml-4" alt="" />
               <img v-else :src="avatar" class="w-8 my-auto h-8 rounded-full ml-4" alt="" />
               <b-dropdown aria-role="list">
@@ -111,6 +126,33 @@
                     </div>
                   </NuxtLink>
                 </b-dropdown-item>
+                <div v-if="user.user_role !== 'user'">
+                  <div class="h-1 bg-gray-100 w-full"></div>
+                  <b-dropdown-item aria-role="listitem">
+                    <NuxtLink to="/seller">
+                      <div class="flex">
+                        <img src="/icons/company.svg" alt="" />
+                        <div class="ml-3">Company Profile</div>
+                      </div>
+                    </NuxtLink>
+                  </b-dropdown-item>
+                  <b-dropdown-item aria-role="listitem">
+                    <NuxtLink to="/seller/products">
+                      <div class="flex">
+                        <img src="/icons/products.svg" alt="" />
+                        <div class="ml-3">Products</div>
+                      </div>
+                    </NuxtLink>
+                  </b-dropdown-item>
+                  <b-dropdown-item aria-role="listitem">
+                    <NuxtLink to="/seller/services">
+                      <div class="flex">
+                        <img src="/icons/services.svg" alt="" />
+                        <div class="ml-3">Services</div>
+                      </div>
+                    </NuxtLink>
+                  </b-dropdown-item>
+                </div>
                 <div class="h-1 bg-gray-100 w-full"></div>
                 <b-dropdown-item aria-role="listitem">
                   <NuxtLink to="/change-password">
@@ -145,6 +187,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { mapState } from "vuex";
+import categories from "~/assets/jsons/categories";
 
 export default {
   computed: mapState(["user", "token"]),
@@ -157,40 +200,7 @@ export default {
       name: "",
       avatar: null,
       notifications: null,
-      categories: [
-        {
-          title: "Hauling Equipment",
-          items: "200 goods",
-        },
-        {
-          title: "Vessels",
-          items: "200 goods",
-        },
-        {
-          title: "Subsea Equipment",
-          items: "200 goods",
-        },
-        {
-          title: "Cranes",
-          items: "200 goods",
-        },
-        {
-          title: "Pumps and Hoses",
-          items: "200 goods",
-        },
-        {
-          title: "OCTG Pipes",
-          items: "200 goods",
-        },
-        {
-          title: "Safety Equipment",
-          items: "200 goods",
-        },
-        {
-          title: "Power",
-          items: "200 goods",
-        },
-      ],
+      categories: categories,
     };
   },
   mounted() {

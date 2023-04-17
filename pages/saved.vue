@@ -3,8 +3,10 @@
     <MainNav />
     <div class="max-w-screen-2xl mx-auto px-5 container min-h-[calc(100vh-470px)]">
       <div class="text-2xl my-3 font-bold">Saved items</div>
-      <div class="lg:flex justify-between">
-        <ProductCard v-for="(item, index) in saved" :key="index" :data="item.equipment" />
+      <div class="flex flex-wrap xl:justify-between justify-around">
+        <div v-for="(item, index) in saved" :key="index" class="w-full lg:w-1/3 px-3">
+          <ProductCard :data="item.equipment" />
+        </div>
       </div>
     </div>
     <FooterNav />

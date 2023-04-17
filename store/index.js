@@ -7,7 +7,7 @@ export const state = () => ({
 
 export const mutations = {
     toggleSidenav(state) {
-        state.sidebar = !state.sidebar
+        // state.sidebar = !state.sidebar
     },
     userLoggedIn(state) {
         state.authenticated = true
