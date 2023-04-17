@@ -216,9 +216,7 @@
         </button>
       </div>
     </div>
-    <div class="lg:mx-20">
-      <FooterNav />
-    </div>
+    <FooterNav />
   </div>
 </template>
 <script>

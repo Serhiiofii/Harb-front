@@ -6,7 +6,7 @@
     <div v-else>
       <MainNav />
     </div>
-    <div class="max-w-screen-2xl mx-auto mx-5 lg:mx-10 p-2">
+    <div class="max-w-screen-2xl mx-auto px-5 lg:mx-10 p-2">
       <div class="lg:flex">
         <div v-show="sidebar" class="
               lg:w-1/4

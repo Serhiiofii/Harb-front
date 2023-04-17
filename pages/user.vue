@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="lg:mx-20 my-8 container">
+    <div class="max-w-screen-2xl mx-auto px-5 my-8 container">
       <div class="relative">
         <img src="/cover.png" class="lg:h-auto h-40" alt="" />
         <img
@@ -62,9 +62,7 @@
       </div>
       <FooterNav />
     </div>
-    <div class="lg:mx-20">
-      <FooterNav />
-    </div>
+    <FooterNav />
   </div>
 </template>
 

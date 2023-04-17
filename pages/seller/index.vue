@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <MainNav />
-    <div class="lg:mx-20 flex mt-4 container">
+    <div class="max-w-screen-2xl mx-auto px-5 flex mt-4 container">
       <Sidebar />
       <div class="lg:ml-4 w-full">
         <div class="flex my-4">
@@ -10,15 +10,13 @@
             <div class="flex justify-between my-3">
               <div class="text-xl font-bold my-auto">#300, 0000</div>
               <div>
-                <button
-                  class="
-                    p-2
-                    bg-green-200
-                    w-40
-                    text-sm text-green-900
-                    rounded-md
-                  "
-                >
+                <button class="
+                      p-2
+                      bg-green-200
+                      w-40
+                      text-sm text-green-900
+                      rounded-md
+                    ">
                   Request for Cash
                 </button>
               </div>
@@ -33,9 +31,7 @@
                 Click to view all Recieved transactions
               </div>
               <div>
-                <button
-                  class="p-2 bg-red-200 w-40 text-sm text-red-900 rounded-md"
-                >
+                <button class="p-2 bg-red-200 w-40 text-sm text-red-900 rounded-md">
                   View
                 </button>
               </div>
@@ -51,27 +47,15 @@
               <div class="m-2 border relative border-gray-200 rounded-xl">
                 <div class="p-2">
                   <span class="text-sm">Company’s Name</span> <br />
-                  <input
-                    type="text"
-                    v-model="name"
-                    class="p-2 border border-gray-200 rounded-sm w-full"
-                  />
+                  <input type="text" v-model="name" class="p-2 border border-gray-200 rounded-sm w-full" />
                 </div>
                 <div class="p-2">
                   <span class="text-sm">Company’s Email</span> <br />
-                  <input
-                    type="text"
-                    v-model="email"
-                    class="p-2 border border-gray-200 rounded-sm w-full"
-                  />
+                  <input type="text" v-model="email" class="p-2 border border-gray-200 rounded-sm w-full" />
                 </div>
                 <div class="p-2">
                   <span class="text-sm">Company’s Phone Number</span> <br />
-                  <input
-                    type="number"
-                    v-model="phone"
-                    class="p-2 border border-gray-200 rounded-sm w-full"
-                  />
+                  <input type="number" v-model="phone" class="p-2 border border-gray-200 rounded-sm w-full" />
                 </div>
               </div>
             </div>
@@ -82,16 +66,14 @@
                   <div class="text-gray-500 text-sm uppercase my-2">
                     profile logo
                   </div>
-                  <div
-                    class="
-                      border-gray-200 border
-                      lg:mr-1
-                      justify-evenly
-                      p-3
-                      rounded-xl
-                      flex
-                    "
-                  >
+                  <div class="
+                        border-gray-200 border
+                        lg:mr-1
+                        justify-evenly
+                        p-3
+                        rounded-xl
+                        flex
+                      ">
                     <div class="w-20 rounded-full bg-blue-100 w-20">
                       <img src="/icons/user.svg" class="mx-auto my-8" alt="" />
                     </div>
@@ -102,27 +84,18 @@
                   <div class="text-gray-500 text-sm uppercase my-2">
                     Company’s address
                   </div>
-                  <div
-                    class="
-                      top
-                      border border-gray-200
-                      p-2
-                      rounded-xl
-                      relative
-                      lg:ml-1
-                    "
-                  >
-                    <div
-                      @click="updateDelivery"
-                      class="absolute top-3 cursor-pointer right-3"
-                    >
+                  <div class="
+                        top
+                        border border-gray-200
+                        p-2
+                        rounded-xl
+                        relative
+                        lg:ml-1
+                      ">
+                    <div @click="updateDelivery" class="absolute top-3 cursor-pointer right-3">
                       <img class="w-4 h-4" src="/edit.png" alt="" />
                     </div>
-                    <textarea
-                      class="w-full p-1 h-20 rounded-md"
-                      name=""
-                      v-model="location"
-                    ></textarea>
+                    <textarea class="w-full p-1 h-20 rounded-md" name="" v-model="location"></textarea>
                   </div>
                 </div>
               </div>
@@ -130,17 +103,10 @@
                 Company’s Bio
               </div>
               <div class="my-2 p-2 border rounded-xl border-gray-200 relative">
-                <div
-                  @click="updateBio"
-                  class="absolute top-3 cursor-pointer right-3"
-                >
+                <div @click="updateBio" class="absolute top-3 cursor-pointer right-3">
                   <img class="w-4 h-4" src="/edit.png" alt="" />
                 </div>
-                <textarea
-                  class="w-full border-none h-20 rounded-md"
-                  name=""
-                  v-model="bio"
-                ></textarea>
+                <textarea class="w-full border-none h-20 rounded-md" name="" v-model="bio"></textarea>
               </div>
             </div>
           </div>
@@ -150,29 +116,15 @@
           <div class="border border-gray-200 p-2">
             <div class="p-2 relative">
               <span class="text-sm my-1">Bank Name</span> <br />
-              <input
-                type="text"
-                v-model="bank_name"
-                class="p-2 border border-gray-200 rounded-sm w-full"
-              />
-              <div
-                @click="updateBio"
-                class="absolute bottom-6 cursor-pointer right-3"
-              >
+              <input type="text" v-model="bank_name" class="p-2 border border-gray-200 rounded-sm w-full" />
+              <div @click="updateBio" class="absolute bottom-6 cursor-pointer right-3">
                 <img class="w-4 h-4" src="/edit.png" alt="" />
               </div>
             </div>
             <div class="p-2 relative">
               <span class="text-sm my-1">Bank Account Number</span> <br />
-              <input
-                type="text"
-                v-model="account"
-                class="p-2 border border-gray-200 rounded-sm w-full"
-              />
-              <div
-                @click="updateBio"
-                class="absolute bottom-6 cursor-pointer right-3"
-              >
+              <input type="text" v-model="account" class="p-2 border border-gray-200 rounded-sm w-full" />
+              <div @click="updateBio" class="absolute bottom-6 cursor-pointer right-3">
                 <img class="w-4 h-4" src="/edit.png" alt="" />
               </div>
             </div>
@@ -194,9 +146,7 @@
         </div>
       </div>
     </div>
-    <div class="lg:mx-20">
-      <FooterNav />
-    </div>
+    <FooterNav />
   </div>
 </template>
 
@@ -273,7 +223,8 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
     async updateDelivery() {
       try {
@@ -298,7 +249,8 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
     async updateBio() {
       try {
@@ -323,7 +275,8 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
     async updateLocation() {
       try {
@@ -348,7 +301,8 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
     async uploadPhoto() {
       try {
@@ -371,7 +325,8 @@ export default {
       } catch {
         console.log("error");
         this.loading = false;
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
   },
 };
@@ -380,6 +335,7 @@ export default {
 textarea:focus {
   outline: none;
 }
+
 @media (max-width: 600px) {
   .top {
     margin-top: 10px;

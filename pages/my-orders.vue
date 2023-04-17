@@ -3,7 +3,7 @@
     <div class="min-h-[84px]">
         <MainNav />
     </div>
-    <div v-if="cart !== null && cart.length > 0" class="lg:mx-20 container lg:flex mt-4 min-h-[calc(100vh-500px)]">
+    <div v-if="cart !== null && cart.length > 0" class="max-w-screen-2xl mx-auto px-5 container lg:flex mt-4 min-h-[calc(100vh-500px)]">
       <div class="w-full bg-white p-2">
         <div v-for="(single, index) in cart" :key="index">
           <Product :data="single.equipment" />
@@ -81,7 +81,7 @@
       </div>
     </div>
     <div v-else class="text-center p-2 min-h-[calc(100vh-500px)] text-xl pt-5">No equipments in your cart.</div>
-    <div class="mx-20">
+    <div class="max-w-screen-2xl mx-auto px-5">
       <div class="my-3">
         <div class="text-2xl font-bold mt-4 mb-2">Similar Items</div>
         <div class="lg:flex flex-wrap">
@@ -99,9 +99,7 @@
         </div>
       </div>
     </div>
-    <div class="lg:mx-20">
-      <FooterNav />
-    </div>
+    <FooterNav />
   </div>
 </template>
 
