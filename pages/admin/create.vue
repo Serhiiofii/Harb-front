@@ -95,7 +95,7 @@
         />
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Comfrim password</div>
+        <div class="text-sm my-1">Confirm password</div>
         <input
           type="password"
           class="
@@ -106,7 +106,7 @@
             rounded-sm
             text-sm
           "
-          placeholder="Comfrim password"
+          placeholder="Confirm password"
           v-model="password_confirmation"
         />
       </div>

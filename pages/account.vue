@@ -4,7 +4,7 @@
     <div class="max-w-screen-2xl mx-auto px-5 flex mt-4 container mx-auto">
       <Sidebar />
       <div class="lg:ml-4 w-full mt-4">
-        <div class="bg-white">
+        <div class="bg-white shadow-md">
           <div class="lg:flex">
             <div class="m-2 border relative border-gray-200 rounded-md">
               <div class="lg:flex mt-6">
@@ -153,7 +153,6 @@ export default {
         })
         .then((response) => {
           window.localStorage.setItem("user", JSON.stringify(response.data));
-          console.log(response.data);
           this.mutateUser();
           this.first_name = response.data.first_name;
           this.last_name = response.data.last_name;

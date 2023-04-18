@@ -1,11 +1,10 @@
 <template>
-  <div class="bg-white shadow-sm">
+  <div class="bg-white shadow-md min-h-[84px]">
     <b-navbar class="max-w-screen-2xl px-5 mx-auto py-4 fixed lg:relative top-0 w-full">
       <template #brand>
         <div class="my-auto w-full flex justify-between">
           <div class="flex items-center w-6 relative lg:hidden">
-            <!-- <img @click="toggleSidenav()" src="/hamburger-menu.svg" class="w-6 mx-auto" alt="" /> -->
-            <b-navbar class="absolute top-0 left-0 categories-inheader">
+            <b-navbar v-show="customerPages.includes($nuxt.$route.name)" class="absolute -top-2 left-0 categories-inheader">
               <template #end>
                 <b-navbar-item v-for="(single, index) in categories" :key="index" class=" w-[350px]">
                   <a :href="'categories?slug=' + single.slug">
@@ -23,9 +22,7 @@
           <NuxtLink to="/" class="my-auto">
             <img class="w-40 my-auto ml-8 lg:ml-0" src="/logo.svg" alt="" />
           </NuxtLink>
-          <div class="bar w-1">
-            <!-- <img src="/hamburger-menu.svg" alt="" /> -->
-          </div>
+          <div class="bar w-1"></div>
         </div>
       </template>
 
@@ -50,7 +47,9 @@
                 <b-dropdown-item aria-role="listitem">
                   <div class="flex justify-between w-80">
                     <div class="uppercase text-gray-300">Notifications</div>
-                    <div class="text-xs text-green-400 w-12">See all</div>
+                    <div class="text-xs text-green-400 w-12">
+                      <NuxtLink to="/notifications">See all</NuxtLink>
+                    </div>
                   </div>
                 </b-dropdown-item>
                 <div class="h-1 bg-gray-100 w-full"></div>
@@ -126,33 +125,33 @@
                     </div>
                   </NuxtLink>
                 </b-dropdown-item>
-                <div v-if="user.user_role !== 'user'">
-                  <div class="h-1 bg-gray-100 w-full"></div>
-                  <b-dropdown-item aria-role="listitem">
-                    <NuxtLink to="/seller">
-                      <div class="flex">
-                        <img src="/icons/company.svg" alt="" />
-                        <div class="ml-3">Company Profile</div>
-                      </div>
-                    </NuxtLink>
-                  </b-dropdown-item>
-                  <b-dropdown-item aria-role="listitem">
-                    <NuxtLink to="/seller/products">
-                      <div class="flex">
-                        <img src="/icons/products.svg" alt="" />
-                        <div class="ml-3">Products</div>
-                      </div>
-                    </NuxtLink>
-                  </b-dropdown-item>
-                  <b-dropdown-item aria-role="listitem">
-                    <NuxtLink to="/seller/services">
-                      <div class="flex">
-                        <img src="/icons/services.svg" alt="" />
-                        <div class="ml-3">Services</div>
-                      </div>
-                    </NuxtLink>
-                  </b-dropdown-item>
-                </div>
+
+                <div v-show="user.user_role !== 'user'" class="h-1 bg-gray-100 w-full"></div>
+                <b-dropdown-item v-show="user.user_role !== 'user'" aria-role="listitem">
+                  <NuxtLink to="/seller">
+                    <div class="flex">
+                      <img src="/icons/company.svg" alt="" />
+                      <div class="ml-3">Company Profile</div>
+                    </div>
+                  </NuxtLink>
+                </b-dropdown-item>
+                <b-dropdown-item v-show="user.user_role !== 'user'" aria-role="listitem">
+                  <NuxtLink to="/seller/products">
+                    <div class="flex">
+                      <img src="/icons/products.svg" alt="" />
+                      <div class="ml-3">Products</div>
+                    </div>
+                  </NuxtLink>
+                </b-dropdown-item>
+                <b-dropdown-item v-show="user.user_role !== 'user'" aria-role="listitem">
+                  <NuxtLink to="/seller/services">
+                    <div class="flex">
+                      <img src="/icons/services.svg" alt="" />
+                      <div class="ml-3">Services</div>
+                    </div>
+                  </NuxtLink>
+                </b-dropdown-item>
+
                 <div class="h-1 bg-gray-100 w-full"></div>
                 <b-dropdown-item aria-role="listitem">
                   <NuxtLink to="/change-password">
@@ -201,6 +200,7 @@ export default {
       avatar: null,
       notifications: null,
       categories: categories,
+      customerPages: ['index','single', 'categories', 'my-orders']
     };
   },
   mounted() {

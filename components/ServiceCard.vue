@@ -1,10 +1,10 @@
 <template>
   <div class="bg-white border border-gray-100 rounded-sm p-4 m-2">
-    <div class="flex justify-between  items-center">
+    <div class="flex justify-between items-center">
       <NuxtLink :to="`/user?slug=${data.seller_id}`" class="w-2/3">
         <div class="flex">
           <img src="/user.png" width="50" alt="" />
-          <div class="">
+          <div class="px-3">
             <div class="text-base font-bold">{{ data.name }}</div>
             <div class="text-sm">{{ data.category }}</div>
           </div>
@@ -17,16 +17,16 @@
           class="
             px-3 py-2
             border border-yellow-500
-            w-32
+            lg:w-32
             rounded-sm
             flex
             justify-evenly
           "
         >
-          <img class="w-4 my-auto h-4" src="/icons/close.svg" alt="" />
+          <img class="w-4 my-auto h-4 hidden lg:block" src="/icons/close.svg" alt="" />
           Remove
         </button>
-        <button v-else class="px-3 py-2 border border-yellow-500 w-32 rounded-sm">
+        <button v-else class="px-3 py-2 border border-yellow-500 lg:w-32 rounded-sm hidden lg:block">
           Follow
         </button>
       </div>

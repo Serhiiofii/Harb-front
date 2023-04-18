@@ -1,6 +1,6 @@
 <template>
-  <div class="px-5 bg-white shadow-sm">
-    <div class="max-w-screen-2xl mx-auto flex py-4 nav justify-between">
+  <div class="bg-white shadow-sm min-h-[84px]">
+    <div class="max-w-screen-2xl mx-auto px-5 flex py-4 nav justify-between">
       <div class="my-auto">
         <NuxtLink to="/">
           <img class="my-auto" src="/logo.svg" alt="" />

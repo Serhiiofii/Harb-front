@@ -2,7 +2,7 @@
   <div class="mt-20 border-t border-black relative">
     <div class="max-w-screen-2xl mx-auto">
       <div class="lg:flex p-4 justify-between">
-        <div class="w-72">
+        <div class="w-72 mb-5">
           <img src="/logo.svg" alt="" />
           <div class="py-3">
             Harbour Hub is a marketplace for buying and selling marine and other
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="w-40">
+        <div class="w-40 mb-5">
           <div class="font-bold mb-4">Company</div>
           <NuxtLink to="/"> <div class="my-1">Home</div> </NuxtLink>
           <NuxtLink to="/becomeaseller">
@@ -40,7 +40,7 @@
           <NuxtLink to="/"> <div class="my-1">Terms</div> </NuxtLink>
           <NuxtLink to="/"> <div class="my-1">Privacy Policy</div> </NuxtLink>
         </div>
-        <div class="w-40">
+        <div class="w-40 mb-5">
           <div class="font-bold mb-4">Quick Links</div>
           <NuxtLink to="/login"> <div class="my-1">Login</div> </NuxtLink>
           <NuxtLink to="/signup"> <div class="my-1">Sign Up</div> </NuxtLink>

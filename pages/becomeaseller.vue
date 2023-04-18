@@ -3,7 +3,7 @@
     <RegularNav />
     <div class="lg:w-2/5 bg-white mx-auto p-6 mt-8 shadow-md rounded-sm">
       <div class="text-center">
-        <div class="font-bold text-2xl">Register a Seller </div>
+        <div class="font-bold text-2xl">Register as a Seller </div>
         <div class="text-xs">
           Join our network of trusted sellers and expand your reach in the
           offshore market. By becoming a seller on our platform, you will gain

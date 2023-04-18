@@ -9,13 +9,16 @@
       my-4
       rounded-md
       lg:relative
-      fixed
+      hidden
+      lg:block
+      shadow-md
+    "
+  >  
+  <!-- fixed
       z-10
       lg:top-0
       top-12
-      left-0
-    "
-  >
+      left-0 -->
     <div class="my-4 text-gray-400 uppercase">Hi {{ user.first_name }},</div>
     <NuxtLink to="/account">
       <div class="flex my-5">

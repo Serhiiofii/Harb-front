@@ -4,8 +4,8 @@
     <div class="max-w-screen-2xl mx-auto px-5 flex mt-4 container">
       <Sidebar />
       <div class="lg:ml-4 w-full">
-        <div class="flex my-4">
-          <div class="border p-4 rounded-md w-1/2 lg:mr-2">
+        <div class="lg:flex my-4">
+          <div class="border p-4 rounded-md w-full lg:w-1/2 mb-3 lg:mx-2 mx-auto">
             <div class="text-base uppercase text-gray-500">Wallet</div>
             <div class="flex justify-between my-3">
               <div class="text-xl font-bold my-auto">#300, 0000</div>
@@ -13,7 +13,7 @@
                 <button class="
                       p-2
                       bg-green-200
-                      w-40
+                      w-32 lg:w-40
                       text-sm text-green-900
                       rounded-md
                     ">
@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <div class="border p-4 rounded-md w-1/2 lg:ml-2">
+          <div class="border p-4 rounded-md w-full lg:w-1/2 mb-3 lg:mx-2 mx-auto">
             <div class="text-base uppercase text-gray-500">
               Transaction Receipts
             </div>
@@ -31,16 +31,16 @@
                 Click to view all Recieved transactions
               </div>
               <div>
-                <button class="p-2 bg-red-200 w-40 text-sm text-red-900 rounded-md">
+                <button class="p-2 bg-red-200 w-32 lg:w-40 text-sm text-red-900 rounded-md">
                   View
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="bg-white roundd-xl p-3">
+        <div class="bg-white roundd-xl p-3 shadow-md">
           <div class="lg:flex">
-            <div class="w-1/2">
+            <div class="w-full lg:w-1/2">
               <div class="text-gray-500 text-sm uppercase m-2">
                 Company’s Profile
               </div>
@@ -111,7 +111,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-white my-4 p-3">
+        <div class="bg-white my-4 p-3 shadow-md">
           <div class="text-gray-500 text-sm uppercase my-2">Bank details</div>
           <div class="border border-gray-200 p-2">
             <div class="p-2 relative">

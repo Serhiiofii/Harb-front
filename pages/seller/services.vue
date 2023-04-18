@@ -30,8 +30,8 @@
             </NuxtLink>
           </div>
         </div>
-        <div class="p-2 flex justify-between flex-wrap">
-          <div class="p-2 w-1/2" v-for="(service, index) in services" :key="index">
+        <div class="p-2 flex lg:justify-between justify-center flex-wrap">
+          <div class="p-2 w-full lg:w-1/2" v-for="(service, index) in services" :key="index">
             <ServiceCard :data="service" :remove="true" />
           </div>
         </div>

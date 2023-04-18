@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="lg:m-2 lg:w-3/4 w-full">
-          <div class="lg:flex lg:my-auto items-center lg:p-0 p-2 mt-20">
+          <div class="flex lg:my-auto items-center lg:p-0 p-2 mt-20">
             <!-- <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
               <template #trigger="{ active }">
                 <b-button expanded :label="single" type="is-info" class="h-12"
