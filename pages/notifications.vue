@@ -30,10 +30,10 @@
                 w-12
               "
             >
-              View
+            <NuxtLink to="/my-orders">View</NuxtLink>
             </div>
             <div v-else class="flex justify-between w-44">
-              <div
+              <button
                 @click="approve(not.equipment_id)"
                 class="
                   text-xs text-green-800 text-center
@@ -46,8 +46,8 @@
                 "
               >
                 Approve
-              </div>
-              <div
+              </button>
+              <button
                 @click="decline(not.equipment_id)"
                 class="
                   text-xs text-red-800 text-center
@@ -60,7 +60,7 @@
                 "
               >
                 Decline
-              </div>
+              </button>
             </div>
           </div>
           <div class="h-1 bg-gray-100 w-full"></div>
