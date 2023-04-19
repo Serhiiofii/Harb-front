@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <RegularNav />
-    <div class="lg:w-2/5 bg-white mx-auto p-6 mt-8 shadow-md rounded-sm">
+    <div class="lg:w-2/5 bg-white mx-auto p-6 mt-10 shadow-md rounded-sm">
       <div class="text-center">
         <div class="font-bold text-2xl">Register as a Seller </div>
         <div class="text-xs">
@@ -89,12 +89,13 @@
             text-sm
           "
         >
-          <option value="hello word">hello world</option>
-          <option value="hello word">hello world</option>
+          <option value="individual">Individual</option>
+          <option value="registered_com">Registered Company</option>
+          <option value="others">Others</option>
         </select>
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Postion in the Company</div>
+        <div class="text-sm my-1">Position in the Company</div>
         <input
           type="text"
           v-model="company_role"
@@ -191,7 +192,7 @@
         />
       </div>
       <div class="my-3">
-        <div class="text-sm my-1">Business Descrition</div>
+        <div class="text-sm my-1">Business Description</div>
         <textarea
           name=""
           v-model="business_description"
