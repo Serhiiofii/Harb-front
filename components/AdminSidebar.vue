@@ -9,11 +9,8 @@
       my-4
       rounded-md
       lg:relative
-      fixed
-      z-10
-      lg:top-0
-      top-12
-      left-0
+      lg:block
+      hidden
     "
   >
     <div class="my-4 text-gray-400 uppercase">Dashboard</div>
