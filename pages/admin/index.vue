@@ -1,12 +1,12 @@
 <template>
   <div class="bg-gray-50">
     <AdminNav />
-    <div class="lg:mx-20 flex mt-4">
+    <div class="max-w-screen-2xl mx-auto px-3 flex mt-4 container">
       <AdminSidebar />
       <div class="lg:ml-4 my-4 w-full">
         <div v-if="data !== null">
-          <div class="flex justify-between">
-            <div class="p-2 w-2/3">
+          <div class="md:flex justify-between">
+            <div class="p-2 md:w-2/3 mx-auto">
               <div class="border rounded-md p-4 flex justify-between">
                 <div class="my-auto">
                   <div class="text-xs">Total Users</div>
@@ -17,7 +17,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-2 w-2/3">
+            <div class="p-2 md:w-2/3 mx-auto">
               <div class="border rounded-md p-4 flex justify-between">
                 <div class="my-auto">
                   <div class="text-xs">Active Customers</div>
@@ -30,7 +30,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-2 w-2/3">
+            <div class="p-2 md:w-2/3 mx-auto">
               <div class="border rounded-md p-4 flex justify-between">
                 <div class="my-auto">
                   <div class="text-xs">Total Equipments</div>
@@ -111,7 +111,7 @@
             </div>
           </div> -->
           </div>
-          <div class="flex">
+          <div class="md:flex">
             <div class="w-full border p-4 m-2 rounded-md">
               <div class="text-xl font-bold">Services</div>
               <div class="text-xs">Total {{ data.total_services }}</div>
@@ -136,6 +136,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 <script>

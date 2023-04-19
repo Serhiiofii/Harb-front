@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-md">
+  <div class="bg-white shadow-md min-h-[84px]">
     <b-navbar class="max-w-screen-2xl px-5 mx-auto py-4 fixed lg:relative top-0 w-full">
       <template #brand>
         <div class="flex justify-center lg:justify-between items-center lg:w-96">

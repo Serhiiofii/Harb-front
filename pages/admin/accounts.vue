@@ -1,24 +1,24 @@
 <template>
   <div class="bg-gray-50">
     <AdminNav />
-    <div class="lg:mx-20 flex mt-4 container">
+    <div class="max-w-screen-2xl mx-auto px-3 flex mt-4 container">
       <AdminSidebar />
       <div class="lg:ml-4 w-full">
         <div class="my-4">
           <input
             type="text"
-            class="p-3 border w-1/2 rounded-md bg-transparent"
+            class="p-3 border w-full rounded-md bg-transparent"
             placeholder="Search"
             v-model="search"
             @change="searchData"
           />
         </div>
-        <div class="flex justify-between">
+        <div class="md:flex justify-between">
           <div
             class="
               flex
               justify-between
-              w-1/2
+              md:w-1/2
               border
               p-4
               rounded-md
@@ -58,7 +58,7 @@
             class="
               flex
               justify-between
-              w-1/2
+              md:w-1/2
               border
               p-4
               rounded-md
@@ -142,6 +142,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 

@@ -22,7 +22,7 @@
             justify-evenly
           "
         >
-          <img class="w-4 my-auto h-4" src="/icons/close.svg" alt="" />
+          <img class="w-4 my-auto h-4 hidden sm:block" src="/icons/close.svg" alt="" />
           Remove
         </button>
       </div>

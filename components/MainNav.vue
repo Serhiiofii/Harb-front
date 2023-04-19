@@ -28,7 +28,7 @@
 
       <template #end>
         <b-navbar-item tag="div">
-          <div class="lg:flex lg:w-full justify-between lg:p-0 p-3">
+          <div class="lg:flex lg:w-full justify-between lg:p-0">
             <NuxtLink to="my-orders" class="my-auto py-3">
               <div class="flex my-auto nav-item px-4 md:px-0">
                 <img src="/icons/Union.png" class="w-4 h-4 mr-1 my-auto" alt="" />

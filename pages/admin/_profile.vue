@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <AdminNav />
-    <div class="lg:mx-20 flex mt-4 container">
+    <div class="max-w-screen-2xl mx-auto px-3 flex mt-4 container">
       <AdminSidebar />
       <div class="lg:ml-4 w-full">
         <!-- <div class="my-4">
@@ -211,6 +211,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 

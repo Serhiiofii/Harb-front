@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50">
     <AdminNav />
-    <div class="lg:mx-20 flex mt-4 container">
+    <div class="max-w-screen-2xl mx-auto px-3 flex mt-4 container">
       <AdminSidebar />
       <div class="lg:ml-4 w-full">
         <div class="lg:ml-4 w-full">
@@ -12,9 +12,9 @@
               placeholder="Search"
             />
           </div>
-          <div class="flex">
+          <div class="md:flex">
             <div
-              class="border bg-white rounded-md p-4 w-1/2 text-center lg:mr-4"
+              class="border bg-white rounded-md p-4 md:w-1/2 text-center lg:mr-4"
             >
               <div class="text-sm my-2">Active Request</div>
               <div
@@ -35,7 +35,7 @@
             </div>
 
             <div
-              class="border bg-white rounded-md p-4 w-1/2 text-center lg:mr-4"
+              class="border bg-white rounded-md p-4 md:w-1/2 text-center lg:mr-4"
             >
               <div class="text-sm my-2">All Request</div>
               <div
@@ -50,7 +50,7 @@
                 309384 Made
               </div>
             </div>
-            <div class="border bg-white rounded-md p-4 w-1/2 text-center">
+            <div class="border bg-white rounded-md p-4 md:w-1/2 text-center">
               <div class="text-sm my-2">Total Requested Amount</div>
               <div
                 class="
@@ -161,6 +161,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 

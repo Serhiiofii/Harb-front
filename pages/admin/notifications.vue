@@ -1,9 +1,9 @@
 <template>
   <div class="bg-gray-50">
     <AdminNav />
-    <div class="lg:mx-20 flex mt-4">
+    <div class="max-w-screen-2xl mx-auto px-3 flex mt-4 container">
       <AdminSidebar />
-      <div class="w-full ml-4 bg-white p-10 container">
+      <div class="w-full ml-4 mt-4 bg-white p-10">
         <div>
           <div class="flex justify-between">
             <div class="uppercase text-gray-300 my-2">Notifications</div>
@@ -67,6 +67,7 @@
         </div>
       </div>
     </div>
+    <FooterNav />
   </div>
 </template>
 <script>
