@@ -7,7 +7,7 @@
         <div class="text-sm">Create an account with socials</div>
       </div>
       <div class="flex justify-between w-24 my-5 mx-auto">
-        <div>
+        <div @click="googlePopup()" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/google.svg" alt="" />
         </div>
         <div>
@@ -17,106 +17,73 @@
       <div class="flex justify-between">
         <div class="my-3 lg:mr-2">
           <div class="text-sm my-1">Enter your First name</div>
-          <input
-            type="text"
-            class="
-              p-3
-              rounded-sm
-              border border-gray-200
-              w-full
-              rounded-sm
-              text-sm
-            "
-            placeholder="Enter First name"
-            v-model="first_name"
-          />
+          <input type="text" class="
+                      p-3
+                      rounded-sm
+                      border border-gray-200
+                      w-full
+                      rounded-sm
+                      text-sm
+                    " placeholder="Enter First name" v-model="first_name" />
         </div>
         <div class="my-3 lg:ml-2">
           <div class="text-sm my-1">Enter your Last Name</div>
-          <input
-            type="text"
-            class="
-              p-3
-              rounded-sm
-              border border-gray-200
-              w-full
-              rounded-sm
-              text-sm
-            "
-            placeholder="Enter Last name"
-            v-model="last_name"
-          />
+          <input type="text" class="
+                      p-3
+                      rounded-sm
+                      border border-gray-200
+                      w-full
+                      rounded-sm
+                      text-sm
+                    " placeholder="Enter Last name" v-model="last_name" />
         </div>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Enter your email</div>
-        <input
-          type="text"
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-          placeholder="e,g johndoe@gmail.com"
-          v-model="email"
-        />
+        <input type="text" class="
+                    p-3
+                    rounded-sm
+                    border border-gray-200
+                    w-full
+                    rounded-sm
+                    text-sm
+                  " placeholder="e,g johndoe@gmail.com" v-model="email" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Enter your Phone Number</div>
-        <input
-          type="number"
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-          placeholder="090 0000 0000"
-          v-model="phone_number"
-        />
+        <input type="number" class="
+                    p-3
+                    rounded-sm
+                    border border-gray-200
+                    w-full
+                    rounded-sm
+                    text-sm
+                  " placeholder="090 0000 0000" v-model="phone_number" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Enter your password</div>
-        <input
-          type="password"
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-          placeholder="Enter password"
-          v-model="password"
-        />
+        <input type="password" class="
+                    p-3
+                    rounded-sm
+                    border border-gray-200
+                    w-full
+                    rounded-sm
+                    text-sm
+                  " placeholder="Enter password" v-model="password" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Confirm password</div>
-        <input
-          type="password"
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-          placeholder="Confirm password"
-          v-model="password_confirmation"
-        />
+        <input type="password" class="
+                    p-3
+                    rounded-sm
+                    border border-gray-200
+                    w-full
+                    rounded-sm
+                    text-sm
+                  " placeholder="Confirm password" v-model="password_confirmation" />
       </div>
       <div class="my-6">
-        <button
-          class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
-          @click="signupUser"
-        >
+        <button class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm" @click="signupUser">
           {{ loading ? "Loading..." : "Sign Up" }}
         </button>
       </div>
@@ -135,8 +102,10 @@ export default {
       last_name: "",
       phone_number: "",
       loading: false,
+      loginUrl: null
     };
   },
+
   methods: {
     async signupUser() {
       try {
@@ -168,6 +137,27 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
+
+    googlePopup() {
+      var width = 500;
+      var height = 600;
+      var toppx = (window.innerHeight / 2) - (height / 2);
+      var leftpx = (window.innerWidth / 2) - (width / 2);
+      window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
+    }
   },
+
+  mounted() {
+    this.$axios.$get('auth/google', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then((response) => {
+        this.loginUrl = response.url;
+      })
+      .catch((error) => console.error(error));
+  }
 };
 </script>
