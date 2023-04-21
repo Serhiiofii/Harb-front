@@ -143,8 +143,7 @@ export default {
       var height = 600;
       var toppx = (window.innerHeight / 2) - (height / 2);
       var leftpx = (window.innerWidth / 2) - (width / 2);
-      // window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
-      window.href = this.loginUrl;
+      window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
     }
   },
 
