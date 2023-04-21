@@ -7,7 +7,12 @@ export default {
         const fullPath = this.$route.fullPath;
         searchParams = (fullPath.split("google?"))[1];
 
-        this.$axios.$get(`auth/callback?${searchParams}`)
+        this.$axios.$get(`auth/callback?${searchParams}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
             .then(response => {
                 console.log(response);
             })
