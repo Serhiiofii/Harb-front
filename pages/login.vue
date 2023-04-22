@@ -135,7 +135,7 @@ export default {
 
     // This method save the new token and username
     onMessage(e) {
-      if (e.origin !== window.origin && e.data.status !== "success") {
+      if (e.origin !== window.origin || e.data.status !== "success") {
         return
       }
       const response = e.data;
@@ -158,7 +158,7 @@ export default {
       }
     }
   },
-  
+
   mounted() {
     this.$axios.$get('auth/google', {
       headers: {
