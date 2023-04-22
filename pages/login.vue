@@ -7,7 +7,7 @@
         <div class="text-sm">Sign in with socials</div>
       </div>
       <div class="flex justify-between w-24 my-5 mx-auto">
-        <div>
+        <div @click="googlePopup()" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/google.svg" alt="" />
         </div>
         <div>
