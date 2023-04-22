@@ -276,15 +276,6 @@ export default {
           .$post(
             "seller/register",
             formData,
-            // {
-            //   company_name: this.company_name,
-            //   company_email: this.company_email,
-            //   otp: this.otp,
-            //   business_entity: this.business_entity,
-            //   company_role: this.company_role,
-            //   business_location: this.business_location,
-            //   business_description: this.business_description,
-            // },
             {
               headers: {
                 "Content-Type": "application/json",
@@ -309,10 +300,6 @@ export default {
               name: "businessdetails",
               params: { slug: response.data.seller.user_id },
             });
-            // window.localStorage.setItem(
-            //   "seller_id",
-            //   JSON.stringify(response.data.seller.id)
-            // );
           });
       } catch (error) {
         console.log(error);
@@ -338,8 +325,7 @@ export default {
             },
           }
         );
-        console.log(data);
-        this.$toast.success("OTp sent Successfully");
+        this.$toast.success(data?.message);
       } catch (error) {
         console.log("error");
         this.loading = false;
