@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -148,10 +149,10 @@ export default {
 
     // This method save the new token and username
     onMessage(e) {
-      console.log(e.data, e);
-      // if (e.origin !== window.origin || !e.data.token) {
-      //   return
-      // }
+      if (e.origin !== window.origin) {
+        return
+      }
+      console.log(e.data);
       // this.$router.go('/board')
     }
   },

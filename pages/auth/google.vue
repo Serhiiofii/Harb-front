@@ -14,7 +14,7 @@ export default {
             }
         })
             .then(response => {
-                window.opener.postMessage({ response }, process.env.FRONT_URL);
+                window.opener.postMessage(response);
                 window.close();
             })
             .catch(error => {
