@@ -14,7 +14,8 @@ export default {
             }
         })
             .then(response => {
-                console.log(response);
+                window.opener.postMessage({ response }, process.env.FRONT_URL);
+                window.close();
             })
             .catch(error => {
                 console.error(error);

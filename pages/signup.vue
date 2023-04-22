@@ -144,6 +144,15 @@ export default {
       var toppx = (window.innerHeight / 2) - (height / 2);
       var leftpx = (window.innerWidth / 2) - (width / 2);
       window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
+    },
+
+    // This method save the new token and username
+    onMessage(e) {
+      console.log(e.data, e);
+      // if (e.origin !== window.origin || !e.data.token) {
+      //   return
+      // }
+      // this.$router.go('/board')
     }
   },
 
@@ -158,6 +167,12 @@ export default {
         this.loginUrl = response.url;
       })
       .catch((error) => console.error(error));
-  }
+
+    window.addEventListener('message', this.onMessage, false)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('message', this.onMessage)
+  },
 };
 </script>
