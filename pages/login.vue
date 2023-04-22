@@ -124,6 +124,58 @@ export default {
         this.$toast.error(error.response.data.message);
       }
     },
+    
+    googlePopup() {
+      var width = 500;
+      var height = 600;
+      var toppx = (window.innerHeight / 2) - (height / 2);
+      var leftpx = (window.innerWidth / 2) - (width / 2);
+      window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
+    },
+
+    // This method save the new token and username
+    onMessage(e) {
+      if (e.origin !== window.origin && e.data.status !== "success") {
+        return
+      }
+      const response = e.data;
+      this.userLoggedIn();
+      this.$toast.success("Successfully authenticated");
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
+      window.localStorage.setItem(
+        "token",
+        JSON.stringify(response.data.token)
+      );
+      this.mutateToken();
+      this.mutateUser();
+      if (response.data.user.user_role === "admin") {
+        this.$router.push("/admin");
+      } else {
+        this.$router.push("/");
+      }
+    }
+  },
+  
+  mounted() {
+    this.$axios.$get('auth/google', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then((response) => {
+        this.loginUrl = response.url;
+      })
+      .catch((error) => console.error(error));
+
+    window.addEventListener('message', this.onMessage, false)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('message', this.onMessage)
   },
 };
 </script>

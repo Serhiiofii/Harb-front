@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -108,6 +108,8 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),
+
     async signupUser() {
       try {
         this.loading = true;
@@ -149,11 +151,27 @@ export default {
 
     // This method save the new token and username
     onMessage(e) {
-      if (e.origin !== window.origin) {
+      if (e.origin !== window.origin && e.data.status !== "success") {
         return
       }
-      console.log(e.data);
-      // this.$router.go('/board')
+      const response = e.data;
+      this.userLoggedIn();
+      this.$toast.success("Successfully authenticated");
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
+      window.localStorage.setItem(
+        "token",
+        JSON.stringify(response.data.token)
+      );
+      this.mutateToken();
+      this.mutateUser();
+      if (response.data.user.user_role === "admin") {
+        this.$router.push("/admin");
+      } else {
+        this.$router.push("/");
+      }
     }
   },
 
