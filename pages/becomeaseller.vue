@@ -324,8 +324,9 @@ export default {
               Authorization: "Bearer " + this.token,
             },
           }
-        );
-        this.$toast.success(data?.message);
+        ).then((response)=>{
+          this.$toast.success(response?.message);
+        });
       } catch (error) {
         console.log("error");
         this.loading = false;
