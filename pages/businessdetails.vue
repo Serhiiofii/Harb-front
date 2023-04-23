@@ -125,6 +125,7 @@
       </div>
     </div>
     <SuccessModal :isComponentModalActive="isComponentModalActive" />
+    <FooterNav />
   </div>
 </template>
 <script>

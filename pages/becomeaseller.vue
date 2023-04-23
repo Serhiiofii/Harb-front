@@ -221,10 +221,10 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  computed: mapState(["token", "mutateUser"]),
+  computed: mapState(["token"]),
   middleware: "authenticated",
 
   data() {
@@ -248,6 +248,8 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["mutateUser"]),
+
     async uploadFile(id) {
       const files = event.target.files;
       this[`image${id}`] = files[0];
@@ -285,12 +287,11 @@ export default {
             }
           )
           .then((response) => {
-            console.log(response.data);
             this.loading = false;
             window.localStorage.setItem(
               "user",
               JSON.stringify({
-                ...JSON.parse(window.localStorage.getItem("user")),
+                ...(JSON.parse(window.localStorage.getItem("user"))),
                 user_role: "seller",
               })
             );
