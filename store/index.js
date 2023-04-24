@@ -2,7 +2,8 @@ export const state = () => ({
     sidebar: true,
     authenticated: false,
     token: "",
-    user: null
+    user: null,
+    email: "",
 })
 
 export const mutations = {
@@ -21,4 +22,7 @@ export const mutations = {
     mutateUser: function (state) {
         state.user = JSON.parse(window.localStorage.getItem("user"))
     },
+    saveEmailForVerify (state, email) {
+        state.email = email
+    }
 }

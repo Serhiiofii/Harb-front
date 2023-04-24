@@ -130,10 +130,10 @@ export default {
             },
           }
         );
-        console.log(data);
         this.loading = false;
-        this.$toast.success("Successfully authenticated");
-        this.$router.push("/login");
+        // this.$toast.success("Successfully authenticated");
+        this.$store.commit('saveEmailForVerify', this.email)
+        this.$router.push("/emailverify");
       } catch (error) {
         console.log(error.response.data.message);
         this.loading = false;

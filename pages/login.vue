@@ -96,7 +96,6 @@ export default {
             }
           )
           .then((response) => {
-            console.log(response.data.user);
             this.userLoggedIn();
             this.$toast.success("Successfully authenticated");
             this.loading = false;
@@ -119,7 +118,6 @@ export default {
           });
         // window.location.href = "/";
       } catch (error) {
-        console.log(error.response.data.message);
         this.loading = false;
         this.$toast.error(error.response.data.message);
       }
