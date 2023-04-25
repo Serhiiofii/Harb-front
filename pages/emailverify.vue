@@ -62,7 +62,7 @@ export default {
     },
 
     methods: {
-        ...mapMutations(["mutateToken", "mutateUser"]),
+        ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),
 
         showChangeEmail() {
             this.showEmailFlag = !this.showEmailFlag
@@ -105,6 +105,7 @@ export default {
                     },
                 })
                 .then((response) => {
+                    this.userLoggedIn();
                     this.$toast.success(response.message);
                     window.localStorage.setItem(
                         "user",
