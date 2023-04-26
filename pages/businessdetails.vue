@@ -108,7 +108,7 @@
         />
       </div>
       <div class="flex">
-        <input type="checkbox" />
+        <input type="checkbox" v-model="isTermCondition" />
         <div class="text-xs p-4">
           To continue with account creation, have you read the
           <span class="text-blue-600">Terms</span> and
@@ -141,14 +141,18 @@ export default {
       account_officer_name: "",
       account_officer_phone: "",
       seller_id: "",
+      isTermCondition: false
     };
   },
   mounted() {
     this.seller_id = this.$router.history.current.params.slug;
-    console.log(this.$router);
   },
   methods: {
     async accountDetails() {
+      if(!this.isTermCondition) {
+        this.$toast.warning("Please agree to all the terms and conditions belong placing the order");
+        return;
+      }
       try {
         this.loading = true;
         let local = JSON.parse(window.localStorage.getItem("token"));
