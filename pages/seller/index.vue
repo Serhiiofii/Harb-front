@@ -93,7 +93,7 @@
                         lg:ml-1
                       ">
                     <div @click="updateDelivery" class="absolute top-3 cursor-pointer right-3">
-                      <img class="w-4 h-4" src="/edit.png" alt="" />
+                      <img class="w-4 h-4" src="/save.png" alt="" />
                     </div>
                     <textarea class="w-full p-1 h-20 rounded-md" name="" v-model="location"></textarea>
                   </div>
@@ -104,7 +104,7 @@
               </div>
               <div class="my-2 p-2 border rounded-xl border-gray-200 relative">
                 <div @click="updateBio" class="absolute top-3 cursor-pointer right-3">
-                  <img class="w-4 h-4" src="/edit.png" alt="" />
+                  <img class="w-4 h-4" src="/save.png" alt="" />
                 </div>
                 <textarea class="w-full border-none h-20 rounded-md" name="" v-model="bio"></textarea>
               </div>
@@ -118,14 +118,14 @@
               <span class="text-sm my-1">Bank Name</span> <br />
               <input type="text" v-model="bank_name" class="p-2 border border-gray-200 rounded-sm w-full" />
               <div @click="updateBio" class="absolute bottom-6 cursor-pointer right-3">
-                <img class="w-4 h-4" src="/edit.png" alt="" />
+                <img class="w-4 h-4" src="/save.png" alt="" />
               </div>
             </div>
             <div class="p-2 relative">
               <span class="text-sm my-1">Bank Account Number</span> <br />
               <input type="text" v-model="account" class="p-2 border border-gray-200 rounded-sm w-full" />
               <div @click="updateBio" class="absolute bottom-6 cursor-pointer right-3">
-                <img class="w-4 h-4" src="/edit.png" alt="" />
+                <img class="w-4 h-4" src="/save.png" alt="" />
               </div>
             </div>
             <!-- <div class="p-2 relative">
@@ -139,7 +139,7 @@
                 @click="updateBio"
                 class="absolute bottom-6 cursor-pointer right-3"
               >
-                <img class="w-4 h-4" src="/edit.png" alt="" />
+                <img class="w-4 h-4" src="/save.png" alt="" />
               </div>
             </div> -->
           </div>

@@ -129,6 +129,7 @@
         >
           <option value="sale">Sale</option>
           <option value="rent">Rent</option>
+          <option value="lease">lease</option>
         </select>
       </div>
       <div class="my-3">
