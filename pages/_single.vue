@@ -3,7 +3,7 @@
     <MainNav />
     <div v-if="product !== null" class="max-w-screen-2xl mx-auto px-5 min-h-[calc(100vh-500px)] my-8 container">
       <div class="lg:flex">
-        <div class="lg:w-3/5">
+        <div class="lg:w-3/5 py-5">
           <img
             :src="product.equipment_images[0]?.image"
             class="w-full lg:h-80"
