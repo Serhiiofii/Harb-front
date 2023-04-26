@@ -55,8 +55,10 @@
             text-sm
           "
         >
-          <option value="hello word">Select a Category</option>
-          <option value="hello word">hello world</option>
+          <option value="737">Guaranty Trust Bank</option>
+          <option value="919">United Bank of Africa</option>
+          <option value="822">Sterling Bank</option>
+          <option value="966">Zenith Bank	</option>
         </select>
       </div>
       <div class="my-3">
