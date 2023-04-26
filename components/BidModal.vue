@@ -9,7 +9,7 @@
             <div>
               <!-- <div class="font-bold my-1">Tatomh Hose:</div> -->
               <div>
-                <div class="text-xs mb-1">Enter Amount BId</div>
+                <div class="text-xs mb-1">Enter Amount Quote</div>
                 <input
                   type="number"
                   v-model="bid"
@@ -19,6 +19,7 @@
                   <div
                     @click="bid = 10000"
                     class="
+                      cursor-pointer
                       bg-green-200
                       text-green-900
                       w-14
@@ -32,6 +33,7 @@
                   <div
                     @click="bid = 30000"
                     class="
+                      cursor-pointer
                       bg-green-200
                       text-green-900
                       w-14
@@ -46,6 +48,7 @@
                   <div
                     @click="bid = 50000"
                     class="
+                      cursor-pointer
                       bg-green-200
                       text-green-900
                       w-14

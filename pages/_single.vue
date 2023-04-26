@@ -32,7 +32,7 @@
               @click="isCardModalActive = !isCardModalActive"
               class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm"
             >
-              Make a Bid
+            Ask For Quote
             </button>
             <NuxtLink :to="'/messages/?slug=' + product.seller_id">
               <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="my-3">
-        <div class="text-3xl font-bold mt-4 mb-2">Recent Sales</div>
+        <div class="text-2xl font-bold mt-8 mb-2">Recent Sales</div>
         <div class="lg:flex">
           <div v-for="(category, index) in data.recent_sales" :key="index">
             <ProductCard :data="category" />
