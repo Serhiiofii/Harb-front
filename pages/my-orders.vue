@@ -63,12 +63,6 @@
                   rounded-sm
                 " v-model="phone" />
           </div>
-          <!-- <div>
-            <div class="text-sm mt-3 mb-1">Delivery Method:</div>
-            <button class="p-2 bg-red-100 font-bold px-4 text-sm">
-              Pay Using Card
-            </button>
-          </div> -->
         </div>
 
         <button class="bg-blue-600 p-2 w-full text-white">
