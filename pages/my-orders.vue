@@ -48,7 +48,7 @@
                   text-sm
                   border-gray-200
                   rounded-sm
-                " v-model="user.delivery_address">
+                " v-model="delivery_address">
               </textarea>
           </div>
           <div>
@@ -61,7 +61,7 @@
                   text-sm
                   border-gray-200
                   rounded-sm
-                " :value="user.phone" />
+                " v-model="phone" />
           </div>
           <!-- <div>
             <div class="text-sm mt-3 mb-1">Delivery Method:</div>
@@ -72,9 +72,13 @@
         </div>
 
         <button class="bg-blue-600 p-2 w-full text-white">
-          <paystack :amount="total * 100" :email="user.email"
-            paystackkey="pk_test_d5d28afc7480b03bab11b88a84879d68f8a089af" :reference="reference"
-            :callback="processPayment" :close="close">
+          <paystack 
+            :amount="total * 100" 
+            :email="user.email"
+            paystackkey="pk_test_8a2dc8687d9dc2d11727fabed59508de76890271" 
+            :reference="reference"
+            :callback="processPayment" 
+            :close="close">
             Checkout
           </paystack>
         </button>
@@ -117,6 +121,8 @@ export default {
       data: [],
       cart: null,
       total: 0,
+      delivery_address: "",
+      phone: "",
     };
   },
   methods: {
@@ -165,9 +171,8 @@ export default {
     },
   },
   mounted() {
-    if (screen.width <= 600) {
-      this.toggleSidenav();
-    }
+    this.delivery_address = this.user.delivery_address
+    this.phone = this.user.phone
     try {
       this.$axios
         .$get("account/cart-items", {
@@ -178,11 +183,10 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
           this.data = response.data;
           this.cart = response.data.cart_items;
           this.cart.map((single) => {
-            this.total = this.total + +single.bid_amount;
+            this.total = this.total + single.bid_amount;
           });
         });
     } catch (error) {
