@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <div v-show="showOrders">
+    <div v-show="showOrders" v-if="path !== '/my-orders'">
       <Orders :orders="orders" />
     </div>
   </div>

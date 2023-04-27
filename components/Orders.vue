@@ -8,7 +8,7 @@
 
             <b-table-column field="user.first_name" label="User" v-slot="props">
                 <div class="flex items-center">
-                    <img :src="props.row.user.avatar" class="pr-1" width="30" height="30" alt="A" />
+                    <img :src="props.row.user.avatar?props.row.user.avatar:'/icons/user.svg'" class="pr-1" width="30" height="30" alt="A" />
                     {{ props.row.user.first_name }}
                 </div>
             </b-table-column>
