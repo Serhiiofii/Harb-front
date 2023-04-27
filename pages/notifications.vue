@@ -30,7 +30,7 @@
                 w-12
               "
             >
-            <NuxtLink to="/my-orders">View</NuxtLink>
+            <NuxtLink to="">View</NuxtLink>
             </div>
             <div v-else class="flex justify-between w-44">
               <button

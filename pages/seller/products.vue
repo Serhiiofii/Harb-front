@@ -64,7 +64,6 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
           this.products = response.data.equipments;
         });
     } catch (error) {
