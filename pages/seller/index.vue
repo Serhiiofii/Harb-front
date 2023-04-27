@@ -180,7 +180,6 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
           this.name = response.data.seller.company_name;
           this.email = response.data.seller.company_email;
           this.phone = response.data.seller.user.phone;
@@ -200,7 +199,6 @@ export default {
     async updateInfo() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/personal-info",
           {
@@ -213,7 +211,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -229,7 +227,6 @@ export default {
     async updateDelivery() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/delivery-address",
           {
@@ -239,15 +236,15 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
         console.log(data);
         this.loading = false;
         this.$toast.success("Delivery address Updated!");
-      } catch {
-        console.log("error");
+      } catch (error) {
+        console.log("error", error);
         this.loading = false;
         this.$toast.error(error.response.data.message);
       }
@@ -255,7 +252,6 @@ export default {
     async updateBio() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/bio",
           {
@@ -265,7 +261,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -281,7 +277,6 @@ export default {
     async updateLocation() {
       try {
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$put(
           "account/location",
           {
@@ -291,7 +286,7 @@ export default {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-              Authorization: "Bearer " + local.data.token,
+              Authorization: "Bearer " + this.token,
             },
           }
         );
@@ -312,11 +307,10 @@ export default {
         formData.append("photo", file);
 
         this.loading = true;
-        let local = JSON.parse(window.localStorage.getItem("data"));
         const data = await this.$axios.$post("account/update-photo", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + local.data.token,
+            Authorization: "Bearer " + this.token,
           },
         });
         console.log(data);
