@@ -2,6 +2,9 @@
   <div class="bg-gray-50 h-screen">
     <MainNav />
     <div class="max-w-screen-2xl mx-auto px-5 lg:flex mt-4 container mx-auto min-h-[calc(100vh-470px)]">
+      <h1>Coming Soon!</h1>
+    </div>
+    <!-- <div class="max-w-screen-2xl mx-auto px-5 lg:flex mt-4 container mx-auto min-h-[calc(100vh-470px)]">
       <div v-show="sidebar" class="
             lg:w-1/2
             w-full
@@ -60,7 +63,6 @@
               <div v-else class="lg:w-2/3 ml-auto flex justify-end my-5">
                 <div class="text-xs mt-auto mr-4">
                   <time-ago :refresh="60" :datetime="chat.created_at"></time-ago>
-                  <!-- {{ chat.created_at.substring(0, 10) }} -->
                 </div>
                 <div class="text-sm p-2 bg-yellow-100 rounded-md">
                   {{ chat.content }}
@@ -78,7 +80,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <FooterNav />
   </div>
 </template> 
