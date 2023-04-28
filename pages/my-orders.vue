@@ -180,11 +180,12 @@ export default {
           this.data = response.data;
           this.cart = response.data.cart_items;
           this.cart.map((single) => {
-            this.total = this.total + single.bid_amount;
+            this.total += single.bid_amount * 1;
           });
         });
     } catch (error) {
       console.log(error);
+      this.$toast.error(error.response.data.message);
     }
   },
 };

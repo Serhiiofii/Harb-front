@@ -27,7 +27,7 @@
       <div class="my-3">
         <div class="text-sm my-1">Bank Account Number</div>
         <input
-          type="number"
+          type="text"
           v-model="account_number"
           class="
             p-3

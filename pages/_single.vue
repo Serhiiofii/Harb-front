@@ -2,8 +2,8 @@
   <div class="bg-gray-50">
     <MainNav />
     <div v-if="product !== null" class="max-w-screen-2xl mx-auto px-5 min-h-[calc(100vh-500px)] my-8 container">
-      <div class="lg:flex">
-        <div class="lg:w-3/5 py-5">
+      <div class="lg:flex py-5">
+        <div class="lg:w-3/5">
           <img
             :src="product.equipment_images[0]?.image"
             class="w-full lg:h-80"
@@ -34,26 +34,26 @@
             >
             Ask For Quote
             </button>
-            <NuxtLink :to="'/messages/?slug=' + product.seller_id">
-              <button class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
+            <!-- <NuxtLink :to="'/messages/?slug=' + product.seller_id"> -->
+              <button @click="$toast.warning('This feature will be available soon.')" class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
                 Chat
               </button>
-            </NuxtLink>
+            <!-- </NuxtLink> -->
             <!-- <button class="p-3 w-32 border border-yellow-600 rounded-sm">
               Call
             </button> -->
           </div>
           <div class="flex items-center">
             <div class="text-sm my-2">Type of Product:</div>
-            <button
+            <div
               v-if="product.sale_type === 'rent'"
               class="px-3 py-0 ml-5 bg-red-100 capitalize w-20 rounded-md "
             >
               {{ product.sale_type }}
-            </button>
-            <button v-else class="px-3 py-0 ml-5 bg-green-100 capitalize w-20 rounded-md ">
+            </div>
+            <div v-else class="px-3 py-0 ml-5 bg-green-100 capitalize w-20 rounded-md ">
               {{ product.sale_type }}
-            </button>
+            </div>
           </div>
           <div class="font-bold my-3">Full Specificiation:</div>
           <div class="text-sm">

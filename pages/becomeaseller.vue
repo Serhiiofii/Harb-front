@@ -61,7 +61,7 @@
       <div class="my-3">
         <div class="text-sm my-1">Enter OTP From Email</div>
         <input
-          type="number"
+          type="text"
           v-model="otp"
           class="
             p-3
