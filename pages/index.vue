@@ -78,7 +78,7 @@
                   </NuxtLink>
                 </div>
                 <div v-else>
-                  <NuxtLink to="/seller">
+                  <NuxtLink to="/equipmentupload">
                     <button class="
                           bg-transparent
                           border border-white
@@ -87,7 +87,7 @@
                           text-white
                           p-3
                         ">
-                      Sell an Iten
+                      Sell an Item
                     </button>
                   </NuxtLink>
                 </div>

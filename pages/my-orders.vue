@@ -122,7 +122,6 @@ export default {
   methods: {
     ...mapMutations(["toggleSidenav"]),
     processPayment() {
-      try {
         this.$axios
           .$post(
             "transactions/verify",
@@ -141,10 +140,10 @@ export default {
           .then((response) => {
             console.log(response.data);
             this.$toast.success("Payment completed!");
-          });
-      } catch (e) {
-        console.log(e);
-      }
+          })
+          .catch((error)=>{
+            this.$toast.error(error.response.data.message);
+          })
     },
     close() {
       this.$toast.error("Transaction was not completed, window closed.");
