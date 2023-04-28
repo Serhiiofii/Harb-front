@@ -6,7 +6,7 @@
     <div v-if="cart !== null && cart.length > 0" class="max-w-screen-2xl mx-auto px-5 container lg:flex mt-4 min-h-[calc(100vh-500px)]">
       <div class="w-full bg-white p-2">
         <div v-for="(single, index) in cart" :key="index">
-          <Product :data="single.equipment" />
+          <Product :data="single.equipment" :cartedId="single.id" />
         </div>
       </div>
       <div v-show="sidebar" class="
@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       data: [],
-      cart: null,
+      cart: [],
       total: 0,
       delivery_address: "",
       phone: "",

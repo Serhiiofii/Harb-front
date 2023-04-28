@@ -56,6 +56,24 @@
             </button>
           </div>
         </div>
+        <div v-else class="lg:mt-0 flex justify-end row-span-1">
+          <div class="flex">
+            <button @click="cancelCart(cartedId)" class="
+                flex
+                justify-center
+                p-3
+                rounded-sm
+                font-bold
+                lg:w-28
+                text-sm
+                bg-red-100
+                mx-1
+              ">
+              <img class="w-4 h-4 my-auto mx-1" src="/icons/close.svg" alt="" /> <span
+                class="hidden sm:block">Cancel</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div v-show="showOrders" v-if="path !== '/my-orders'">
@@ -70,6 +88,7 @@ import { mapState } from "vuex";
 export default {
   props: {
     data: Object,
+    cartedId: String
   },
   data() {
     return {
@@ -84,6 +103,24 @@ export default {
     this.path = this.$router.history.current.path;
   },
   methods: {
+    cancelCart(id) {
+      this.$axios
+        .$delete(`account/cart-items/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          location.reload();
+          this.$toast.success("Product canceled successfully!");
+        })
+        .catch((error) => {
+          this.$toast.error(error.response.data.message);
+        })
+    },
+
     async removeProduct(id) {
       if (!confirm("Are you sure you want to delete this product?")) return;
 
