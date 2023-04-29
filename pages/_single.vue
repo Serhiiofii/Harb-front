@@ -29,7 +29,7 @@
           <div class="text-3xl font-bold">{{ product.name }}</div>
           <div class="flex justify-between my-3">
             <button
-              @click="isCardModalActive = !isCardModalActive"
+              @click="askForQuote(product)"
               class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm"
             >
             Ask For Quote
@@ -47,11 +47,11 @@
             <div class="text-sm my-2">Type of Product:</div>
             <div
               v-if="product.sale_type === 'rent'"
-              class="px-3 py-0 ml-5 bg-red-100 capitalize w-20 rounded-md "
+              class="px-3 py-0 ml-5 bg-red-100 capitalize w-20 rounded-md text-center"
             >
               {{ product.sale_type }}
             </div>
-            <div v-else class="px-3 py-0 ml-5 bg-green-100 capitalize w-20 rounded-md ">
+            <div v-else class="px-3 py-0 ml-5 bg-green-100 capitalize w-20 rounded-md text-center">
               {{ product.sale_type }}
             </div>
           </div>
@@ -69,11 +69,12 @@
           </div>
         </div>
       </div>
-      <BidModal
+      <!-- <BidModal
         :isCardModalActive="isCardModalActive"
         :id="product.id"
         :toggle="toggleCard"
-      />
+        type="bid"
+      /> -->
     </div>
     <FooterNav />
   </div>
@@ -117,6 +118,24 @@ export default {
     toggleCard() {
       this.isCardModalActive = !this.isCardModalActive;
     },
+    askForQuote(product) {
+      this.$axios
+        .$post(`products/ask`,
+          {
+            equip_id: product.id,
+            seller_id: product.seller_id,
+          },{
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        }).then((response)=>{
+          this.$toast.success(response.message);
+        }).catch((error)=>{
+          this.$toast.error(error.response.data.message);
+        })
+    }
   },
 };
 </script>

@@ -125,6 +125,14 @@
                     </div>
                   </NuxtLink>
                 </b-dropdown-item>
+                <b-dropdown-item aria-role="listitem">
+                  <NuxtLink to="/notifications">
+                    <div class="flex">
+                      <img src="/icons/bell.svg" alt="" />
+                      <div class="ml-3">Notifications</div>
+                    </div>
+                  </NuxtLink>
+                </b-dropdown-item>
 
                 <div v-show="user.user_role !== 'user'" class="h-1 bg-gray-100 w-full"></div>
                 <b-dropdown-item v-show="user.user_role !== 'user'" aria-role="listitem">

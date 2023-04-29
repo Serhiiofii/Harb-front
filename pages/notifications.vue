@@ -32,7 +32,7 @@
             >
             <NuxtLink to="">View</NuxtLink>
             </div>
-            <div v-else class="flex justify-between w-44">
+            <div v-else-if="not.type === 'bid' && user.user_role==='seller'" class="flex justify-between w-44">
               <button
                 @click="approve(not.equipment_id)"
                 class="
@@ -62,10 +62,62 @@
                 Decline
               </button>
             </div>
+            <div v-else-if="not.type === 'quote' && user.user_role==='seller'">
+              <button
+                @click="openModal(not.quote_id, 'quote')"
+                class="
+                  text-xs text-green-800 text-center
+                  bg-blue-200
+                  rounded-sm
+                  p-1
+                  my-auto
+                  w-20
+                  cursor-pointer
+                "
+              >
+                Make Quote
+              </button>
+              <button
+                class="
+                  text-xs text-green-800 text-center
+                  bg-green-100
+                  rounded-sm
+                  p-1
+                  my-auto
+                  w-20
+                  cursor-pointer
+                "
+              >
+              <NuxtLink to="/seller/products">View Project</NuxtLink>
+              </button>
+            </div>
+            <div v-else-if="not.type === 'quote' && user.user_role==='user'">
+              <button
+                @click="openModal(not.equipment_id, 'bid', not.quote)"
+                class="
+                  text-xs text-green-800 text-center
+                  bg-blue-200
+                  rounded-sm
+                  p-1
+                  my-auto
+                  w-20
+                  cursor-pointer
+                "
+              >
+                Confirm Quote
+              </button>
+            </div>
           </div>
           <div class="h-1 bg-gray-100 w-full"></div>
         </div>
       </div>
+      <BidModal
+        :isCardModalActive="isCardModalActive"
+        :id="dataId"
+        :toggle="toggleCard"
+        :type="type"
+        :quote="quote"
+      />
     </div>
     <FooterNav />
   </div>
@@ -74,11 +126,15 @@
 import { mapState } from "vuex";
 
 export default {
-  computed: mapState(["token"]),
+  computed: mapState(["user","token"]),
 
   data() {
     return {
       notifications: [],
+      isCardModalActive: false,
+      dataId: '',
+      type: 'quote',
+      quote: null 
     };
   },
   mounted() {
@@ -92,7 +148,6 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
           this.notifications = response.data;
         });
     } catch (error) {
@@ -148,6 +203,16 @@ export default {
         console.log(error);
         this.$toast.error(error.response.data.message);      }
     },
+    toggleCard() {
+      this.isCardModalActive = !this.isCardModalActive;
+    },
+    openModal(dataId, type, quote=null) {
+      this.isCardModalActive = !this.isCardModalActive;
+      this.dataId = dataId;
+      this.type = type;
+      if(quote) this.quote = quote;
+      else this.quote = null
+    }
   },
 };
 </script>

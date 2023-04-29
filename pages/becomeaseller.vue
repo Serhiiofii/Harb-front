@@ -167,14 +167,12 @@
             id="fileInput1"
             @change="uploadFile(2)"
             class="hidden"
-            accept="image/png, image/gif, image/jpeg"
           />
           <input
             type="file"
             id="fileInput2"
             @change="uploadFile(3)"
             class="hidden"
-            accept="image/png, image/gif, image/jpeg"
           />
         </div>
       </div>
