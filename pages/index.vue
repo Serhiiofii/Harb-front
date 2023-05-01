@@ -51,49 +51,10 @@
               placeholder="Search items on harbour hub" @change="searchData" />
           </div>
 
-          <div class="p-4 lg:m-2 bg-img rounded-md">
+          <div class="p-4 lg:m-2 rounded-md">
             <div class="w-full relative mt-2">
-              <div class="lg:w-2/3 lg:m-10 m-4">
-                <div class="lg:text-4xl text-xl font-bold text-white">
-                  Get offshore <br />
-                  equipment on demand
-                </div>
-                <div class="my-3 text-white text-sm">
-                  Find marine equipment, equipment for industrial use, and
-                  industrial spare parts. Whether you're looking to buy or sell
-                  you'll find the best deals here
-                </div>
-                <div v-if="user === null || user.user_role === 'user'">
-                  <NuxtLink to="/becomeaseller">
-                    <button class="
-                          bg-transparent
-                          border border-white
-                          w-44
-                          rounded-md
-                          text-white
-                          p-3
-                        ">
-                      Become a Seller
-                    </button>
-                  </NuxtLink>
-                </div>
-                <div v-else>
-                  <NuxtLink to="/equipmentupload">
-                    <button class="
-                          bg-transparent
-                          border border-white
-                          w-44
-                          rounded-md
-                          text-white
-                          p-3
-                        ">
-                      Sell an Item
-                    </button>
-                  </NuxtLink>
-                </div>
-              </div>
+              <Carousel :user="user" />
             </div>
-
           </div>
 
           <div v-if="search !== '' && data.length > 0">
@@ -351,10 +312,4 @@ export default {
   margin-top: 8px !important;
 }
 
-.bg-img {
-  background-image: url("/hero.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
 </style>
