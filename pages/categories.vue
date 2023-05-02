@@ -9,12 +9,20 @@
       </div>
     </div>
     <div class="max-w-screen-2xl mx-auto px-5 p-2 min-h-[calc(100vh-470px)]">
-      <div v-if="data !== null && data.length > 0" class="flex flex-wrap xl:justify-between justify-around">
-        <div v-for="(featured, index) in data" :key="index" class="w-full lg:w-1/3 px-3">
-          <ProductCard :data="featured" />
+      <div class="bg-white border">
+        <div class="p-3 bg-blue-500 text-white font-bold uppercase">
+          {{ slug }}
+        </div>
+        <div class="w-full">
+          <div v-if="data !== null && data.length > 0" class="flex flex-wrap lg:justify-between justify-around">
+            <div v-for="(featured, index) in data" :key="index" class="w-full lg:w-1/3 px-3">
+              <ProductCard :data="featured" />
+            </div>
+          </div>
+          <div v-else class="text-center p-2 text-xl pt-5">No Data.</div>
         </div>
       </div>
-      <div v-else class="text-center p-2 text-xl pt-5">No Data.</div>
+
     </div>
     <FooterNav />
   </div>
@@ -27,13 +35,14 @@ export default {
   data() {
     return {
       data: [],
+      slug: this.$router.history.current.query.slug
     };
   },
   computed: mapState(["sidebar", "token", "user"]),
 
   mounted() {
     this.$axios
-      .$get(`equipment/categories/${this.$router.history.current.query.slug}`, {
+      .$get(`equipment/categories/${this.slug}`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
