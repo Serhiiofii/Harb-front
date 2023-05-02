@@ -8,7 +8,7 @@
         <MainNav />
       </div>
     </div>
-    <div class="max-w-screen-2xl mx-auto px-5 p-2 min-h-[calc(100vh-470px)]">
+    <div class="max-w-screen-2xl mx-auto px-5 p-2 min-h-[calc(100vh-470px)] py-5">
       <div class="bg-white border">
         <div class="p-3 bg-blue-500 text-white font-bold uppercase">
           {{ slug }}

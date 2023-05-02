@@ -21,8 +21,8 @@
               hidden
             ">
           <div class="font-bold text-xl mb-8 mt-4">Categories</div>
-          <div v-for="(single, index) in categories" :key="index">
-            <NuxtLink :to="'categories?slug=' + single.slug">
+          <div v-for="(single, index) in categories" :key="index" class="hover:bg-blue-500 hover:scale-[1.1] duration-200">
+            <NuxtLink :to="'categories?slug=' + single.slug" class="hover:text-white">
               <div class="flex lg:my-6">
                 <img :src="require(`~/assets/icons/${single.img}.jpeg`)" class="w-10 h-10 m-1" alt="" />
                 <div class="p-1 my-auto">

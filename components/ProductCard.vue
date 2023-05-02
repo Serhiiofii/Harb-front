@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md m-2 lg:my-0 my-4 rounded-xl shadow-md overflow-hidden mx-auto">
+  <div class="max-w-md m-2 lg:my-0 my-4 rounded-xl shadow-md overflow-hidden mx-auto hover:scale-[1.025] duration-200">
     <NuxtLink :to="data.id">
       <img
         :src="data?.equipment_images[0]?.image"
