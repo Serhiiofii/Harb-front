@@ -11,122 +11,73 @@
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Name</div>
-        <input
-          type="text"
-          v-model="name"
-          class="
+        <input type="text" v-model="name" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-          placeholder="Enter Equipment Name"
-        />
+          " placeholder="Enter Equipment Name" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Category</div>
-        <select
-          name=""
-          v-model="category"
-          class="
+        <select name="" v-model="category" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-        >
-          <!-- <option value="hello word">Select a Category</option> -->
-          <option
-            v-for="(category, index) in categories"
-            :value="category.slug"
-            :key="index"
-          >
+          ">
+          <option v-for="(category, index) in categories" :value="category.slug" :key="index">
             {{ category.title }}
           </option>
         </select>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Manufacturer</div>
-        <input
-          v-model="manufacturer"
-          type="text"
-          class="
+        <input v-model="manufacturer" type="text" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-          placeholder="Manufacturer"
-        />
+          " placeholder="Manufacturer" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Specification</div>
-        <input
-          type="text"
-          v-model="specification"
-          class="
+        <input type="text" v-model="specification" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-          placeholder="Specification"
-        />
+          " placeholder="Specification" />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Year of Build</div>
-        <input
-          type="date"
-          v-model="year_of_build"
-          class="
+        <input type="date" v-model="year_of_build" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-        />
-        <!-- <select
-          name=""
-          v-model="year_of_build"
-          id=""
-          class="
-            p-3
-            rounded-sm
-            border border-gray-200
-            w-full
-            rounded-sm
-            text-sm
-          "
-        >
-          <option value="hello word">Select Year</option>
-          <option value="hello word">hello world</option>
-        </select> -->
+          " />
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Sale Type</div>
-        <select
-          name=""
-          v-model="type"
-          id=""
-          class="
+        <select name="" v-model="type" id="" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-        >
+          ">
           <option value="sale">Sale</option>
           <option value="rent">Rent</option>
           <option value="lease">lease</option>
@@ -134,10 +85,7 @@
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Equipment Description</div>
-        <textarea
-          v-model="description"
-          name=""
-          class="
+        <textarea v-model="description" name="" class="
             p-3
             rounded-sm
             border border-gray-200
@@ -145,95 +93,54 @@
             rounded-sm
             text-sm
             h-32
-          "
-          placeholder="Description......"
-        ></textarea>
+          " placeholder="Description......"></textarea>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Add Image:</div>
         <div class="flex justify-between">
-          <div>
+          <div class="w-1/3 p-2">
             <label for="fileInput" v-if="image1URL">
-              <img
-                :src="image1URL"
-                class="cursor-pointer w-40 h-40 rounded-md"
-                alt=""
-              />
+              <img :src="image1URL" class="cursor-pointer mx-auto rounded-md" alt="" />
             </label>
-
             <label for="fileInput" v-else>
-              <img src="/upload.png" class="cursor-pointer" alt="" />
+              <img src="/upload.png" class="cursor-pointer mx-auto" alt="" />
             </label>
           </div>
-
-          <div>
+          <div class="w-1/3 p-2">
             <label for="fileInput1" v-if="image2URL">
-              <img
-                :src="image2URL"
-                class="cursor-pointer w-40 h-40 rounded-md"
-                alt=""
-              />
+              <img :src="image2URL" class="cursor-pointer mx-auto rounded-md" alt="" />
             </label>
-
             <label for="fileInput1" v-else>
-              <img src="/upload.png" class="cursor-pointer" alt="" />
+              <img src="/upload.png" class="cursor-pointer mx-auto" alt="" />
             </label>
           </div>
-          <div>
+          <div class="w-1/3 p-2">
             <label for="fileInput2" v-if="image3URL">
-              <img
-                :src="image3URL"
-                class="cursor-pointer w-40 h-40 rounded-md"
-                alt=""
-              />
+              <img :src="image3URL" class="cursor-pointer mx-auto rounded-md" alt="" />
             </label>
-
             <label for="fileInput2" v-else>
-              <img src="/upload.png" class="cursor-pointer" alt="" />
+              <img src="/upload.png" class="cursor-pointer mx-auto" alt="" />
             </label>
           </div>
-          <input
-            type="file"
-            id="fileInput"
-            @change="uploadFile(1)"
-            class="hidden"
-            accept="image/png, image/gif, image/jpeg"
-          />
-          <input
-            type="file"
-            id="fileInput1"
-            @change="uploadFile(2)"
-            class="hidden"
-            accept="image/png, image/gif, image/jpeg"
-          />
-          <input
-            type="file"
-            id="fileInput2"
-            @change="uploadFile(3)"
-            class="hidden"
-            accept="image/png, image/gif, image/jpeg"
-          />
+          <input type="file" id="fileInput" @change="uploadFile(1)" class="hidden"
+            accept="image/png, image/gif, image/jpeg" />
+          <input type="file" id="fileInput1" @change="uploadFile(2)" class="hidden"
+            accept="image/png, image/gif, image/jpeg" />
+          <input type="file" id="fileInput2" @change="uploadFile(3)" class="hidden"
+            accept="image/png, image/gif, image/jpeg" />
         </div>
       </div>
       <div class="my-3">
         <div class="text-sm my-1">Add a Custom Specification:</div>
-        <input
-          type="text"
-          v-model="custom_title"
-          class="
+        <input type="text" v-model="custom_title" class="
             p-3
             rounded-sm
             border border-gray-200
             w-full
             rounded-sm
             text-sm
-          "
-          placeholder="Specification Title:"
-        />
-        <input
-          type="text"
-          v-model="custom_details"
-          class="
+          " placeholder="Specification Title:" />
+        <input type="text" v-model="custom_details" class="
             p-3
             rounded-sm
             border border-gray-200
@@ -241,16 +148,11 @@
             rounded-sm
             text-sm
             mt-1
-          "
-          placeholder="Specification Details"
-        />
+          " placeholder="Specification Details" />
       </div>
 
       <div class="mt-6">
-        <button
-          @click="upload"
-          class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm"
-        >
+        <button @click="upload" class="bg-blue-600 w-full p-3 text-white font-bold rounded-sm">
           {{ loading ? "Loading..." : "Proceed" }}
         </button>
       </div>
@@ -267,52 +169,13 @@ textarea:focus {
 <script>
 import { mapState } from "vuex";
 
+import categories from "~/assets/jsons/categories";
+
 export default {
   computed: mapState(["token"]),
   data() {
     return {
-      categories: [
-        {
-          title: "Hauling Equipment",
-          items: "200 goods",
-          slug: "hauling-equipment",
-        },
-        {
-          title: "Vessels",
-          items: "200 goods",
-          slug: "vessels",
-        },
-        {
-          title: "Subsea Equipment",
-          items: "200 goods",
-          slug: "subsea-equipment",
-        },
-        {
-          title: "Cranes",
-          items: "200 goods",
-          slug: "cranes",
-        },
-        {
-          title: "Pumps and Hoses",
-          items: "200 goods",
-          slug: "pumps-and-hoses",
-        },
-        {
-          title: "OCTG Pipes",
-          items: "200 goods",
-          slug: "octg-pipes",
-        },
-        {
-          title: "Safety Equipment",
-          items: "200 goods",
-          slug: "safety-equipment",
-        },
-        {
-          title: "Power",
-          items: "200 goods",
-          slug: "power",
-        },
-      ],
+      categories: categories,
       name: "",
       category: "",
       manufacturer: "",
