@@ -123,7 +123,6 @@
                 alt=""
               />
             </label>
-
             <label for="fileInput" v-else>
               <img src="/upload.png" class="cursor-pointer" alt="" />
             </label>
@@ -137,7 +136,6 @@
                 alt=""
               />
             </label>
-
             <label for="fileInput1" v-else>
               <img src="/upload.png" class="cursor-pointer" alt="" />
             </label>
@@ -150,7 +148,6 @@
                 alt=""
               />
             </label>
-
             <label for="fileInput2" v-else>
               <img src="/upload.png" class="cursor-pointer" alt="" />
             </label>
@@ -160,7 +157,7 @@
             id="fileInput"
             @change="uploadFile(1)"
             class="hidden"
-            accept="image/png, image/gif, image/jpeg"
+            accept=""
           />
           <input
             type="file"
