@@ -1,6 +1,6 @@
 <template>
     <section>
-        <b-carousel indicator="true" indicator-background="true" :indicator-inside="true"
+        <b-carousel :indicator="true" :indicator-background="true" :indicator-inside="true"
             indicator-mode="click" indicator-position="is-bottom" indicator-style="is-lines">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color}`">
