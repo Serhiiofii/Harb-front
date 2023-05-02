@@ -32,43 +32,39 @@
             </NuxtLink>
           </div>
         </div>
-        <div class="lg:m-2 lg:w-3/4 w-full">
-          <div class="flex lg:my-auto items-center lg:p-0 p-2">
-            <!-- <b-dropdown aria-role="list" class="lg:-mr-1 nav-item">
-              <template #trigger="{ active }">
-                <b-button expanded :label="single" type="is-info" class="h-12"
-                  :icon-right="active ? 'menu-up' : 'menu-down'" />
-              </template>
-              <div class="p-2" @click="categoryFilter({ title: 'All Categories' })">
-                All Categories
-              </div>
-              <div v-for="(single, index) in categories" :key="index" class="p-2" @click="categoryFilter(single)">
-                {{ single.title }}
-              </div>
-            </b-dropdown> -->
+        <div class="lg:mt-4 md:px-3 lg:px-5 lg:w-3/4 w-full">
+          <div class="flex lg:my-auto items-center">
             <button class="bg-blue-500 h-12 px-5 text-white" @click="searchData">Search</button>
             <input v-model="search" type="text" class="p-3 border border-gray-100 w-full h-12"
               placeholder="Search items on harbour hub" @change="searchData" />
           </div>
 
-          <div class="p-4 lg:m-2 rounded-md">
+          <div class="rounded-md mb-5">
             <div class="w-full relative mt-2">
               <Carousel :user="user" />
             </div>
           </div>
 
-          <div v-if="search !== '' && data.length > 0">
-            <div class="flex flex-wrap xl:justify-between justify-around">
-              <div v-for="(top, index) in data" :key="index" class="w-full lg:w-1/2 px-3">
-                <ProductCard :data="top" />
+          <div v-if="search !== ''" class="bg-white border mb-6">
+            <div class="p-3 bg-blue-500 text-white font-bold">
+              Search Result
+            </div>
+            <div class="w-full">
+              <div v-if="data.length > 0" class="flex flex-wrap xl:justify-between justify-around">
+                <div v-for="(top, index) in data" :key="index" class="w-full lg:w-1/2 px-3">
+                  <ProductCard :data="top" />
+                </div>
+              </div>
+              <div v-if="data.length === 0" class="text-center py-10">
+                Sorry, we couldn't find any results for "<i>{{ search }}</i>"
               </div>
             </div>
           </div>
-          <div v-if="search !== '' && data.length === 0" class="text-center py-10">
-            Sorry, we couldn't find any results for "<i>{{ search }}</i>"
-          </div>
-          <div v-if="search === '' && single === 'All Categories'">
-            <div class="text-2xl font-bold mt-4 mb-2">Top Deals</div>
+
+          <div v-if="search === '' && single === 'All Categories'" class="bg-white border mb-6">
+            <div class="p-3 bg-blue-500 text-white font-bold">
+              Top Deals
+            </div>
             <div class="flex flex-wrap xl:justify-between justify-around">
               <div v-for="(top, index) in data.top_deals" :key="index" class="w-full lg:w-1/2 px-3">
                 <ProductCard :data="top" />
@@ -78,26 +74,34 @@
         </div>
       </div>
       <div v-if="search === '' && single === 'All Categories'">
-        <div class="w-full">
-          <div class="text-2xl font-bold mt-4 mb-2">Popular Products</div>
+        <div class="bg-white border mb-6">
+          <div class="p-3 bg-blue-500 text-white font-bold">
+            Popular Products
+          </div>
           <div class="flex flex-wrap xl:justify-between justify-around">
             <div v-for="(featured, index) in data.featured_products" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="featured" />
             </div>
           </div>
         </div>
-        <div class="w-full">
-          <div class="text-2xl font-bold mt-4 mb-2">Recent Sales</div>
+
+        <div class="bg-white border mb-6">
+          <div class="p-3 bg-blue-500 text-white font-bold">
+            Most Viewed
+          </div>
           <div class="flex flex-wrap xl:justify-between justify-around">
-            <div v-for="(category, index) in data.recent_sales" :key="index" class="w-full lg:w-1/3 px-3">
+            <div v-for="(category, index) in data.most_viewed_products" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
         </div>
-        <div class="w-full">
-          <div class="text-2xl font-bold mt-4 mb-2">Most Viewed</div>
+        
+        <div class="bg-white border mb-6">
+          <div class="p-3 bg-blue-500 text-white font-bold">
+            Recent Sales
+          </div>
           <div class="flex flex-wrap xl:justify-between justify-around">
-            <div v-for="(category, index) in data.most_viewed_products" :key="index" class="w-full lg:w-1/3 px-3">
+            <div v-for="(category, index) in data.recent_sales" :key="index" class="w-full lg:w-1/3 px-3">
               <ProductCard :data="category" />
             </div>
           </div>
@@ -311,5 +315,4 @@ export default {
 .nav-item {
   margin-top: 8px !important;
 }
-
 </style>

@@ -62,8 +62,8 @@ export default {
             carousels: [
                 { img: '/hero/hero-1.png', color: 'info' },
                 { img: '/hero/pipe.jpg', color: 'success' },
-                { img: '/hero/hero-1.png', color: 'warning' },
-                { img: '/hero/vessel.png', color: 'danger' }
+                { img: '/hero/hero-1.png', color: 'info' },
+                { img: '/hero/vessel.png', color: 'success' }
             ]
         }
     }
