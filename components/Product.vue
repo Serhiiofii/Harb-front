@@ -301,6 +301,7 @@ export default {
             console.log(response.data);
             // this.loading = false;
             this.$toast.success("Product deleted successfully!");
+            location.reload();
           });
       }
       catch (error) {
