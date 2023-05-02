@@ -19,7 +19,7 @@
               <ProductCard :data="featured" />
             </div>
           </div>
-          <div v-else class="text-center p-2 text-xl pt-5">No Data.</div>
+          <div v-else class="text-center p-2 text-xl pt-3">No Data.</div>
         </div>
       </div>
 
