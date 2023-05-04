@@ -54,11 +54,12 @@ import { mapState } from "vuex";
 
 export default {
     props: {
-        orders: Array,
+        data: Object,
+        showOrders: Boolean
     },
     data() {
         return {
-            data: [],
+            orders: [],
             isPaginated: true,
             isPaginationSimple: true,
             isPaginationRounded: false,
@@ -113,6 +114,11 @@ export default {
         },
         openChat(uId) {
             this.$toast.warning("This feature will be available soon.");
+        }
+    },
+    watch: {
+        showOrders: function() {
+            this.getOrders(this.data.id, this.data.seller_id)
         }
     }
 }
