@@ -226,7 +226,7 @@ export default {
         })
         .then((response) => {
           // console.log(response.data);
-          this.notifications = response.data;
+          this.notifications = response.data.slice(0,5);
         });
     } catch (error) {
       console.log(error);

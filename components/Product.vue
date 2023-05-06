@@ -35,10 +35,14 @@
                 text-sm
                 bg-blue-300
                 mx-1
+                relative
               ">
               <img class="w-4 h-4 my-auto mx-1"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVR4nO2YTUoDQRCFX1wHN+p91LUgutS5h7hTTyR6A0N2ijfxJ26VJwMVCKiQaOxXlbwPajFMT/rLo7tTE8AYY4wxxhjTHK5IyeCKlDzAqsj9qRao7k+1QHV/qgWq+1MtUN2faoHq/lQLVPenWqC6P9UC1f2pFqjuT7VAdX8uILABoIsaIAelAuxmxp/+8Dmt/xxwgFijAAex8k68hX8XYEbk/lQLVPenWqC6P9UC1f3pPrBdgJ37QAe4dOg+sF2AGZH7Uy1Q3Z9qger+VAtU96f7wHYBdu4DHeDSofvAdgFmRO5PtUB1f6oFqvtTLVDdn+4D2wXYuQ90gEuH7gPbBZgRuT/VAtX9qRao7k+1QHV/qgWq+1MtUN2faoEq/ixW8+IAUSzA7NABrkGAYwCjmXvjRNclAuxl72bujRJdlwgwM8wa4CQmGiI3kwU8N2PsawMvPMZku8jN4wKe+zH2oYEXrmKya+TmYgHP2xjbP/Pv7MRS7yc8Q162ADzN4XkeY57jmSYcA/iIiW8A7CU9Ew8AvH/jOYxtO115/Xc5bC13BOAlwbsu/1jPivCmbAO4jMP3LUEY81b/C30fZ16zbWuMMcYYY4zBVz4BsgbyphZRiP0AAAAASUVORK5CYII="
                 alt="" /> <span class="hidden sm:block">Quotes</span>
+              <div v-show="quoteBadge>0" class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
+                {{ quoteBadge }}
+              </div>
             </button>
             <button @click="getOrders()" class="
                 flex
@@ -50,10 +54,14 @@
                 text-sm
                 bg-blue-200
                 mx-1
+                relative
               ">
               <img class="w-4 h-4 my-auto mx-1"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVR4nO2YTUoDQRCFX1wHN+p91LUgutS5h7hTTyR6A0N2ijfxJ26VJwMVCKiQaOxXlbwPajFMT/rLo7tTE8AYY4wxxhjTHK5IyeCKlDzAqsj9qRao7k+1QHV/qgWq+1MtUN2faoHq/lQLVPenWqC6P9UC1f2pFqjuT7VAdX8uILABoIsaIAelAuxmxp/+8Dmt/xxwgFijAAex8k68hX8XYEbk/lQLVPenWqC6P9UC1f3pPrBdgJ37QAe4dOg+sF2AGZH7Uy1Q3Z9qger+VAtU96f7wHYBdu4DHeDSofvAdgFmRO5PtUB1f6oFqvtTLVDdn+4D2wXYuQ90gEuH7gPbBZgRuT/VAtX9qRao7k+1QHV/qgWq+1MtUN2faoEq/ixW8+IAUSzA7NABrkGAYwCjmXvjRNclAuxl72bujRJdlwgwM8wa4CQmGiI3kwU8N2PsawMvPMZku8jN4wKe+zH2oYEXrmKya+TmYgHP2xjbP/Pv7MRS7yc8Q162ADzN4XkeY57jmSYcA/iIiW8A7CU9Ew8AvH/jOYxtO115/Xc5bC13BOAlwbsu/1jPivCmbAO4jMP3LUEY81b/C30fZ16zbWuMMcYYY4zBVz4BsgbyphZRiP0AAAAASUVORK5CYII="
                 alt="" /> <span class="hidden sm:block">Orders</span>
+                <div v-show="orderBadge>0" class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
+                  {{ orderBadge }}
+                </div>
             </button>
             <button @click="openUpdateModal(data.id)" class="
                 flex
@@ -240,7 +248,9 @@ import categories from "~/assets/jsons/categories";
 export default {
   props: {
     data: Object,
-    cartedId: String
+    cartedId: String,
+    quoteBadge: Number,
+    orderBadge: Number
   },
   data() {
     return {
