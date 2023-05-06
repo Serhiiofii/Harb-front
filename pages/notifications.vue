@@ -11,31 +11,26 @@
           </div>
         </div>
         <div class="h-1 bg-gray-100 w-full"></div>
-        <div v-for="(not, index) in notifications" :key="index">
+        <div v-for="(not, index) in notifications" :key="index" :class="{ 'bg-slate-100': not.is_read==1}">
           <div class="flex justify-between my-2">
             <div class="">
               <div class="text-sm">{{ not.title }}</div>
-              <div class="text-xs text-gray-200">
+              <div class="text-xs text-slate-400">
                 {{ not.created_at.substring(0, 10) }}
               </div>
             </div>
-            <div
-              v-if="not.equipment_id === null"
-              class="
+            <div v-if="not.equipment_id === null" class="
                 text-xs text-green-800 text-center
                 bg-green-100
                 rounded-sm
                 p-1
                 my-auto
                 w-12
-              "
-            >
-            <NuxtLink to="">View</NuxtLink>
+              ">
+              <NuxtLink to="">View</NuxtLink>
             </div>
-            <div v-else-if="not.type === 'bid' && user.user_role==='seller'" class="flex justify-between w-44">
-              <button
-                @click="approve(not.equipment_id)"
-                class="
+            <div v-else-if="not.type === 'bid' && user.user_role === 'seller'" class="flex justify-between w-44">
+              <button @click="approve(not.equipment_id, not.id)" class="
                   text-xs text-green-800 text-center
                   bg-green-100
                   rounded-sm
@@ -43,13 +38,10 @@
                   my-auto
                   w-20
                   cursor-pointer
-                "
-              >
+                ">
                 Approve
               </button>
-              <button
-                @click="decline(not.equipment_id)"
-                class="
+              <button @click="decline(not.equipment_id, not.id)" class="
                   text-xs text-red-800 text-center
                   bg-red-100
                   rounded-sm
@@ -57,15 +49,12 @@
                   my-auto
                   w-20
                   cursor-pointer
-                "
-              >
+                ">
                 Decline
               </button>
             </div>
-            <div v-else-if="not.type === 'quote' && user.user_role==='seller'">
-              <button
-                @click="openModal(not.quote_id, 'quote')"
-                class="
+            <div v-else-if="not.type === 'quote' && user.user_role === 'seller'">
+              <button @click="openModal(not.quote_id, not.id, 'quote')" class="
                   text-xs text-green-800 text-center
                   bg-blue-200
                   rounded-sm
@@ -73,12 +62,10 @@
                   my-auto
                   w-20
                   cursor-pointer
-                "
-              >
+                ">
                 Make Quote
               </button>
-              <button
-                class="
+              <button class="
                   text-xs text-green-800 text-center
                   bg-green-100
                   rounded-sm
@@ -86,15 +73,12 @@
                   my-auto
                   w-20
                   cursor-pointer
-                "
-              >
-              <NuxtLink to="/seller/products">View Project</NuxtLink>
+                " @click="gotoProduct(not, '/seller/products')">
+                View
               </button>
             </div>
-            <div v-else-if="not.type === 'quote' && user.user_role==='user'">
-              <button
-                @click="openModal(not.equipment_id, 'bid', not.quote)"
-                class="
+            <div v-else-if="not.type === 'quote' && user.user_role === 'user'">
+              <button @click="openModal(not.equipment_id, not.id, 'bid', not.quote)" class="
                   text-xs text-green-800 text-center
                   bg-blue-200
                   rounded-sm
@@ -102,22 +86,26 @@
                   my-auto
                   w-20
                   cursor-pointer
-                "
-              >
+                ">
                 Confirm Quote
+              </button>
+              <button class="
+                  text-xs text-green-800 text-center
+                  bg-green-100
+                  rounded-sm
+                  p-1
+                  my-auto
+                  w-20
+                  cursor-pointer
+                " @click="gotoProduct(not, '_single')">
+                View
               </button>
             </div>
           </div>
           <div class="h-1 bg-gray-100 w-full"></div>
         </div>
       </div>
-      <BidModal
-        :isCardModalActive="isCardModalActive"
-        :id="dataId"
-        :toggle="toggleCard"
-        :type="type"
-        :quote="quote"
-      />
+      <BidModal :isCardModalActive="isCardModalActive" :id="dataId" :toggle="toggleCard" :type="type" :quote="quote" />
     </div>
     <FooterNav />
   </div>
@@ -126,7 +114,7 @@
 import { mapState } from "vuex";
 
 export default {
-  computed: mapState(["user","token"]),
+  computed: mapState(["user", "token"]),
 
   data() {
     return {
@@ -134,7 +122,7 @@ export default {
       isCardModalActive: false,
       dataId: '',
       type: 'quote',
-      quote: null 
+      quote: null
     };
   },
   mounted() {
@@ -155,11 +143,11 @@ export default {
     }
   },
   methods: {
-    approve(id) {
+    approve(pid, nid) {
       try {
         this.$axios
           .$put(
-            `seller/products/${id}/bid-offer`,
+            `seller/products/${pid}/bid-offer`,
             {
               offer: "approve",
             },
@@ -173,17 +161,19 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
+            this.markAsReadNotic(nid);
             this.$toast.success("Bid approved");
           });
       } catch (error) {
         console.log(error);
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
-    decline(id) {
+    decline(pid, nid) {
       try {
         this.$axios
           .$put(
-            `seller/products/${id}/bid-offer`,
+            `seller/products/${pid}/bid-offer`,
             {
               offer: "decline",
             },
@@ -197,21 +187,45 @@ export default {
           )
           .then((response) => {
             console.log(response.data);
+            this.markAsReadNotic(nid);
             this.$toast.success("Bid declined");
           });
       } catch (error) {
         console.log(error);
-        this.$toast.error(error.response.data.message);      }
+        this.$toast.error(error.response.data.message);
+      }
     },
     toggleCard() {
       this.isCardModalActive = !this.isCardModalActive;
     },
-    openModal(dataId, type, quote=null) {
+    openModal(dataId, nid, type, quote = null) {
+      this.markAsReadNotic(nid);
       this.isCardModalActive = !this.isCardModalActive;
       this.dataId = dataId;
       this.type = type;
-      if(quote) this.quote = quote;
+      if (quote) this.quote = quote;
       else this.quote = null
+    },
+    gotoProduct(notification, uri_name) {
+      this.markAsReadNotic(notification.id)
+      if(uri_name === '_single'){
+        this.$router.push({ path: `/${notification.equipment_id}` });
+      } else {
+        this.$router.push({ path: uri_name });
+      }
+    },
+    markAsReadNotic(nid) {
+      this.$axios
+        .$get(`account/notifications/${nid}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.token,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        });
     }
   },
 };

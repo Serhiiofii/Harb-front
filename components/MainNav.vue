@@ -39,9 +39,13 @@
             <div class="my-auto nav-item py-3">
               <b-dropdown aria-role="list" class="mt-1" position="is-bottom-left">
                 <template #trigger="{}">
-                  <div class="flex items center">
+                  <div class="flex items center relative">
                     <img src="/icons/bell.png" class="h-4 w-4 mx-4 cursor-pointer" alt="" />
                     <span class="-ml-3 block lg:hidden">Notifications</span>
+                    
+                    <div v-show="noticBadge>0" class="bg-red-500 h-3 p-1 flex justify-center items-center absolute -top-2 right-1 text-white text-[11px]">
+                      {{ noticBadge }}
+                    </div>
                   </div>
                 </template>
                 <b-dropdown-item aria-role="listitem">
@@ -207,6 +211,7 @@ export default {
       name: "",
       avatar: null,
       notifications: null,
+      noticBadge: 0,
       categories: categories,
       customerPages: ['index','single', 'categories', 'my-orders']
     };
@@ -225,7 +230,10 @@ export default {
           },
         })
         .then((response) => {
-          // console.log(response.data);
+          const unReadAry = response.data.filter((val)=>{
+            if(val.is_read == 0) return true
+          });
+          this.noticBadge = unReadAry.length;
           this.notifications = response.data.slice(0,5);
         });
     } catch (error) {
