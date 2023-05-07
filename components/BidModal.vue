@@ -76,7 +76,7 @@ export default {
   computed: mapState(["token"]),
   data() {
     return {
-      bid: 1000,
+      bid: this.quote?.amount??1000,
       showModal: this.isCardModalActive
     };
   },

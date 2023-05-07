@@ -29,19 +29,24 @@
           <div class="text-3xl font-bold">{{ product.name }}</div>
           <div class="flex justify-between my-3">
             <button
+              v-show="!quote?.amount"
               @click="askForQuote(product)"
               class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm"
             >
             Ask For Quote
+            </button>
+            <button
+              v-show="quote?.amount"
+              @click="isCardModalActive = !isCardModalActive"
+              class="bg-blue-600 p-3 w-52 text-white mr-8 rounded-sm"
+            >
+            Make a Bid
             </button>
             <!-- <NuxtLink :to="'/messages/?slug=' + product.seller_id"> -->
               <button @click="$toast.warning('This feature will be available soon.')" class="p-3 w-32 border border-blue-600 mr-4 rounded-sm">
                 Chat
               </button>
             <!-- </NuxtLink> -->
-            <!-- <button class="p-3 w-32 border border-yellow-600 rounded-sm">
-              Call
-            </button> -->
           </div>
           <div class="flex items-center">
             <div class="text-sm my-2">Type of Product:</div>
@@ -69,12 +74,12 @@
           </div>
         </div>
       </div>
-      <!-- <BidModal
-        :isCardModalActive="isCardModalActive"
+      <BidModal 
+        :isCardModalActive="isCardModalActive" 
         :id="product.id"
-        :toggle="toggleCard"
-        type="bid"
-      /> -->
+        :toggle="toggleCard" 
+        type="bid" 
+        :quote="quote" />
     </div>
     <FooterNav />
   </div>
@@ -92,6 +97,7 @@ export default {
       single: "",
       data: [],
       product: null,
+      quote: null,
     };
   },
   mounted() {
@@ -106,9 +112,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
           this.product = response.data.product;
           this.data = response.data;
+          this.quote = response.data.quotes_answer;
         });
     } catch (error) {
       console.log(error);
