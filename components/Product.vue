@@ -40,7 +40,8 @@
               <img class="w-4 h-4 my-auto mx-1"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVR4nO2YTUoDQRCFX1wHN+p91LUgutS5h7hTTyR6A0N2ijfxJ26VJwMVCKiQaOxXlbwPajFMT/rLo7tTE8AYY4wxxhjTHK5IyeCKlDzAqsj9qRao7k+1QHV/qgWq+1MtUN2faoHq/lQLVPenWqC6P9UC1f2pFqjuT7VAdX8uILABoIsaIAelAuxmxp/+8Dmt/xxwgFijAAex8k68hX8XYEbk/lQLVPenWqC6P9UC1f3pPrBdgJ37QAe4dOg+sF2AGZH7Uy1Q3Z9qger+VAtU96f7wHYBdu4DHeDSofvAdgFmRO5PtUB1f6oFqvtTLVDdn+4D2wXYuQ90gEuH7gPbBZgRuT/VAtX9qRao7k+1QHV/qgWq+1MtUN2faoEq/ixW8+IAUSzA7NABrkGAYwCjmXvjRNclAuxl72bujRJdlwgwM8wa4CQmGiI3kwU8N2PsawMvPMZku8jN4wKe+zH2oYEXrmKya+TmYgHP2xjbP/Pv7MRS7yc8Q162ADzN4XkeY57jmSYcA/iIiW8A7CU9Ew8AvH/jOYxtO115/Xc5bC13BOAlwbsu/1jPivCmbAO4jMP3LUEY81b/C30fZ16zbWuMMcYYY4zBVz4BsgbyphZRiP0AAAAASUVORK5CYII="
                 alt="" /> <span class="hidden sm:block">Quotes</span>
-              <div v-show="quoteBadge>0" class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
+              <div v-show="quoteBadge > 0"
+                class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
                 {{ quoteBadge }}
               </div>
             </button>
@@ -59,9 +60,10 @@
               <img class="w-4 h-4 my-auto mx-1"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABzUlEQVR4nO2YTUoDQRCFX1wHN+p91LUgutS5h7hTTyR6A0N2ijfxJ26VJwMVCKiQaOxXlbwPajFMT/rLo7tTE8AYY4wxxhjTHK5IyeCKlDzAqsj9qRao7k+1QHV/qgWq+1MtUN2faoHq/lQLVPenWqC6P9UC1f2pFqjuT7VAdX8uILABoIsaIAelAuxmxp/+8Dmt/xxwgFijAAex8k68hX8XYEbk/lQLVPenWqC6P9UC1f3pPrBdgJ37QAe4dOg+sF2AGZH7Uy1Q3Z9qger+VAtU96f7wHYBdu4DHeDSofvAdgFmRO5PtUB1f6oFqvtTLVDdn+4D2wXYuQ90gEuH7gPbBZgRuT/VAtX9qRao7k+1QHV/qgWq+1MtUN2faoEq/ixW8+IAUSzA7NABrkGAYwCjmXvjRNclAuxl72bujRJdlwgwM8wa4CQmGiI3kwU8N2PsawMvPMZku8jN4wKe+zH2oYEXrmKya+TmYgHP2xjbP/Pv7MRS7yc8Q162ADzN4XkeY57jmSYcA/iIiW8A7CU9Ew8AvH/jOYxtO115/Xc5bC13BOAlwbsu/1jPivCmbAO4jMP3LUEY81b/C30fZ16zbWuMMcYYY4zBVz4BsgbyphZRiP0AAAAASUVORK5CYII="
                 alt="" /> <span class="hidden sm:block">Orders</span>
-                <div v-show="orderBadge>0" class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
-                  {{ orderBadge }}
-                </div>
+              <div v-show="orderBadge > 0"
+                class="bg-red-500 p-1 h-4 flex justify-center items-center absolute top-0 right-0 text-white text-sm">
+                {{ orderBadge }}
+              </div>
             </button>
             <button @click="openUpdateModal(data.id)" class="
                 flex
@@ -313,24 +315,34 @@ export default {
         });
     },
     async removeProduct(id) {
-      if (!confirm("Are you sure you want to delete this product?"))
-        return;
       try {
-        this.loading = true;
-        await this.$axios
-          .$delete(`seller/equipments/${id}`, {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: "Bearer " + this.token,
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            // this.loading = false;
-            this.$toast.success("Product deleted successfully!");
-            location.reload();
-          });
+        this.$swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.loading = true;
+            this.$axios
+              .$delete(`seller/equipments/${id}`, {
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Authorization: "Bearer " + this.token,
+                },
+              })
+              .then((response) => {
+                console.log(response.data);
+                // this.loading = false;
+                this.$toast.success("Product deleted successfully!");
+                location.reload();
+              });
+          }
+        })
       }
       catch (error) {
         console.log("error");
@@ -392,7 +404,7 @@ export default {
             this.specification = response.data.equipment.equipment_specification;
             this.description = response.data.equipment.description;
             this.type = response.data.equipment.sale_type;
-            if(response.data.equipment_images) {
+            if (response.data.equipment_images) {
               this.image1 = this.image1URL = response.data.equipment_images[0]?.image;
               this.image2 = this.image2URL = response.data.equipment_images[1]?.image;
               this.image3 = this.image3URL = response.data.equipment_images[2]?.image;
