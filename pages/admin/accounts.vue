@@ -96,13 +96,6 @@
                     </button>
                   </NuxtLink>
                 </div>
-                <!-- <div>
-                  <button
-                    class="bg-blue-200 p-2 rounded-md text-sm text-blue-800"
-                  >
-                    Send a message
-                  </button>
-                </div> -->
                 <div>
                   <button @click="deleteAccount(account.id)" class="bg-red-200 p-2 rounded-md text-sm text-red-800">
                     Delete Account

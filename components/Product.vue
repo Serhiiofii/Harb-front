@@ -25,7 +25,9 @@
         </div>
         <div v-if="path !== '/my-orders'" class="lg:mt-0 flex justify-end row-span-1">
           <div class="flex">
-            <button @click="getQuotes()" class="
+            <button
+              v-show="user.user_role=='seller'"
+              @click="getQuotes()" class="
                 flex
                 justify-center
                 p-3
@@ -45,7 +47,9 @@
                 {{ quoteBadge }}
               </div>
             </button>
-            <button @click="getOrders()" class="
+            <button 
+              v-show="user.user_role=='seller'"
+              @click="getOrders()" class="
                 flex
                 justify-center
                 p-3
@@ -281,7 +285,7 @@ export default {
       image3URL: "",
     };
   },
-  computed: mapState(["token"]),
+  computed: mapState(["token", "user"]),
   mounted() {
     this.path = this.$router.history.current.path;
     this.name = this.data.name;

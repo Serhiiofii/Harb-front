@@ -11,46 +11,48 @@
             placeholder="Search"
           />
         </div> -->
-        <div class="flex my-3">
-          <div class="border bg-white p-4 w-1/2 lg:mr-2">
+        <div class="lg:flex my-3">
+          <div class="border bg-white p-4 w-full lg:w-1/2 lg:mr-2">
             <div class="uppercase text-gray-500 my-3">{{account.first_name}} {{account.last_name}}</div>
-            <div class="flex justify-between">
-              <div class="my-auto">{{account.email}}</div>
+            <div class="flex md:justify-between justify-around">
+              <div class="my-auto pb-2">{{account.email}}</div>
               <button
                 class="bg-green-100 text-green-900 flex p-3 rounded-md text-sm"
+                title="View CAC"
               >
                 View CAC
                 <img
-                  class="my-auto w-4 h-4 ml-2"
+                  class="my-auto px-4 h-4 hidden sm:block"
                   src="/icons/Union.svg"
                   alt=""
                 />
               </button>
               <button
                 class="bg-blue-100 text-blue-900 flex p-3 rounded-md text-sm"
+                title="View Other Docs"
               >
                 View Other Docs
                 <img
-                  class="my-auto w-4 h-4 ml-2"
+                  class="my-auto px-4 h-4 hidden sm:block"
                   src="/icons/Vector.svg"
                   alt=""
                 />
               </button>
             </div>
           </div>
-          <div class="border bg-white p-4 w-1/2 lg:ml-2">
+          <div class="border bg-white p-4 w-full lg:w-1/2 lg:ml-2">
             <div class="text-gray-500 my-3">TRANSACTIONS</div>
             <div class="flex justify-between">
               <div>
                 <button
-                  class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3"
+                  class="bg-red-200 px-3 text-red-700 rounded-md text-sm p-3"
                 >
                   Sold Transactions: {{ sold }}
                 </button>
               </div>
               <div>
                 <button
-                  class="bg-red-200 w-52 text-red-700 rounded-md text-sm p-3"
+                  class="bg-red-200 px-3 text-red-700 rounded-md text-sm p-3"
                 >
                   Rented Transactions: {{ rented }}
                 </button>
