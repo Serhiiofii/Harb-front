@@ -58,6 +58,12 @@
       </div>
     </NuxtLink>
     <div class="bg-gray-300 h-1 w-full"></div>
+    <NuxtLink to="/admin/userlogs">
+      <div class="flex my-5">
+        <img src="/icons/log-file-icon.svg" width="16" alt="" />
+        <div class="ml-4">User Logs</div>
+      </div>
+    </NuxtLink>
     <NuxtLink to="/admin/roles">
       <div class="flex my-5">
         <img src="/icons/user.svg" alt="" />

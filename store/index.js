@@ -12,9 +12,17 @@ export const mutations = {
     },
     async userLoggedIn(state) {
         state.authenticated = true;
-        const ip = await this.$axios.$get('http://icanhazip.com');
+
+        const locationInfo = await fetch('https://ipapi.co/json').then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            return data;
+        });
+        const location = locationInfo?.city + ", " + locationInfo?.country;
+        const timezone = locationInfo?.timezone;
+        const ip = locationInfo?.ip;
         let os = navigator.userAgent.slice(13).split(';')
-        os = os[0]
+        os = os[0];
         let nAgt = navigator.userAgent;
         let browserName = navigator.appName;
         let fullVersion = '' + parseFloat(navigator.appVersion);
@@ -80,7 +88,9 @@ export const mutations = {
             ip, 
             os: os.trim(), 
             browser: browserName,
-            browser_ver: fullVersion
+            browser_ver: fullVersion,
+            timezone,
+            location
         }
         this.$axios.$post('account/logs', sdata)
             .then((res)=>{

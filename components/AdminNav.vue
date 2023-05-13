@@ -87,6 +87,12 @@
             </NuxtLink>
           </b-navbar-item>
           <div class="h-1 bg-gray-100 w-full"></div>
+          <NuxtLink to="/admin/userlogs">
+            <div class="flex my-5">
+              <img src="/icons/log-file-icon.svg" width="16" alt="" />
+              <div class="ml-4">User Logs</div>
+            </div>
+          </NuxtLink>
           <b-navbar-item>
             <NuxtLink to="/admin/roles">
               <div class="flex my-1">
