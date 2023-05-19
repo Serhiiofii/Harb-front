@@ -84,6 +84,8 @@ input:focus {
 }
 </style>
 
+
+
 <script>
 export default {
   data() {
@@ -94,6 +96,8 @@ export default {
   mounted() {
     const d = new Date();
     this.date = d.getFullYear();
+    
+    this.$tawkMessenger.toggle();
   },
 };
 </script>

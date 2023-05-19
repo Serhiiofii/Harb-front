@@ -10,7 +10,7 @@
         <div @click="googlePopup()" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/google.svg" alt="" />
         </div>
-        <div>
+        <div @click="facebookPopup()"  class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/facebook.svg" alt="" />
         </div>
       </div>
@@ -148,6 +148,15 @@ export default {
       var leftpx = (window.innerWidth / 2) - (width / 2);
       window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
     },
+
+    facebookPopup() {
+      var width = 500;
+      var height = 600;
+      var toppx = (window.innerHeight / 2) - (height / 2);
+      var leftpx = (window.innerWidth / 2) - (width / 2);
+      window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
+    },
+
 
     // This method save the new token and username
     onMessage(e) {
