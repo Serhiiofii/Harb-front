@@ -10,7 +10,7 @@
         <div @click="googlePopup()" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/google.svg" alt="" />
         </div>
-        <div @click="facebookPopup()"  class="cursor-pointer">
+        <div @click="loginWithFacebook"  class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/facebook.svg" alt="" />
         </div>
       </div>
@@ -93,6 +93,8 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { initFbsdk } from '~/plugins/fb.js';
+
 export default {
   data() {
     return {
@@ -106,6 +108,23 @@ export default {
       loginUrl: null
     };
   },
+
+  mounted() {
+
+initFbsdk();
+this.$axios.$get('auth/google', {
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+})
+  .then((response) => {
+    this.loginUrl = response.url;
+  })
+  .catch((error) => console.error(error));
+
+window.addEventListener('message', this.onMessage, false)
+},
 
   methods: {
     ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),
@@ -149,14 +168,6 @@ export default {
       window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
     },
 
-    facebookPopup() {
-      var width = 500;
-      var height = 600;
-      var toppx = (window.innerHeight / 2) - (height / 2);
-      var leftpx = (window.innerWidth / 2) - (width / 2);
-      window.open(this.loginUrl, 'google auth', "width=" + width + ",height=" + height + ",scrollbars=no,left=" + leftpx + ",top=" + toppx)
-    },
-
 
     // This method save the new token and username
     onMessage(e) {
@@ -181,26 +192,45 @@ export default {
       } else {
         this.$router.push("/");
       }
+    },
+
+    loginWithFacebook () {
+      window.FB.login(response => {
+        if (response && response.authResponse) {
+          console.log('response', response)
+          var userInfo = {
+            loginType: 'fb',
+            fb: {
+              auth: response.authResponse
+            }
+          }
+          this.$store.commit('setLoginUser', userInfo)
+          window.FB.api(`/${response.authResponse.userID}`, userResponse => {
+            if (userResponse) {
+              console.log(userResponse);
+              var userInfo = {
+                loginType: 'fb',
+                fb: {
+                  auth: response.authResponse,
+                  user: userResponse
+                }
+              }
+              this.$store.commit('setLoginUser', userInfo)
+            }
+          }, this.params);
+          router.push('/home')
+        }
+      }, this.params)
     }
+
+
   },
 
-  mounted() {
-    this.$axios.$get('auth/google', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then((response) => {
-        this.loginUrl = response.url;
-      })
-      .catch((error) => console.error(error));
 
-    window.addEventListener('message', this.onMessage, false)
-  },
 
   beforeDestroy() {
     window.removeEventListener('message', this.onMessage)
   },
 };
 </script>
+
