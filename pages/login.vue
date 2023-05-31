@@ -10,7 +10,7 @@
         <div @click="googlePopup()" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/google.svg" alt="" />
         </div>
-        <div>
+        <div @click="loginWithFacebook" class="cursor-pointer">
           <img class="w-10 h-10" src="/icons/facebook.svg" alt="" />
         </div>
       </div>
@@ -64,6 +64,8 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { initFbsdk } from '~/plugins/fb.js';
+
 export default {
   data() {
     return {
@@ -73,8 +75,10 @@ export default {
     };
   },
   mounted() {
+
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("token");
+
   },
   methods: {
     ...mapMutations(["userLoggedIn", "mutateToken", "mutateUser"]),
@@ -154,10 +158,41 @@ export default {
       } else {
         this.$router.push("/");
       }
+    },
+
+    loginWithFacebook () {
+      window.FB.login(response => {
+        if (response && response.authResponse) {
+          console.log('response', response)
+          var userInfo = {
+            loginType: 'fb',
+            fb: {
+              auth: response.authResponse
+            }
+          }
+          this.$store.commit('user', userInfo)
+          window.FB.api(`/${response.authResponse.userID}`, userResponse => {
+            if (userResponse) {
+              console.log(userResponse);
+              var userInfo = {
+                loginType: 'fb',
+                fb: {
+                  auth: response.authResponse,
+                  user: userResponse
+                }
+              }
+              this.$store.commit('user', userInfo)
+            }
+          }, this.params);
+          router.push('/')
+        }
+      }, this.params)
     }
+
   },
 
   mounted() {
+    initFbsdk();
     this.$axios.$get('auth/google', {
       headers: {
         'Content-Type': 'application/json',
